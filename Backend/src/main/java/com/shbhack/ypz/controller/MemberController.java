@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shbhack.ypz.domain.Member;
-import com.shbhack.ypz.dto.JoinDTO;
+import com.shbhack.ypz.dto.JoinRequestDTO;
+import com.shbhack.ypz.dto.LoginRequestDTO;
+import com.shbhack.ypz.dto.LoginResponseDTO;
 import com.shbhack.ypz.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,12 +27,12 @@ public class MemberController {
 	private final MemberService memberService;
 	
 	@PostMapping("/join")
-	public ResponseEntity<?> join(@RequestBody JoinDTO dto) {
+	public ResponseEntity<?> join(@RequestBody JoinRequestDTO dto) {
 
 		String name = null;
 		
 		try {
-			name = memberService.join(dto.getId(), dto.getPassword(), dto.getAccountNo());
+			name = memberService.join(dto.getMemberId(), dto.getPassword(), dto.getAccountNo());
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
@@ -39,9 +41,17 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody String id, @RequestBody String password) {
+	public ResponseEntity<?> login(@RequestBody LoginRequestDTO dto) {
 		
-		return new ResponseEntity<>(HttpStatus.OK);
+		try {
+			LoginResponseDTO response = memberService.login(dto.getMemberId(), dto.getPassword());
+			
+			return new ResponseEntity<LoginResponseDTO>(response, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 	
 	@GetMapping("/{id}")

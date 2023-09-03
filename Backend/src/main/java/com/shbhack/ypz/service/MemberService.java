@@ -37,4 +37,26 @@ public class MemberService {
 		
 		return name;
 	}
+
+	
+	public LoginResponseDTO login(String memberId, String password) throws Exception {
+		Member member = memberRepository.findByMemberId(memberId);
+		
+		if (member == null) throw new Exception("존재하지 않는 아이디입니다.");
+		
+		// 비밀번호 비교
+		// TODO password 암호화 후 비교
+		if (!member.getPassword().equals(password)) throw new Exception("로그인에 실패하였습니다.");
+		
+		// TODO AccessToken, RefreshToken 발급
+		String accessToken = "testAccessToken";
+		String refreshToken = "testRefreshToken";
+		
+		LoginResponseDTO loginResponseDTO = LoginResponseDTO.builder()
+				.member(member)
+				.accessToken(accessToken)
+				.refreshToken(refreshToken).build();
+		
+		return loginResponseDTO;
+	}
 }
