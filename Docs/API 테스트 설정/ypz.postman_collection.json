@@ -1,0 +1,47 @@
+{
+	"info": {
+		"_postman_id": "3878901d-f49e-4e2e-b1ba-d865c2fcd317",
+		"name": "ypz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28248785"
+	},
+	"item": [
+		{
+			"name": "join",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"test@abc.com\",\r\n    \"password\": \"passwordtest\",\r\n    \"accountNo\": \"110-110-1111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/member/join",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"join"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
