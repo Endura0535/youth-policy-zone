@@ -9,23 +9,25 @@ MySql : 8.0.x
 ## application.yml
 
 ```
-spring:
-    profiles: # profiles 설정
-      active: dev # 다른 설정이 없을 때 default 환경 값
-      
-    datasource:
-        url: jdbc:mysql://localhost:3306/ypz
-        username: {username}
-        password: {userpw}
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        
-    # jpa설정
-    jpa:
-      properties: # property 사용 설정
-        hibernate: # hibernate property 설정
-          ddl-auto: update
-          format_sql: true # 보여지는 쿼리를 예쁘게 포맷팅 -> 사용하지않으면 긴 줄 형태로 출력됌
 
+spring:
+  profiles: # profiles 설정
+    active: dev # 다른 설정이 없을 때 default 환경 값
+    
+  datasource:
+    url: jdbc:mysql://localhost:3306/ypz
+    username: {username}
+    password: {password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    
+  # jpa설정
+  jpa:
+    hibernate: # hibernate property 설정
+      ddl-auto: update
+      format_sql: true # 보여지는 쿼리를 예쁘게 포맷팅 -> 사용하지않으면 긴 줄 형태로 출력됌
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        
 # 로그 레벨 설정
 logging:
   level:
@@ -34,4 +36,5 @@ logging:
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
     org.springframework.web.socket: trace
+
 ```
