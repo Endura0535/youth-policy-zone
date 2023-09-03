@@ -67,4 +67,21 @@ public class MemberService {
 		
 		return loginResponseDTO;
 	}
+	
+	public void updateMemberInfo(Member updatedMember) throws Exception {
+		Member member = retrieveMember(updatedMember.getMemberId());
+
+		// TODO 업데이트 회원 정보 검증
+		
+		member = member.builder()
+			.age(updatedMember.getAge())
+			.education(updatedMember.getEducation())
+			.kidsCount(updatedMember.getKidsCount())
+			.password(updatedMember.getPassword())
+			.residence(updatedMember.getResidence())
+			.single(updatedMember.isSingle())
+			.build();
+		
+		memberRepository.saveAndFlush(member);
+	}
 }

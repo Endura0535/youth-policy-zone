@@ -71,9 +71,26 @@ public class MemberController {
 
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable String id, @RequestHeader("Authorization") String accessToken,
-			@RequestBody Member member) {
+	@PutMapping("/{memberId}")
+	public ResponseEntity<?> update(@PathVariable String memberId, @RequestHeader("Authorization") String accessToken,
+			@RequestBody Member updatedMember) {
+		
+		// TODO AccessToken 검증
+		
+		try {
+			if (!memberId.equals(updatedMember.getMemberId())) throw new Exception();
+			
+			memberService.retrieveMember(memberId);
+			
+		} catch(Exception e) {
+			return new ResponseEntity<String>("회원 정보를 찾을 수 없습니다.", HttpStatus.BAD_REQUEST);
+		}
+		
+		try {
+			memberService.updateMemberInfo(updatedMember);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("회원 정보를 수정하는데 실패하였습니다.", HttpStatus.BAD_REQUEST);
+		}
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
