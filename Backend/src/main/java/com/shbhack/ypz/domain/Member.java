@@ -1,10 +1,13 @@
 package com.shbhack.ypz.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,8 +16,10 @@ import lombok.ToString;
 @Entity
 @Setter
 @Getter
+@Builder
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class Member {
 
 	@Id
@@ -22,7 +27,8 @@ public class Member {
 	private Long mId;
 	
 	@NotBlank
-	private String id;
+	@Column(unique=true)
+	private String memberId;
 	
 	@NotBlank
 	private String password;
@@ -42,11 +48,4 @@ public class Member {
 	private int education;
 	
 	private String residence;
-
-	public Member(String id, String password, String accountNo, String name) {
-		this.id = id;
-		this.password = password;
-		this.accountNo = accountNo;
-		this.name = name;
-	}
 }

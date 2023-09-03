@@ -3,6 +3,7 @@ package com.shbhack.ypz.service;
 import org.springframework.stereotype.Service;
 
 import com.shbhack.ypz.domain.Member;
+import com.shbhack.ypz.dto.LoginResponseDTO;
 import com.shbhack.ypz.repo.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,7 @@ public class MemberService {
 
 	private final MemberRepository memberRepository;
 	
-	public String join(String id, String password, String accountNo) throws Exception {
+	public String join(String memberId, String password, String accountNo) throws Exception {
 		
 		// TODO id 중복검사
 		
@@ -22,7 +23,11 @@ public class MemberService {
 		
 		// TODO password 암호화
 		
-		Member newMember = new Member(id, password, accountNo, name);
+		Member newMember = Member.builder()
+				.memberId(memberId)
+				.password(password)
+				.accountNo(accountNo)
+				.name(name).build();
 		
 		try {
 			memberRepository.save(newMember);
