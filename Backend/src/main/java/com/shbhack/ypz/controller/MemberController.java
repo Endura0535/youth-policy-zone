@@ -1,7 +1,5 @@
 package com.shbhack.ypz.controller;
 
-import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +9,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shbhack.ypz.domain.Member;
+import com.shbhack.ypz.dto.JoinDTO;
 import com.shbhack.ypz.service.MemberService;
 
-import domain.Member;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -24,13 +22,20 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/member")
 public class MemberController {
 
-	private MemberService service;
+	private final MemberService memberService;
 	
 	@PostMapping("/join")
-	public ResponseEntity<?> join(@RequestBody String id, @RequestBody String password,
-			@RequestBody String accountNo) {
+	public ResponseEntity<?> join(@RequestBody JoinDTO dto) {
 
-		return new ResponseEntity<>(HttpStatus.OK);
+		String name = null;
+		
+		try {
+			name = memberService.join(dto.getId(), dto.getPassword(), dto.getAccountNo());
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return new ResponseEntity<String>(name, HttpStatus.OK);
 	}
 	
 	@PostMapping("/login")
@@ -58,7 +63,7 @@ public class MemberController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@PostMapping("/bank-account-authentication")
+	@PutMapping("/bank-account-authentication")
 	public ResponseEntity<?> authenticateBankAccount(@RequestBody String accountNo, @RequestBody String code) {
 		
 		return new ResponseEntity<>(HttpStatus.OK);
