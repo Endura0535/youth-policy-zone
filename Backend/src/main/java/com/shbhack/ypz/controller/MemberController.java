@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shbhack.ypz.domain.Member;
+import com.shbhack.ypz.dto.BankAccountAuthenticateRequestDTO;
 import com.shbhack.ypz.dto.JoinRequestDTO;
 import com.shbhack.ypz.dto.LoginRequestDTO;
 import com.shbhack.ypz.dto.LoginResponseDTO;
@@ -96,9 +97,17 @@ public class MemberController {
 	}
 	
 	@PostMapping("/bank-account-authentication")
-	public ResponseEntity<?> authenticateBankAccount(@RequestBody String accountNo) {
+	public ResponseEntity<?> authenticateBankAccount(@RequestBody BankAccountAuthenticateRequestDTO dto) {
 		
-		return new ResponseEntity<>(HttpStatus.OK);
+		try {
+			memberService.requestBankAccountAuthentication(dto.getMemberId(), dto.getAccountNo());
+			
+			return new ResponseEntity<>(HttpStatus.OK);
+			
+		} catch(Exception e) {
+			return new ResponseEntity<String>("계좌 인증 요청에 실패했습니다.", HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 	
 	@PutMapping("/bank-account-authentication")

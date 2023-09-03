@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class MemberService {
+	
+	private final BankAccountAuthenticationService bankAccountAuthenticationService;
 
 	private final MemberRepository memberRepository;
 	
@@ -83,5 +85,14 @@ public class MemberService {
 			.build();
 		
 		memberRepository.saveAndFlush(member);
+	}
+	
+	// 계좌 인증 요청
+	public void requestBankAccountAuthentication(String memberId, String accountNo) throws Exception {
+		try {
+			bankAccountAuthenticationService.createAuthentication(memberId, accountNo);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 }
