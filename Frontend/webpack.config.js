@@ -1,6 +1,7 @@
 // import
 const path = require('path')
-// 경로와 관련한 작업을 수행하기 위하여 Node.js의 내장 모듈인 path를 가져와 사용
+const HtmlPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin')
 
 // export
 module.exports = {
@@ -15,5 +16,30 @@ module.exports = {
 				// 번들된 JavaScript 파일의 이름은 app.js
 				clean: true
 				// 기존에 만들었던 파일이 있다면 제거
-		}
+		},
+
+    // 다양한 플러그인 설정
+    plugins: [
+      new HtmlPlugin({   // HtmlPlugin을 생성
+        template: './index.html' // index.html을 원본 템플릿으로 설정함.
+      }),
+      // new CopyPlugin({
+      //   patterns: [
+      //     { from: 'static' } // 'static' 디렉토리의 모든 파일과 폴더를 복사
+      //   ]
+      // })
+    ],
+
+    module: {
+      rules: [
+        {
+          test: /\.s?css$/, // 파일 확장자가 .css 또는 .scss 로 끝나는 파일들을 찾는다.
+          use: [
+            'style-loader',
+            'css-loader',
+            'sass-loader'
+          ]
+        }
+      ]
+    },
 }
