@@ -11,8 +11,19 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class MemberService {
+	
+	private final BankAccountAuthenticationService bankAccountAuthenticationService;
 
 	private final MemberRepository memberRepository;
+	
+	public Member retrieveMember(String memberId) throws Exception {
+
+		Member member = memberRepository.findByMemberId(memberId);
+		
+		if (member == null) throw new Exception("존재하지 않는 아이디입니다.");
+		
+		return member;
+	}
 	
 	public String join(String memberId, String password, String accountNo) throws Exception {
 		
@@ -40,9 +51,8 @@ public class MemberService {
 
 	
 	public LoginResponseDTO login(String memberId, String password) throws Exception {
-		Member member = memberRepository.findByMemberId(memberId);
 		
-		if (member == null) throw new Exception("존재하지 않는 아이디입니다.");
+		Member member = retrieveMember(memberId);
 		
 		// 비밀번호 비교
 		// TODO password 암호화 후 비교
@@ -58,5 +68,31 @@ public class MemberService {
 				.refreshToken(refreshToken).build();
 		
 		return loginResponseDTO;
+	}
+	
+	public void updateMemberInfo(Member updatedMember) throws Exception {
+		Member member = retrieveMember(updatedMember.getMemberId());
+
+		// TODO 업데이트 회원 정보 검증
+		
+		member = member.builder()
+			.age(updatedMember.getAge())
+			.education(updatedMember.getEducation())
+			.kidsCount(updatedMember.getKidsCount())
+			.password(updatedMember.getPassword())
+			.residence(updatedMember.getResidence())
+			.single(updatedMember.isSingle())
+			.build();
+		
+		memberRepository.saveAndFlush(member);
+	}
+	
+	// 계좌 인증 요청
+	public void requestBankAccountAuthentication(String memberId, String accountNo) throws Exception {
+		try {
+			bankAccountAuthenticationService.createAuthentication(memberId, accountNo);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 }
