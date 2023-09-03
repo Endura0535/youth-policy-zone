@@ -14,6 +14,15 @@ public class MemberService {
 
 	private final MemberRepository memberRepository;
 	
+	public Member retrieveMember(String memberId) throws Exception {
+
+		Member member = memberRepository.findByMemberId(memberId);
+		
+		if (member == null) throw new Exception("존재하지 않는 아이디입니다.");
+		
+		return member;
+	}
+	
 	public String join(String memberId, String password, String accountNo) throws Exception {
 		
 		// TODO id 중복검사
@@ -40,9 +49,8 @@ public class MemberService {
 
 	
 	public LoginResponseDTO login(String memberId, String password) throws Exception {
-		Member member = memberRepository.findByMemberId(memberId);
 		
-		if (member == null) throw new Exception("존재하지 않는 아이디입니다.");
+		Member member = retrieveMember(memberId);
 		
 		// 비밀번호 비교
 		// TODO password 암호화 후 비교
