@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.shbhack.ypz.service.JwtService;
-import com.shbhack.ypz.service.UserService;
+import com.shbhack.ypz.service.MemberService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
-    private final UserService userService;
+    private final MemberService memberService;
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
@@ -41,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         userEmail = jwtService.extractUserName(jwt);
         if (StringUtils.isNotEmpty(userEmail)
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userService.userDetailsService()
+            UserDetails userDetails = memberService.userDetailsService()
                     .loadUserByUsername(userEmail);
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 SecurityContext context = SecurityContextHolder.createEmptyContext();

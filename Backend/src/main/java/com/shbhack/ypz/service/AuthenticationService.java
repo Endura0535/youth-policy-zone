@@ -1,11 +1,11 @@
 package com.shbhack.ypz.service;
 
-import com.truongbn.security.dao.request.SignUpRequest;
-import com.truongbn.security.dao.request.SigninRequest;
-import com.truongbn.security.dao.response.JwtAuthenticationResponse;
+import com.shbhack.ypz.dto.request.SignInRequestDTO;
+import com.shbhack.ypz.dto.request.SignUpRequestDTO;
+import com.shbhack.ypz.dto.response.SignInResponseDTO;
 
 public interface AuthenticationService {
-    JwtAuthenticationResponse signup(SignUpRequest request);
+    void signup(SignUpRequestDTO request);
 
-    JwtAuthenticationResponse signin(SigninRequest request);
+    SignInResponseDTO signin(SignInRequestDTO request);
 }

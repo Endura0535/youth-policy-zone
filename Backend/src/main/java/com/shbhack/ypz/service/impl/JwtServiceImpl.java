@@ -1,4 +1,4 @@
-package com.truongbn.security.service.impl;
+package com.shbhack.ypz.service.impl;
 
 import java.security.Key;
 import java.util.Date;
@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.truongbn.security.service.JwtService;
+import com.shbhack.ypz.service.JwtService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
