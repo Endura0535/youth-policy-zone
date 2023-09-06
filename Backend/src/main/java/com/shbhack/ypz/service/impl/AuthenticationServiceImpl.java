@@ -27,7 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public void signup(SignUpRequestDTO request) {
 		
         var member = Member.builder().memberId(request.getMemberId())
-        		.password(passwordEncoder.encode(request.getPassword()))
+                .memberPwd(passwordEncoder.encode(request.getPassword()))
         		.name(request.getName())
         		.accountNo(request.getAccountNo())
                 .role(Role.USER).build();
