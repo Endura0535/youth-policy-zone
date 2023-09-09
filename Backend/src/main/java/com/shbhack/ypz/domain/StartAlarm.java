@@ -19,7 +19,7 @@ public class StartAlarm {
     private Long alarmBoxNo;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "memberId", referencedColumnName = "memberId")
+    @JoinColumn(name = "memberNo", referencedColumnName = "memberId")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)

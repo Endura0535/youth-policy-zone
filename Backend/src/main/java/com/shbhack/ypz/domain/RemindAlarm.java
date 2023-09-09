@@ -22,11 +22,11 @@ public class RemindAlarm {
     private long remindAlarmNo;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "memberId", referencedColumnName = "memberId")
+    @JoinColumn(name = "memberNo")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "policyId", referencedColumnName = "policyId")
+    @JoinColumn(name = "policyNo")
     private Policy policy;
 
     @NotBlank
