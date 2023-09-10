@@ -7,13 +7,13 @@
 	},
 	"item": [
 		{
-			"name": "join",
+			"name": "signup",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"test@abc.com\",\r\n    \"password\": \"passwordtest\",\r\n    \"accountNo\": \"110-110-1111\"\r\n}",
+					"raw": "{\r\n    \"memberId\": \"test6@abc.com\",\r\n    \"password\": \"passwordtest\",\r\n    \"accountNo\": \"110-110-1111\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,22 +21,51 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/member/join",
+					"raw": "http://localhost:8080/auth/signup",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"member",
-						"join"
+						"auth",
+						"signup"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "login",
+			"name": "signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberId\": \"test1@abc.com\",\r\n    \"password\": \"passwordtest\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "member",
 			"request": {
 				"method": "GET",
 				"header": []
