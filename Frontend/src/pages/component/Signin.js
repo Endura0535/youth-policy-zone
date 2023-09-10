@@ -4,10 +4,11 @@ function Signin() {
 
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
-  const [pwType, setPwType] = useState({
+  const [pwVisibility, setPwVisibility] = useState({
     type: 'password',
     visible: false,
   });
+  const [rememberId, setRememberId] = useState(false);
 
 
   const onEmailChanged = (e) => {
@@ -18,9 +19,9 @@ function Signin() {
     setPw(e.target.value);
   }
 
-  const handlePwType = (e) => {
-    setPwType(() => {
-      if (!pwType.visible) {
+  const handlePwVisibility = (e) => {
+    setPwVisibility(() => {
+      if (!pwVisibility.visible) {
         return {type: "text", visible: true};
       }
       else {
@@ -29,15 +30,45 @@ function Signin() {
     })
   }
 
+  // 아이디 기억하기
+  const handleRememberId = () => {
+    setRememberId(!rememberId);
+  }
+
+  // 비밀번호 초기화
+  const onClickForgotPw = () => {
+    alert('비밀번호 초기화')
+  }
+
+  // 로그인 버튼 클릭
+  const onClickSignin = () => {
+
+  }
+
   return (
     <div>
-        <div><label htmlFor="id">Email : <input type="email" onChange={onEmailChanged} value={email} id='id'/></label></div>
         <div>
-          <label htmlFor="pw">Password : <input type={pwType.type} onChange={onPwChanged} value={pw} id='pw'/></label>
-          <span onClick={handlePwType}>
-            {pwType.visible ? "비밀번호 숨기기" : "비밀번호 보기"}
-          </span>
+          <div><label htmlFor="email">이메일 주소</label></div>
+          <div><input type="email" onChange={onEmailChanged} value={email} id="email"/></div>
         </div>
+        <div>
+          <div><label htmlFor="pw">비밀번호</label></div>
+          <div>
+            <input type={pwVisibility.type} onChange={onPwChanged} value={pw} id="pw"/>
+            <span onClick={handlePwVisibility}>
+              {pwVisibility.visible ? "비밀번호 숨기기" : "비밀번호 보기"}
+            </span>
+          </div>
+        </div>
+        <div>
+          <label htmlFor='rememberId'>
+            <input type="checkbox" onChange={handleRememberId} value={rememberId} id="rememberId"/>
+            아이디 기억하기
+          </label>
+          <br />
+          <span onClick={onClickForgotPw}>비밀번호를 잊어버렸나요?</span>
+        </div>
+        <button onClick={onClickSignin}>로그인</button>
     </div>
   )
 }
