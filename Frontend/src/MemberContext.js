@@ -38,27 +38,25 @@ export function MemberProvider({ children }) {
   }
 
   const setMemberInfo = () => {
-    if (apiClient.current === null) {
-      alert('로그인 정보가 유효하지 않습니다.');
-      navigate("/");
-      return;
-    }
+    if (accessToken.current === null || apiClient.current === null) return false;
 
     // 회원 정보 설정
     apiClient.current.get(`/member/${memberInfo.current.memberId}`)
       .then((response) => {
       memberInfo.current = response.data;
     });
+    return true;
   }
 
   const doSignout = () => {
     setAccessToken(null);
+    setMemberInfo.current = null;
     navigate('/');
   }
 
   return (
     <MemberContext.Provider value={{ 
-      accessToken, memberInfo, succeededSignin, setMemberId, doSignout
+      accessToken, memberInfo, succeededSignin, setMemberId, doSignout, setMemberInfo
     }}>
       {children}
     </MemberContext.Provider>

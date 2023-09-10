@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Signin from './component/Signin';
 import Signup from './component/Signup';
+import { useMember } from '../MemberContext';
+import { useNavigate } from 'react-router-dom';
 
 function AuthPage() {
+  const { setMemberInfo } = useMember();
+  const [tab, setTab] = useState(0);
+  const navigate = useNavigate();
 
-  const [tab, setTabs] = useState(0);
-
+  useEffect(() => {
+    if(setMemberInfo()) navigate('/home');
+  }, []);
 
   return (
     <div>
@@ -13,8 +19,8 @@ function AuthPage() {
       <div>청년정책지역</div>
       <div>이곳은 청년 정책 지역, 청정지역입니다.</div>
       <div>
-        <button onClick={() => setTabs(0)}>로그인</button>
-        <button onClick={() => setTabs(1)}>회원가입</button>
+        <button onClick={() => setTab(0)}>로그인</button>
+        <button onClick={() => setTab(1)}>회원가입</button>
       </div>
       {tab === 0 && <Signin />}
       {tab === 1 && <Signup />}
