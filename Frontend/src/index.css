@@ -26,9 +26,9 @@ code {
 
 .main-container {
   margin: 0 auto;
-  max-width: 1280px;
-  width: 50%;
-  background-color: red;
+  max-width: 800px;
+  width: 100%;
+  background-color: #F3F6FB;
 }
 
 .primary-btn {
@@ -92,3 +92,11 @@ code {
  .primary-btn:active {
   padding-bottom: 10px;
  }
+
+ /* COMMON */
+.yflex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
