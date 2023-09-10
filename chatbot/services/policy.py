@@ -7,7 +7,12 @@ async def getPolicyInfo():
     policyList = []
 
     # 청년정책 정보 api metadata
-    
+    URL = "https://www.youthcenter.go.kr/opi/youthPlcyList.do"
+    params = {
+        'openApiVlak': 'fcbb6f9bfa03c6cee91bf7dd',
+        'pageIndex': '1',
+        'display': '1'
+    }
     idx = 1
 
     # 청년정책 정보 수집 및 저장
@@ -36,9 +41,10 @@ async def getPolicyInfo():
             val = columns[i].text  # 정책 데이터
 
             if infoType == 'rnum':  # row 번호
-                policyInfo['id'] = val
+                policyInfo["id"] = val
             elif infoType == 'polyBizSjnm':  # 정책명
                 policyInfo['text'] = val
+                metadata['name'] = val
             elif infoType == 'bizId':  # 정책 ID
                 metadata['policyId'] = val
             elif infoType == 'polyItcnCn':  # 정책 소개
@@ -78,7 +84,7 @@ async def getPolicyInfo():
             elif infoType == 'rfcSiteUrla2':  # 참고 사이트 2
                 metadata['referenceURL2'] = val
             elif infoType == 'mngtMson':  # 주관 부처명
-                metadata['referenceURL2'] = val
+                metadata['department'] = val
 
         policyInfo['metadata'] = metadata
         policyList.append(policyInfo)
