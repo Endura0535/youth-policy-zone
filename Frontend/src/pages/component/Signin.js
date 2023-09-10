@@ -4,35 +4,11 @@ import { useMember } from '../../MemberContext';
 import { useNavigate } from 'react-router-dom';
 
 function Signin() {
-  const { succeededSignin, setMemberId } = useMember();
-  const [email, setEmail] = useState('');
-  const [pw, setPw] = useState('');
-  const [pwVisibility, setPwVisibility] = useState({
-    type: 'password',
-    visible: false,
-  });
+  const { succeededSignin, setMemberId, email, pw, pwVisibility,
+    onEmailChanged, onPwChanged, handlePwVisibility
+  } = useMember();
   const [rememberId, setRememberId] = useState(false);
   const navigate = useNavigate();
-
-
-  const onEmailChanged = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const onPwChanged = (e) => {
-    setPw(e.target.value);
-  }
-
-  const handlePwVisibility = (e) => {
-    setPwVisibility(() => {
-      if (!pwVisibility.visible) {
-        return {type: "text", visible: true};
-      }
-      else {
-        return {type: "password", visible: false};
-      }
-    })
-  }
 
   // 아이디 기억하기
   const handleRememberId = () => {
@@ -61,6 +37,7 @@ function Signin() {
 
   return (
     <div>
+      <form>
         <div>
           <div><label htmlFor="email">이메일 주소</label></div>
           <div><input type="email" onChange={onEmailChanged} value={email} id="email"/></div>
@@ -68,7 +45,9 @@ function Signin() {
         <div>
           <div><label htmlFor="pw">비밀번호</label></div>
           <div>
-            <input type={pwVisibility.type} onChange={onPwChanged} value={pw} id="pw"/>
+            <input type={pwVisibility.type} onChange={onPwChanged} value={pw} id="pw"
+              autoComplete='false'
+            />
             <span onClick={handlePwVisibility}>
               {pwVisibility.visible ? "비밀번호 숨기기" : "비밀번호 보기"}
             </span>
@@ -82,7 +61,8 @@ function Signin() {
           <br />
           <span onClick={onClickForgotPw}>비밀번호를 잊어버렸나요?</span>
         </div>
-        <button onClick={onClickSignin}>로그인</button>
+        <button type="button" onClick={onClickSignin}>로그인</button>
+      </form>
     </div>
   )
 }
