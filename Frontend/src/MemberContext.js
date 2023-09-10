@@ -7,10 +7,17 @@ export function MemberProvider({ children }) {
 
   const accessToken = useRef("");
   const memberInfo = useRef({});
+  const apiClient = useRef(null);
 
   const succeededSignin = (token) => {
     // 엑세스토큰 설정
     accessToken.current = token;
+    apiClient.current = apiClient.current = axios.create({
+      baseURL: process.env.REACT_APP_API_URL,
+      headers: {
+        'Authorization': `Bearer ${accessToken.current}`
+      }
+    });
     // 멤버정보 설정
     setMemberInfo();
   }
@@ -23,14 +30,9 @@ export function MemberProvider({ children }) {
   }
 
   const setMemberInfo = () => {
-    console.log(accessToken.current);
-    axios.get(`http://localhost:8080/member/${memberInfo.current.memberId}`, {
-      headers: {
-        'Authorization': `Bearer ${accessToken.current}`
-      }
-    }).then((response) => {
+    apiClient.get(`/member/${memberInfo.current.memberId}`)
+      .then((response) => {
       memberInfo.current = response.data;
-      console.log(memberInfo.current);
     });
   }
 

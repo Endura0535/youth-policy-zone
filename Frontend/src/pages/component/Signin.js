@@ -47,7 +47,7 @@ function Signin() {
   // 로그인 버튼 클릭
   const onClickSignin = () => {
     setMemberId(email);
-    axios.post('http://localhost:8080/auth/signin', {
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/signin`, {
       "memberId": email,
       "password": pw,
     }).then((response) => {
