@@ -94,6 +94,12 @@ code {
  }
 
  /* COMMON */
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .yflex {
   display: flex;
   flex-direction: column;
