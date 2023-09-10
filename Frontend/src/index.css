@@ -1,8 +1,21 @@
+@font-face {
+  font-family: 'OneShinhanBold';
+  src: local('OneShinhanBold'), url('./assets/fonts/OneShinhanBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OneShinhanMedium';
+  src: local('OneShinhanMedium'), url('./assets/fonts/OneShinhanMedium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OneShinhanLight';
+  src: local('OneShinhanLight'), url('./assets/fonts/OneShinhanLight.ttf') format('truetype');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'OneShinhanMedium', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
