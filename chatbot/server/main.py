@@ -5,6 +5,7 @@ from fastapi import FastAPI, File, Form, HTTPException, Depends, Body, UploadFil
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.staticfiles import StaticFiles
 from loguru import logger
+import json
 
 from models.api import (
     DeleteRequest,
@@ -81,7 +82,11 @@ async def upsert(
         request: UpsertRequest = Body(...),
 ):
     try:
-        ids = await datastore.upsert(request.documents)
+        # policyList 처리할 수 있도록 변경
+        req = json.loads(request)
+        # print(req["documents"])
+        # ids = await datastore.upsert(request.documents)
+        ids = await datastore.upsert(req["documents"])
         return UpsertResponse(ids=ids)
     except Exception as e:
         logger.error(e)
