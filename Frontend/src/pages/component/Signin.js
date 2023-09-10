@@ -54,6 +54,7 @@ function Signin() {
       succeededSignin(response.data.token);
       navigate('/home');
     }).catch((err)=> {
+      console.log(err);
       alert(err.response.data);
     });
   }

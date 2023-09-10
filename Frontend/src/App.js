@@ -8,8 +8,8 @@ import { MemberProvider } from './MemberContext'
 
 function App() {
   return (
-    <MemberProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <MemberProvider>
         <div className="App">
           <Routes>
             <Route path="/" element={<WelcomePage />} />
@@ -18,8 +18,8 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </div>
+      </MemberProvider>
     </BrowserRouter>
-  </MemberProvider>
   )
 }
 
