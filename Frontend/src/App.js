@@ -6,11 +6,11 @@ import ProfilePage from './pages/ProfilePage'
 import AuthPage from './pages/AuthPage'
 import { MemberProvider } from './MemberContext'
 
-function App() {
-  return (
-    <BrowserRouter>
-      <MemberProvider>
-        <div className="App">
+class App extends React.Component {
+  render(){
+    return(
+      <BrowserRouter>
+        <div className="main-container">
           <Routes>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/auth" element={<AuthPage />} />
@@ -18,9 +18,11 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </div>
-      </MemberProvider>
     </BrowserRouter>
-  )
+    )
+  }
 }
+
+
 
 export default App
