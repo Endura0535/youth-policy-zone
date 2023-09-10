@@ -8,7 +8,7 @@ function BankAccountAuthenticationResponse({setIsRequested}) {
 
   const onClickAuthResponseButton = () => {
     // 인증번호 전송
-    // 회원가입 완료 페이지로 이동
+    // 계좌인증 결과로 이동
   }
 
   return (
