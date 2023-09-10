@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useContext, useRef } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const MemberContext = createContext("member");
@@ -10,6 +10,40 @@ export function MemberProvider({ children }) {
   const memberInfo = useRef({});
   const navigate = useNavigate();
   const apiClient = useRef(null);
+
+  // AuthPage
+  const [email, setEmail] = useState('');
+  const [pw, setPw] = useState('');
+  const [pwVisibility, setPwVisibility] = useState({
+    type: 'password',
+    visible: false,
+  });
+  const [bankAccount, setBankAccount] = useState('');
+
+  const onEmailChanged = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const onPwChanged = (e) => {
+    setPw(e.target.value);
+  }
+
+  const handlePwVisibility = (e) => {
+    setPwVisibility(() => {
+      if (!pwVisibility.visible) {
+        return {type: "text", visible: true};
+      }
+      else {
+        return {type: "password", visible: false};
+      }
+    })
+  }
+
+  const onBankAccountChanged = (e) => {
+    setBankAccount(e.target.value);
+  }
+
+  // AuthPage //
 
   const setAccessToken = (token) => {
     // 엑세스토큰 설정
@@ -56,7 +90,9 @@ export function MemberProvider({ children }) {
 
   return (
     <MemberContext.Provider value={{ 
-      accessToken, memberInfo, succeededSignin, setMemberId, doSignout, setMemberInfo
+      accessToken, memberInfo, succeededSignin, setMemberId, doSignout, setMemberInfo,
+      email, setEmail, pw, pwVisibility, setPwVisibility, bankAccount, setBankAccount,
+      onEmailChanged, onPwChanged, handlePwVisibility, onBankAccountChanged
     }}>
       {children}
     </MemberContext.Provider>
