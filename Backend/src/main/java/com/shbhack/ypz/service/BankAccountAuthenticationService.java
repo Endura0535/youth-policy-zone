@@ -1,9 +1,6 @@
 package com.shbhack.ypz.service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 import org.springframework.stereotype.Service;
 
@@ -15,8 +12,17 @@ public class BankAccountAuthenticationService {
 	// 계좌 인증 정보 생성
 	public void createAuthentication(String memberId, String accountNo) throws Exception {
 		
-		// TODO 임의 4자리 코드 생성
-		String code = "1234";
+		// 임의 4자리 코드 생성
+		Random random = new Random(System.currentTimeMillis());
+		int range = (int)Math.pow(10, 4);
+		int trim = (int)Math.pow(10, 3);
+		int result = random.nextInt(range)+trim;
+
+		if(result>range){
+		    result = result - trim;
+		}
+
+		String code = String.valueOf(result);
 		
 		// TODO 신한 OpenAI 1원 이체 요청
 		
