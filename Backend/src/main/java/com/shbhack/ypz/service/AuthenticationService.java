@@ -8,4 +8,6 @@ public interface AuthenticationService {
     void signup(SignUpRequestDTO request);
 
     SignInResponseDTO signin(SignInRequestDTO request);
+
+    boolean isExistMember(String memberId);
 }

@@ -4,6 +4,7 @@ import WelcomePage from './pages/WelcomePage'
 import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ProfilePage'
 import AuthPage from './pages/AuthPage'
+import { MemberProvider } from './MemberContext'
 
 class App extends React.Component {
   render(){
@@ -21,6 +22,7 @@ class App extends React.Component {
     )
   }
 }
+
 
 
 export default App
