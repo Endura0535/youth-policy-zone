@@ -2,7 +2,15 @@ from abc import ABC, abstractmethod
 from typing import Dict, List, Optional
 import asyncio
 
-from models.models import (
+# from models.models import (
+#     Document,
+#     DocumentChunk,
+#     DocumentMetadataFilter,
+#     Query,
+#     QueryResult,
+#     QueryWithEmbedding,
+# )
+from models.policyModels import (
     Document,
     DocumentChunk,
     DocumentMetadataFilter,
@@ -13,7 +21,7 @@ from models.models import (
 from services.chunks import get_document_chunks
 from services.openai import get_embeddings
 
-
+# TODO: 정책 데이터 처리하기
 class DataStore(ABC):
     async def upsert(
         self, documents: List[Document], chunk_token_size: Optional[int] = None
@@ -28,7 +36,8 @@ class DataStore(ABC):
             *[
                 self.delete(
                     filter=DocumentMetadataFilter(
-                        document_id=document.id,
+                        # document_id=document.id,
+                        document_id=document.get('id'),
                     ),
                     delete_all=False,
                 )
