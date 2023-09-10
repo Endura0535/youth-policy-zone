@@ -36,7 +36,7 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
         		.cors().configurationSource(corsConfigurationSource())
         		.and()
-                .authorizeHttpRequests(request -> request.requestMatchers("/auth/**")
+                .authorizeHttpRequests(request -> request.requestMatchers("/auth/**", "/policy/**", "/member/**", "/chat/**", "/alert/**")
                         .permitAll().anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
