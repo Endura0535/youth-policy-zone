@@ -3,7 +3,7 @@ import bs4
 import json
 
 
-def getPolicyInfo():
+async def getPolicyInfo():
     policyList = []
 
     # 청년정책 정보 api metadata
@@ -25,16 +25,69 @@ def getPolicyInfo():
 
         # 더 이상 정책이 없는 경우
         if idx == 3:
-        # if len(rows) == 0:
+            # if len(rows) == 0:
             break
 
         # 컬럼 값 조회
         columns = rows[0].find_all()
+        metadata = {}
         for i in range(0, len(columns)):
-            policyInfo[columns[i].name] = columns[i].text
+            infoType = columns[i].name  # 정책 정보 유형
+            val = columns[i].text  # 정책 데이터
 
+            if infoType == 'rnum':  # row 번호
+                policyInfo['id'] = val
+            elif infoType == 'polyBizSjnm':  # 정책명
+                policyInfo['text'] = val
+            elif infoType == 'bizId':  # 정책 ID
+                metadata['policyId'] = val
+            elif infoType == 'polyItcnCn':  # 정책 소개
+                metadata['policyDetail'] = val
+            elif infoType == 'sporCn':  # 지원 내용
+                metadata['supportContent'] = val
+            elif infoType == 'sporScvl':  # 지원 규모
+                metadata['supportScale'] = val
+            elif infoType == 'bizPrdCn':  # 사업 운영 기간
+                metadata['policyOperationPeriod'] = val
+            elif infoType == 'ageInfo':  # 연령 정보
+                metadata['ageInfo'] = val
+            elif infoType == 'majrRqisCn':  # 전공 요건
+                metadata['major'] = val
+            elif infoType == 'empmSttsCn':  # 취업 상태
+                metadata['employeedStatus'] = val
+            elif infoType == 'splzRlmRqisCn':  # 특화 분야
+                metadata['specialized'] = val
+            elif infoType == 'accrRqisCn':  # 학력 요건
+                metadata['academicAbility'] = val
+            elif infoType == 'prcpCn':  # 거주지 및 소득 조건
+                metadata['ResiIncomeCondition'] = val
+            elif infoType == 'aditRscn':  # 추가 단서 사항
+                metadata['additional'] = val
+            elif infoType == 'prcpLmttTrgtCn':  # 참여 제한 대상
+                metadata['restriction'] = val
+            elif infoType == 'rqutProcCn':  # 신청 절차
+                metadata['applicationProcedure'] = val
+            elif infoType == 'pstnPaprCn':  # 제출 서류
+                metadata['submissionDocuments'] = val
+            elif infoType == 'jdgnPresCn':  # 심사 발표 내용
+                metadata['judge'] = val
+            elif infoType == 'rqutUrla':  # 신청 사이트 주소
+                metadata['applicationURL'] = val
+            elif infoType == 'rfcSiteUrla1':  # 참고 사이트 1
+                metadata['referenceURL1'] = val
+            elif infoType == 'rfcSiteUrla2':  # 참고 사이트 2
+                metadata['referenceURL2'] = val
+            elif infoType == 'mngtMson':  # 주관 부처명
+                metadata['referenceURL2'] = val
+
+        policyInfo['metadata'] = metadata
         policyList.append(policyInfo)
-
         idx += 1
 
-    return policyList
+        # json 형태로 반환
+        data = {
+            "documents": policyList
+        }
+        policyJson = json.dumps(data, ensure_ascii=False).encode("utf-8")
+
+    return policyJson.decode("utf-8")

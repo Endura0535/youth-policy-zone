@@ -51,8 +51,8 @@ app.mount("/sub", sub_app)
     response_model=UpsertResponse,
 )
 async def upsert_file(
-    file: UploadFile = File(...),
-    metadata: Optional[str] = Form(None),
+        file: UploadFile = File(...),
+        metadata: Optional[str] = Form(None),
 ):
     try:
         metadata_obj = (
@@ -78,7 +78,7 @@ async def upsert_file(
     response_model=UpsertResponse,
 )
 async def upsert(
-    request: UpsertRequest = Body(...),
+        request: UpsertRequest = Body(...),
 ):
     try:
         ids = await datastore.upsert(request.documents)
@@ -93,7 +93,7 @@ async def upsert(
     response_model=QueryResponse,
 )
 async def query_main(
-    request: QueryRequest = Body(...),
+        request: QueryRequest = Body(...),
 ):
     try:
         results = await datastore.query(
@@ -112,7 +112,7 @@ async def query_main(
     description="Accepts search query objects array each with query and optional filter. Break down complex questions into sub-questions. Refine results by criteria, e.g. time / source, don't do this often. Split queries if ResponseTooLargeError occurs.",
 )
 async def query(
-    request: QueryRequest = Body(...),
+        request: QueryRequest = Body(...),
 ):
     try:
         results = await datastore.query(
@@ -129,7 +129,7 @@ async def query(
     response_model=DeleteResponse,
 )
 async def delete(
-    request: DeleteRequest = Body(...),
+        request: DeleteRequest = Body(...),
 ):
     if not (request.ids or request.filter or request.delete_all):
         raise HTTPException(
@@ -157,6 +157,9 @@ async def startup():
 def start():
     uvicorn.run("server.main:app", host="0.0.0.0", port=8000, reload=True)
 
+
 @app.post("/policy/init")
-def getNewPolicyDate():
-    return getPolicyInfo()
+async def getNewPolicyDate():
+    policyInfo = await getPolicyInfo()
+    await upsert(policyInfo)
+    return policyInfo
