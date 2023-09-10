@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 
 function Signin() {
@@ -42,7 +43,12 @@ function Signin() {
 
   // 로그인 버튼 클릭
   const onClickSignin = () => {
-
+    axios.post('http://localhost:8080/auth/signin', {
+      "memberId": email,
+      "password": pw,
+    }).then((response) => {
+      console.log(response);
+    })
   }
 
   return (
