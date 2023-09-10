@@ -1,13 +1,102 @@
+@font-face {
+  font-family: 'OneShinhanBold';
+  src: local('OneShinhanBold'), url('./assets/fonts/OneShinhanBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OneShinhanMedium';
+  src: local('OneShinhanMedium'), url('./assets/fonts/OneShinhanMedium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OneShinhanLight';
+  src: local('OneShinhanLight'), url('./assets/fonts/OneShinhanLight.ttf') format('truetype');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'OneShinhanMedium', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.main-container {
+  margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+  background-color: #F3F6FB;
+}
+
+.primary-btn {
+  background-color: #E5F0FC;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #0B68E9;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0 20px 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 19px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+ }
+ 
+ .primary-btn:after {
+  background-clip: padding-box;
+  background-color: #E5F0FC;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+ }
+ 
+ .primary-btn:main, .primary-btn:focus {
+  user-select: auto;
+ }
+ 
+ .primary-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+ }
+ 
+ .primary-btn:disabled {
+  cursor: auto;
+ }
+ 
+ .primary-btn:active:after {
+  border-width: 0 0 0px;
+ }
+ 
+ .primary-btn:active {
+  padding-bottom: 10px;
+ }
+
+ /* COMMON */
+.yflex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

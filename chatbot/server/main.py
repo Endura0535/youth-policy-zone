@@ -5,6 +5,7 @@ from fastapi import FastAPI, File, Form, HTTPException, Depends, Body, UploadFil
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.staticfiles import StaticFiles
 from loguru import logger
+import json
 
 from models.api import (
     DeleteRequest,
@@ -18,6 +19,8 @@ from datastore.factory import get_datastore
 from services.file import get_document_from_file
 
 from models.models import DocumentMetadata, Source
+
+from services.policy import getPolicyInfo
 
 bearer_scheme = HTTPBearer()
 BEARER_TOKEN = os.environ.get("BEARER_TOKEN")
@@ -49,8 +52,8 @@ app.mount("/sub", sub_app)
     response_model=UpsertResponse,
 )
 async def upsert_file(
-    file: UploadFile = File(...),
-    metadata: Optional[str] = Form(None),
+        file: UploadFile = File(...),
+        metadata: Optional[str] = Form(None),
 ):
     try:
         metadata_obj = (
@@ -76,10 +79,14 @@ async def upsert_file(
     response_model=UpsertResponse,
 )
 async def upsert(
-    request: UpsertRequest = Body(...),
+        request: UpsertRequest = Body(...),
 ):
     try:
-        ids = await datastore.upsert(request.documents)
+        # policyList 처리할 수 있도록 변경
+        req = json.loads(request)
+        # print(req["documents"])
+        # ids = await datastore.upsert(request.documents)
+        ids = await datastore.upsert(req["documents"])
         return UpsertResponse(ids=ids)
     except Exception as e:
         logger.error(e)
@@ -91,7 +98,7 @@ async def upsert(
     response_model=QueryResponse,
 )
 async def query_main(
-    request: QueryRequest = Body(...),
+        request: QueryRequest = Body(...),
 ):
     try:
         results = await datastore.query(
@@ -110,7 +117,7 @@ async def query_main(
     description="Accepts search query objects array each with query and optional filter. Break down complex questions into sub-questions. Refine results by criteria, e.g. time / source, don't do this often. Split queries if ResponseTooLargeError occurs.",
 )
 async def query(
-    request: QueryRequest = Body(...),
+        request: QueryRequest = Body(...),
 ):
     try:
         results = await datastore.query(
@@ -127,7 +134,7 @@ async def query(
     response_model=DeleteResponse,
 )
 async def delete(
-    request: DeleteRequest = Body(...),
+        request: DeleteRequest = Body(...),
 ):
     if not (request.ids or request.filter or request.delete_all):
         raise HTTPException(
@@ -154,3 +161,10 @@ async def startup():
 
 def start():
     uvicorn.run("server.main:app", host="0.0.0.0", port=8000, reload=True)
+
+
+@app.post("/policy/init")
+async def getNewPolicyDate():
+    policyInfo = await getPolicyInfo()
+    await upsert(policyInfo)
+    return policyInfo
