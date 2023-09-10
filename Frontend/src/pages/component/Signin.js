@@ -4,7 +4,7 @@ import { useMember } from '../../MemberContext';
 import { useNavigate } from 'react-router-dom';
 
 function Signin() {
-  const { accessToken } = useMember();
+  const { succeededSignin, setMemberId } = useMember();
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [pwVisibility, setPwVisibility] = useState({
@@ -46,11 +46,12 @@ function Signin() {
 
   // 로그인 버튼 클릭
   const onClickSignin = () => {
+    setMemberId(email);
     axios.post('http://localhost:8080/auth/signin', {
       "memberId": email,
       "password": pw,
     }).then((response) => {
-      accessToken.current = response.data.token;
+      succeededSignin(response.data.token);
       navigate('/home');
     }).catch((err)=> {
       alert(err.response.data);
