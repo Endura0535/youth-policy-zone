@@ -23,9 +23,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    
+
     public void signup(SignUpRequestDTO request) {
-		
+
         var member = Member.builder().memberId(request.getMemberId())
                 .memberPwd(passwordEncoder.encode(request.getPassword()))
         		.name(request.getName())
@@ -36,13 +36,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public SignInResponseDTO signin(SignInRequestDTO request) {
-    	
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getMemberId(), request.getPassword()));
-        
+
         var member = memberRepository.findByMemberId(request.getMemberId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid ID or password."));
         var jwt = jwtService.generateToken(member);
         return SignInResponseDTO.builder().token(jwt).build();
+    }
+
+    @Override
+    public boolean isExistMember(String memberId) {
+        return memberRepository.findByMemberId(memberId).isPresent();
     }
 }
