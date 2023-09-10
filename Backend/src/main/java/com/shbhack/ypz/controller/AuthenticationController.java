@@ -1,5 +1,6 @@
 package com.shbhack.ypz.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
+@Slf4j
 public class AuthenticationController {
 	
 	private final AuthenticationService authenticationService;
@@ -28,8 +30,12 @@ public class AuthenticationController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@RequestBody SignUpRequestDTO dto) {
-		// TODO id 중복검사
-		
+		log.info("--------------signup called--------------");
+		// id 중복검사
+		if(authenticationService.isExistMember(dto.getMemberId())) {
+			return new ResponseEntity<String>("이미 존재하는 아이디입니다.", HttpStatus.CONFLICT);
+		}
+
 		// TODO 예금주 실명조회로 이름 가져오기
 		String name = "TEST";
 		dto.setName(name);
@@ -60,7 +66,7 @@ public class AuthenticationController {
 	
 	@PostMapping("/bank-account-authentication")
 	public ResponseEntity<?> authenticateBankAccount(@RequestBody BankAccountAuthenticateRequestDTO dto) {
-		
+		log.info("--------------authenticateBankAccount called--------------");
 		try {
 			bankAccountAuthenticationService.createAuthentication(dto.getMemberId(), dto.getAccountNo());
 			

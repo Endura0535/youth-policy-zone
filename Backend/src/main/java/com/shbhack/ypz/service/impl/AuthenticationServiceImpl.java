@@ -45,4 +45,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var jwt = jwtService.generateToken(member);
         return SignInResponseDTO.builder().token(jwt).build();
     }
+
+    @Override
+    public boolean isExistMember(String memberId) {
+        return memberRepository.findByMemberId(memberId).isPresent();
+    }
 }
