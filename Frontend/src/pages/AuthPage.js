@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Signin from './component/Signin';
 import Signup from './component/Signup';
 import { useMember } from '../MemberContext';
 import { useNavigate } from 'react-router-dom';
 
 function AuthPage() {
-  const { setMemberInfo } = useMember();
-  const [tab, setTab] = useState(0);
+  const { setMemberInfo, tab, setTab} = useMember();
   const navigate = useNavigate();
 
   useEffect(() => {

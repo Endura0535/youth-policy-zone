@@ -12,6 +12,7 @@ export function MemberProvider({ children }) {
   const apiClient = useRef(null);
 
   // AuthPage
+  const [tab, setTab] = useState(0);
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [pwVisibility, setPwVisibility] = useState({
@@ -92,7 +93,8 @@ export function MemberProvider({ children }) {
     <MemberContext.Provider value={{ 
       accessToken, memberInfo, succeededSignin, setMemberId, doSignout, setMemberInfo,
       email, setEmail, pw, pwVisibility, setPwVisibility, bankAccount, setBankAccount,
-      onEmailChanged, onPwChanged, handlePwVisibility, onBankAccountChanged
+      onEmailChanged, onPwChanged, handlePwVisibility, onBankAccountChanged,
+      tab, setTab
     }}>
       {children}
     </MemberContext.Provider>

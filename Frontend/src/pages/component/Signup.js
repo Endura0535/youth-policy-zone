@@ -1,13 +1,15 @@
 import React from 'react'
 import { useMember } from '../../MemberContext';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   const { email, pw, pwVisibility, bankAccount, onEmailChanged, onPwChanged, handlePwVisibility,
     onBankAccountChanged
   } = useMember();
+  const navigate = useNavigate();
 
   const onClickNextButton = (e) => {
-
+    navigate("/account-auth");
   }
 
   return (

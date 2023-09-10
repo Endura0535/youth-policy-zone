@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useMember } from '../../MemberContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,8 +9,6 @@ function Signin() {
   } = useMember();
   const [rememberId, setRememberId] = useState(false);
   const navigate = useNavigate();
-
-  
 
   // 아이디 기억하기
   const handleRememberId = () => {
