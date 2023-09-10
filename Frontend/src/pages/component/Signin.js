@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useMember } from '../../MemberContext';
 
 function Signin() {
-
+  const { accessToken } = useMember();
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [pwVisibility, setPwVisibility] = useState({
@@ -47,7 +48,8 @@ function Signin() {
       "memberId": email,
       "password": pw,
     }).then((response) => {
-      console.log(response);
+      accessToken.current = response.data.token;
+      console.log(accessToken.current);
     })
   }
 
