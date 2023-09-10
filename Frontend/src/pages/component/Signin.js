@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useMember } from '../../MemberContext';
+import { useNavigate } from 'react-router-dom';
 
 function Signin() {
   const { accessToken } = useMember();
@@ -11,6 +12,7 @@ function Signin() {
     visible: false,
   });
   const [rememberId, setRememberId] = useState(false);
+  const navigate = useNavigate();
 
 
   const onEmailChanged = (e) => {
@@ -49,8 +51,10 @@ function Signin() {
       "password": pw,
     }).then((response) => {
       accessToken.current = response.data.token;
-      console.log(accessToken.current);
-    })
+      navigate('/home');
+    }).catch((err)=> {
+      alert(err.response.data);
+    });
   }
 
   return (
