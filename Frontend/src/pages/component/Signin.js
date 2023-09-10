@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useMember } from '../../MemberContext';
+import { useNavigate } from 'react-router-dom';
 
 function Signin() {
-
+  const { succeededSignin, setMemberId } = useMember();
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [pwVisibility, setPwVisibility] = useState({
@@ -10,6 +12,7 @@ function Signin() {
     visible: false,
   });
   const [rememberId, setRememberId] = useState(false);
+  const navigate = useNavigate();
 
 
   const onEmailChanged = (e) => {
@@ -43,12 +46,17 @@ function Signin() {
 
   // 로그인 버튼 클릭
   const onClickSignin = () => {
-    axios.post('http://localhost:8080/auth/signin', {
+    setMemberId(email);
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/signin`, {
       "memberId": email,
       "password": pw,
     }).then((response) => {
-      console.log(response);
-    })
+      succeededSignin(response.data.token);
+      navigate('/home');
+    }).catch((err)=> {
+      console.log(err);
+      alert(err.response.data);
+    });
   }
 
   return (
