@@ -1,5 +1,7 @@
 package com.shbhack.ypz.controller;
 
+import com.shbhack.ypz.dto.request.ShbSearchNameRequestDTO;
+import com.shbhack.ypz.service.ShbService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ import com.shbhack.ypz.service.BankAccountAuthenticationService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
@@ -27,6 +32,8 @@ public class AuthenticationController {
 	private final AuthenticationService authenticationService;
 	
 	private final BankAccountAuthenticationService bankAccountAuthenticationService;
+
+	private final ShbService shbService;
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@RequestBody SignUpRequestDTO dto) {
@@ -37,17 +44,35 @@ public class AuthenticationController {
 		}
 
 		// TODO 예금주 실명조회로 이름 가져오기
-		String name = "TEST";
+
+		// RequestDTO DataHeader, DataBody 설정
+		ShbSearchNameRequestDTO shbSearchNameRequestDTO = new ShbSearchNameRequestDTO();
+
+		Map<String, String> dataHeader = new HashMap<>();
+		dataHeader.put("apikey", "${feign.shb.apikey}");
+
+		Map<String, String> dataBody = new HashMap<>();
+		dataBody.put("입금은행코드", "088");
+		dataBody.put("입금계좌번호", "110184999999");
+
+		shbSearchNameRequestDTO.setDataHeader(dataHeader);
+		shbSearchNameRequestDTO.setDataBody(dataBody);
+
+		String name = shbService.searchName(shbSearchNameRequestDTO);
+		log.info("--------------name: " + name + "--------------");
+
+//		String name = "Test";
 		dto.setName(name);
 		
-		try {
-			authenticationService.signup(dto);
-			
-			return new ResponseEntity<String>(name, HttpStatus.OK);
-			
-		} catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
+//		try {
+//			authenticationService.signup(dto);
+//
+//			return new ResponseEntity<String>(name, HttpStatus.OK);
+//
+//		} catch (Exception e) {
+//			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+//		}
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PostMapping("/signin")
@@ -61,7 +86,6 @@ public class AuthenticationController {
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		
 	}
 	
 	@PostMapping("/bank-account-authentication")

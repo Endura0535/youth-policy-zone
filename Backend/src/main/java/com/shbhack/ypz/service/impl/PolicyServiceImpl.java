@@ -20,7 +20,7 @@ public class PolicyServiceImpl implements PolicyService {
 
         var policyList = policyRepository.findAllPolicy().stream()
                 .map(p -> Policy.builder()
-                        .policyNo(p.getPolicyNo())
+                        .id(p.getId())
                         .alarmType(p.getAlarmType())
                         .expireDt(p.getExpireDt())
                         .build())
