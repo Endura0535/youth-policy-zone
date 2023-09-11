@@ -33,7 +33,7 @@ public class MemberService {
 			.age(updatedMember.getAge())
 			.education(updatedMember.getEducation())
 			.kidsCount(updatedMember.getKidsCount())
-			.password(updatedMember.getPassword())
+			.memberPwd(updatedMember.getPassword())
 			.residence(updatedMember.getResidence())
 			.single(updatedMember.isSingle())
 			.build();
