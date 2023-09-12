@@ -3,7 +3,7 @@ body {
 }
 
 
-/* WELCOMEPAGE.js */
+/* ---------- WELCOMEPAGE.js ---------- */
 .welcome-container {
   display: flex;
   flex-direction: column;
@@ -31,12 +31,12 @@ body {
   margin: 30px 0 20px 0;
 }
 
-.entry-button {
-  margin: 10px;
+.cover-btn {
+  margin: 30px;
 }
 
 
-/* ------ AUTHPage ------ */
+/* ------------- AUTHPAGE.js ------------ */
 .auth-toggle-container {
   display: table-cell;
   vertical-align: middle;
@@ -53,7 +53,7 @@ body {
   margin: 0px;
   width: 140px;
   height: 40px;
-  background-color: #fcce8a;
+  background-color: #E5F0FC;
   border-radius: 26px;
   overflow: hidden;
   position: relative;
@@ -116,4 +116,59 @@ body {
   content: attr(data-off);
   right: auto;
   left: 20px;
+}
+
+
+.input-container {
+  position: relative;
+}
+
+.input-container input, .form button {
+  outline: none;
+  border: 1px solid #e5e7eb;
+  margin: 8px 0;
+}
+
+.input-container input {
+  background-color: #fff;
+  padding: 1rem;
+  padding-right: 3rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  width: 300px;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.input-container span {
+  display: grid;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  place-content: center;
+}
+
+.input-container span svg {
+  color: #9CA3AF;
+  width: 1rem;
+  height: 1rem;
+}
+
+.input-container .hidepassword {
+  margin-top: 20px;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.signin-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rememberId, .forgotPw {
+  font-size: 0.9em;
+  cursor: pointer;
 }
