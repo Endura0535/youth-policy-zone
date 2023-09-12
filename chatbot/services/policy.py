@@ -1,6 +1,7 @@
 import requests
 import bs4
 import json
+import re
 
 
 async def getPolicyInfo():
@@ -11,7 +12,7 @@ async def getPolicyInfo():
     params = {
         'openApiVlak': 'fcbb6f9bfa03c6cee91bf7dd',
         'pageIndex': '1',
-        'display': '1'
+        'display': '100'
     }
     idx = 1
 
@@ -28,8 +29,8 @@ async def getPolicyInfo():
         xml_obj = bs4.BeautifulSoup(content, 'lxml-xml')
         rows = xml_obj.findAll('youthPolicy')
 
-        # 더 이상 정책이 없는 경우
-        if idx == 3:
+        # 더 이상 정책이 없는 경우 종료
+        if idx == 2:
             # if len(rows) == 0:
             break
 
@@ -42,6 +43,7 @@ async def getPolicyInfo():
 
             if infoType == 'rnum':  # row 번호
                 policyInfo["id"] = val
+                metadata['id'] = val
             elif infoType == 'polyBizSjnm':  # 정책명
                 policyInfo['text'] = val
                 metadata['name'] = val
@@ -55,8 +57,12 @@ async def getPolicyInfo():
                 metadata['supportScale'] = val
             elif infoType == 'bizPrdCn':  # 사업 운영 기간
                 metadata['policyOperationPeriod'] = val
+            elif infoType == 'rqutPrdCn':  # 사업 신청 기간
+                metadata['applicationPeriod'] = val
             elif infoType == 'ageInfo':  # 연령 정보
-                metadata['ageInfo'] = val
+                info = classifyAge(val)
+                metadata['startAge'] = info[0]
+                metadata['endAge'] = info[1]
             elif infoType == 'majrRqisCn':  # 전공 요건
                 metadata['major'] = val
             elif infoType == 'empmSttsCn':  # 취업 상태
@@ -97,3 +103,28 @@ async def getPolicyInfo():
         policyJson = json.dumps(data, ensure_ascii=False).encode("utf-8")
 
     return policyJson.decode("utf-8")
+
+
+def classifyAge(ageInfo):
+    # print(ageInfo)
+    start = 0
+    end = 99
+
+    data = re.findall(r'\d+', ageInfo);
+
+    # '만 19세 ~ 34세' 형태의 데이터
+    if '~' in ageInfo:
+        return data
+
+    # '만 18세 이상' 형태의 데이터
+    if '이상' in ageInfo:
+        end = data[0]
+
+    # '만 39세 미만' 형태의 데이터
+    if '미만' in ageInfo:
+        start = data[0]
+
+    # print(start)
+    # print(end)
+
+    return [start, end]
