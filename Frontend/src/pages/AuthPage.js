@@ -44,21 +44,10 @@ function AuthPage() {
                 <label class="btn-color-mode-switch-inner" data-off="로그인" data-on="회원가입" for="color_mode"></label>
             </label>
         </div>
-
-<<<<<<< HEAD
-      <div>
-        <button onClick={() => setTab(0)}>로그인</button>
-        <button onClick={() => setTab(1)}>회원가입</button>
-      </div>
-      {tab === 0 && <Signin />}
-      {tab === 1 && <Signup />}
-    </div>
-=======
-        {tab === 0 && <Signin />}
-        {tab === 1 && <Signup />}
+        {tab === 1 && <Signin />}
+        {tab === 0 && <Signup />}
       </div>
     </CSSTransition>
->>>>>>> feature-userui
   )
 }
 
