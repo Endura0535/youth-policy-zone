@@ -53,7 +53,7 @@ body {
   margin: 0px;
   width: 140px;
   height: 40px;
-  background-color: #fcce8a;
+  background-color: #E5F0FC;
   border-radius: 26px;
   overflow: hidden;
   position: relative;
@@ -155,4 +155,20 @@ body {
   color: #9CA3AF;
   width: 1rem;
   height: 1rem;
+}
+
+.input-container .hidepassword {
+  margin-top: 20px;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.signin-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rememberId, .forgotPw {
+  font-size: 0.9em;
+  cursor: pointer;
 }
