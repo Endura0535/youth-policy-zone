@@ -85,7 +85,7 @@ export function MemberProvider({ children }) {
 
   const doSignout = () => {
     setAccessToken(null);
-    setMemberInfo.current = null;
+    memberInfo.current = null;
     navigate('/');
   }
 

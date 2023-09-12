@@ -4,24 +4,39 @@ body {
 
 
 /* WELCOMEPAGE.js */
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
 
-.welcomelogo {
+.brand .logoimage {
   width: 150px;
 }
 
-.brand-letter {
+.brand .brand-letter {
   font-size: 50px;
   color: #0B68E9;
 }
 
-.sm-letter {
+.brand .brand-letter .sm-letter {
   font-size: 40px;
   color: #C1DBF8;
 }
 
+.youthimage {
+  width: 300px;
+  margin: 30px 0 20px 0;
+}
+
+.entry-button {
+  margin: 10px;
+}
+
 
 /* ------ AUTHPage ------ */
-
 .auth-toggle-container {
   display: table-cell;
   vertical-align: middle;
