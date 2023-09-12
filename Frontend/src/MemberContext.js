@@ -12,7 +12,7 @@ export function MemberProvider({ children }) {
   const apiClient = useRef(null);
 
   // AuthPage
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(1);
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [pwVisibility, setPwVisibility] = useState({
@@ -85,7 +85,7 @@ export function MemberProvider({ children }) {
 
   const doSignout = () => {
     setAccessToken(null);
-    setMemberInfo.current = null;
+    memberInfo.current = null;
     navigate('/');
   }
 
