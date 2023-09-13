@@ -1,11 +1,20 @@
 import React from 'react'
+import { useMember } from '../../MemberContext';
+import axios from 'axios';
 
 function BankAccountAuthenticationRequest({setIsRequested}) {
-
-  
+  const { email, bankAccount } = useMember();
 
   const onClickAuthRequestButton = () => {
-    setIsRequested(true);
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/bank-account-authentication`, {
+      memberId: email,
+      accountNo: bankAccount,
+    }).then((response) => {
+      console.log('request ok');
+      setIsRequested(true);
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 
   return (
