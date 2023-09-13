@@ -2,6 +2,8 @@ import requests
 import bs4
 import json
 import re
+from datetime import datetime, timedelta
+import calendar
 
 
 async def getPolicyInfo():
@@ -12,8 +14,10 @@ async def getPolicyInfo():
     params = {
         'openApiVlak': 'fcbb6f9bfa03c6cee91bf7dd',
         'pageIndex': '1',
-        'display': '100'
+        'display': '1'
     }
+
+    # TODO: DB에서 마지막 값 조회
     idx = 1
 
     # 청년정책 정보 수집 및 저장
@@ -30,7 +34,7 @@ async def getPolicyInfo():
         rows = xml_obj.findAll('youthPolicy')
 
         # 더 이상 정책이 없는 경우 종료
-        if idx == 2:
+        if idx == 30:
             # if len(rows) == 0:
             break
 
@@ -58,7 +62,9 @@ async def getPolicyInfo():
             elif infoType == 'bizPrdCn':  # 사업 운영 기간
                 metadata['policyOperationPeriod'] = val
             elif infoType == 'rqutPrdCn':  # 사업 신청 기간
-                metadata['applicationPeriod'] = val
+                info = classifyApplicationPeriod(val)
+                metadata['applicationStart'] = info[0]
+                metadata['applicationEnd'] = info[1]
             elif infoType == 'ageInfo':  # 연령 정보
                 info = classifyAge(val)
                 metadata['startAge'] = info[0]
@@ -96,6 +102,8 @@ async def getPolicyInfo():
         policyList.append(policyInfo)
         idx += 1
 
+        # TODO: DB에 저장
+
         # json 형태로 반환
         data = {
             "documents": policyList
@@ -105,6 +113,87 @@ async def getPolicyInfo():
     return policyJson.decode("utf-8")
 
 
+# 신청 기간 구분
+# yyyy-mm-dd 형태로 저장
+# 상시 정책의 경우 0000-00-00
+def classifyApplicationPeriod(periodInfo):
+    periodInfo = re.sub(r'\([^)]*\)', '', periodInfo)  # 괄호 제거
+    periodInfo = re.sub(r'\d{1,2}:\d{2}', '', periodInfo)  # HH:MM 형태 제거
+    periodInfo = re.sub(r'[가-힣a-zA-Z]+', '', periodInfo)  # 한글, 영어 제거
+    periodInfo = periodInfo.strip()  # 공백 제거
+
+    startDate = endDate = "0000-00-00"
+
+    dateRange = periodInfo.split('~')
+    # print(dateRange)
+
+    # 시작 일, 종료 일이 모두 있는 경우
+    if len(dateRange) == 2:
+        # 20230807~20231231 형태의 데이터
+        match = re.search(r'\d{8}', dateRange[0])
+        if match is not None:
+            startDate = formatDate(dateRange[0][:4], dateRange[0][4:6], dateRange[0][6:])
+            endDate = formatDate(dateRange[1][:4], dateRange[1][4:6], dateRange[1][6:])
+            return [startDate, endDate]
+
+        # 그 외의 다양한 데이터 형태
+        year, month, day = findDateFormat(dateRange[0])
+        if day == 0:
+            day = 1
+        startDate = formatDate(year, month, day)
+
+        year, month, day = findDateFormat(dateRange[1])
+        if day == 0:
+            day = 31
+        endDate = formatDate(year, month, day)
+
+    # 시작일 또는 종료 일만 있는 경우
+    elif len(dateRange) == 1:
+        year, month, day = findDateFormat(dateRange[0])
+        if day == 0:
+            startDate = formatDate(year, month, 1)
+            endDate = formatDate(year, month, 31)
+
+    return [startDate, endDate]
+
+
+# 날짜 형태 파악
+def findDateFormat(date):
+    # yyyy.mm.dd 형태
+    match = re.search(r'(\d{4})[\s.~-](\d{1,2})[\s.~-](\d{1,2})[\s.~-]?', date)
+    if match:
+        return match.group(1), match.group(2), match.group(3)
+
+    # yy.mm.dd 형태
+    match = re.search(r'(\d{2})[\s.~-](\d{1,2})[\s.~-](\d{1,2})[\s.~-]?', date)
+    if match:
+        return "20" + match.group(1), match.group(2), match.group(3)
+
+    # yyyy.mm 형태
+    match = re.search(r'(\d{4})[\s.~-](\d{1,2})[\s.~-]?', date)
+    if match:
+        return match.group(1), match.group(2), 0
+
+    # mm.dd 형태
+    match = re.search(r'(\d{1,2})[\s.~-](\d{1,2})[\s.~-]?', date)
+    if match:
+        return 2023, match.group(1), match.group(2)
+
+    # mm 형태
+    match = re.search(r'(\d{1,2})[\s.~-]?', date)
+    if match:
+        return 2023, match.group(1), 0
+
+    else:
+        return 0, 0, 0
+
+
+# 날짜 형태 지정
+def formatDate(year, month, date):
+    return f"{int(year):04d}-{int(month):02d}-{int(date):02d}"
+
+
+# 연령 정보 구분
 def classifyAge(ageInfo):
     # print(ageInfo)
     start = 0
@@ -123,8 +212,5 @@ def classifyAge(ageInfo):
     # '만 39세 미만' 형태의 데이터
     if '미만' in ageInfo:
         start = data[0]
-
-    # print(start)
-    # print(end)
 
     return [start, end]
