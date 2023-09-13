@@ -1,17 +1,15 @@
 package com.shbhack.ypz.service;
 
 import com.shbhack.ypz.client.ShbFeignClient;
-import com.shbhack.ypz.dto.request.ShbSearchNameRequestDTO;
-import com.shbhack.ypz.dto.response.ShbSearchNameResponseDTO;
-import feign.Response;
+import com.shbhack.ypz.dto.shb.request.ShbSearchNameRequestDTO;
+import com.shbhack.ypz.dto.shb.request.ShbSendSolPushRequestDTO;
+import com.shbhack.ypz.dto.shb.response.ShbSearchNameResponseDTO;
+import com.shbhack.ypz.dto.shb.response.ShbSendSolPushResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.ResponseData;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @Slf4j
@@ -35,6 +33,24 @@ public class ShbService {
         ShbSearchNameResponseDTO responseDTO = shbFeignClient.searchName(requestDTO);
         responseDTO.insertValues();
 
-        return responseDTO.getBankCode();
+        return responseDTO.getUserName();
+    }
+
+    public String sendSolPush(String clientNo, String message){
+        ShbSendSolPushRequestDTO requestDTO = new ShbSendSolPushRequestDTO();
+
+        requestDTO.setDataHeader(new HashMap<String, String>() {{
+            put("apikey", "2023_Shinhan_SSAFY_Hackathon");
+        }});
+        requestDTO.setDataBody(new HashMap<String, String>() {{
+            put("제휴고객번호", clientNo);
+            put("발송메시지", message);
+        }});
+
+        ShbSendSolPushResponseDTO responseDTO = shbFeignClient.sendSolPush(requestDTO);
+        responseDTO.insertValues();
+
+        return responseDTO.getResultStatus();
+
     }
 }

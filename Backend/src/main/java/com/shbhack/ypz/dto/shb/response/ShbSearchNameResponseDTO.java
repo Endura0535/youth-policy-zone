@@ -1,4 +1,4 @@
-package com.shbhack.ypz.dto.response;
+package com.shbhack.ypz.dto.shb.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

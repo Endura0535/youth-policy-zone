@@ -1,6 +1,5 @@
 package com.shbhack.ypz.controller;
 
-import com.shbhack.ypz.dto.request.ShbSearchNameRequestDTO;
 import com.shbhack.ypz.service.ShbService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,9 +18,6 @@ import com.shbhack.ypz.service.AuthenticationService;
 import com.shbhack.ypz.service.BankAccountAuthenticationService;
 
 import lombok.RequiredArgsConstructor;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -43,7 +39,7 @@ public class AuthenticationController {
 			return new ResponseEntity<String>("이미 존재하는 아이디입니다.", HttpStatus.CONFLICT);
 		}
 
-		// TODO 예금주 실명 조회 : 은행 코드, 계좌번호 받아서 넣기
+		// TODO 예금주 실명 조회 : 은행 코드, 계좌번호 받아서 넣기(signUpRequestDTO에 계좌 번호 추가 필요)
 
 		String bankCode = "088";
 		String accountNo = "110184999999";
@@ -52,7 +48,7 @@ public class AuthenticationController {
 		log.info("--------------name: " + name + "--------------");
 
 		dto.setName(name);
-		
+
 //		try {
 //			authenticationService.signup(dto);
 //

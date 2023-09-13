@@ -1,4 +1,4 @@
-package com.shbhack.ypz.dto.request;
+package com.shbhack.ypz.dto.shb.request;
 
 import lombok.Data;
 
