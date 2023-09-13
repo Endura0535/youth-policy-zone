@@ -12,7 +12,7 @@ import java.sql.Date;
 @Data
 @Entity
 @Builder
-@Table(name="policy")
+@Table(name = "policy")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Policy {
@@ -21,16 +21,56 @@ public class Policy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long policyNo;
+    private Long id;  // 정책 번호
+
+    private String name;   // 정책 이름
 
     @NotBlank
     @Column(unique = true)
-    private String policyId;
+    private String policyId;    // 정책 아이디
+
+    private String policyDetail;    // 정책 소개
+
+    private String supportContent;  // 지원 내용
+
+    private String supportScale;    // 지원 규모
+
+    private String policyOperationPeriod;  // 사업 운영 기간
+
+    private String ageInfo;    // 연령 정보
+
+    private String major;  // 전공 요건
+
+    private String employeedStatus;  // 취업 상태
+
+    private String specialized;    // 특화 분야
+
+    private String academicAbility; // 학력 요건
+
+    private String ResiIncomeCondition; // 거주지 및 소득 조건
+
+    private String aditRscn; // 추가 단서 사항
+
+    private String prcpLmttTrgtCn; // 참여 제한 대상
+
+    private String rqutProcCn; // 신청 절차
+
+    private String pstnPaprCn; // 제출 서류
+
+    private String jdgnPresCn; // 심사 발표 내용
+
+    private String rqutUrla; // 신청 사이트 주소
+
+    private String rfcSiteUrla1; // 참고 사이트 1
+
+    private String rfcSiteUrla2; // 참고 사이트 2
+
+    private String mngtMson; // 주관 부처명
 
     @NotBlank
-    private char alarmType;
+    private char alarmType; // 알람 타입
 
     @NotBlank
-    private Date expireDt;
+    private Date expireDt;  // 마감일
 
 }
