@@ -43,25 +43,14 @@ public class AuthenticationController {
 			return new ResponseEntity<String>("이미 존재하는 아이디입니다.", HttpStatus.CONFLICT);
 		}
 
-		// TODO 예금주 실명조회로 이름 가져오기
+		// TODO 예금주 실명 조회 : 은행 코드, 계좌번호 받아서 넣기
 
-		// RequestDTO DataHeader, DataBody 설정
-		ShbSearchNameRequestDTO shbSearchNameRequestDTO = new ShbSearchNameRequestDTO();
+		String bankCode = "088";
+		String accountNo = "110184999999";
 
-		Map<String, String> dataHeader = new HashMap<>();
-		dataHeader.put("apikey", "${feign.shb.apikey}");
-
-		Map<String, String> dataBody = new HashMap<>();
-		dataBody.put("입금은행코드", "088");
-		dataBody.put("입금계좌번호", "110184999999");
-
-		shbSearchNameRequestDTO.setDataHeader(dataHeader);
-		shbSearchNameRequestDTO.setDataBody(dataBody);
-
-		String name = shbService.searchName(shbSearchNameRequestDTO);
+		String name = shbService.searchName(bankCode, accountNo);
 		log.info("--------------name: " + name + "--------------");
 
-//		String name = "Test";
 		dto.setName(name);
 		
 //		try {

@@ -20,26 +20,21 @@ public class ShbService {
     @Autowired
     private ShbFeignClient shbFeignClient;
 
-    // 예금주 실명 조회
-    public String searchName(ShbSearchNameRequestDTO shbSearchNameRequestDTO) {
-//        ShbSearchNameResponseDTO shbSearchNameResponseDTO = shbFeignClient.searchName(shbSearchNameRequestDTO);
-//        return shbSearchNameResponseDTO.getDataHeader().get("name");
-//        Response response = shbFeignClient.searchName(shbSearchNameRequestDTO);
+    public String searchName(String bankNo, String accountNo) {
+        ShbSearchNameRequestDTO requestDTO = new ShbSearchNameRequestDTO();
 
-        Map<String, String> dataHeader = new HashMap<>();
-        dataHeader.put("apikey", "2023_Shinhan_SSAFY_Hackathon");
+        requestDTO.setDataHeader(new HashMap<String, String>() {{
+            put("apikey", "2023_Shinhan_SSAFY_Hackathon");
+        }});
 
-        Map<String, String> dataBody = new HashMap<>();
-        dataBody.put("입금은행코드", "088");
-        dataBody.put("입금계좌번호", "110184999999");
+        requestDTO.setDataBody(new HashMap<String, String>() {{
+            put("입금은행코드", bankNo);
+            put("입금계좌번호", accountNo);
+        }});
 
-        shbSearchNameRequestDTO.setDataHeader(dataHeader);
-        shbSearchNameRequestDTO.setDataBody(dataBody);
+        ShbSearchNameResponseDTO responseDTO = shbFeignClient.searchName(requestDTO);
+        responseDTO.insertValues();
 
-        ShbSearchNameResponseDTO responseDTO = shbFeignClient.searchName(shbSearchNameRequestDTO);
-//        Response result = shbFeignClient.searchName(shbSearchNameRequestDTO);
-//        Response result = shbFeignClient.searchName();
-        log.info("response: {}", responseDTO.toString());
-        return responseDTO.getUserName();
+        return responseDTO.getBankCode();
     }
 }

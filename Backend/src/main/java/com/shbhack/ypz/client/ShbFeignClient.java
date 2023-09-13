@@ -12,7 +12,5 @@ public interface ShbFeignClient {
 
     // 예금주 실명 조회
     @PostMapping(value = "/v1/search/name")
-//    Response searchName(@RequestBody ShbSearchNameRequestDTO shbSearchNameRequestDTO);
     ShbSearchNameResponseDTO searchName(@RequestBody ShbSearchNameRequestDTO shbSearchNameRequestDTO);
-//    Response searchName();
 }
