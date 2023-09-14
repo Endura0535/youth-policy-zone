@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PolicyRepository extends JpaRepository<Policy, Long> {
 
-    @Query("select p from Policy p ORDER BY p.policyNo DESC")
+    @Query("select p from Policy p ORDER BY p.id DESC")
     List<Policy> findAllPolicy();
 }
