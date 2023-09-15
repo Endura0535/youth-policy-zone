@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage'
 import AuthPage from './pages/AuthPage'
 import { MemberProvider } from './MemberContext'
 import BankAccountAuthenticationPage from './pages/BankAccountAuthenticationPage'
+import BankAccountAuthenticationResultPage from './pages/BankAccountAuthenticationResultPage'
 
 class App extends React.Component {
   render(){
@@ -17,6 +18,7 @@ class App extends React.Component {
               <Route path="/" element={<WelcomePage />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/account-auth" element={<BankAccountAuthenticationPage />} />
+              <Route path="/signup-result" element={<BankAccountAuthenticationResultPage />} />
               <Route path="/home" element={<HomePage />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Routes>

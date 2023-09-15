@@ -15,7 +15,7 @@ function AuthPage() {
 
   useEffect(() => {
     if(setMemberInfo()) navigate('/home');
-  }, []);
+  }, [navigate, setMemberInfo]);
 
   const handleToggle = () => {
     setTab(prevTab => (prevTab === 0 ? 1 : 0));
@@ -23,16 +23,16 @@ function AuthPage() {
 
   return (
     <CSSTransition in={true} appear={true} timeout={300} classNames="fade">
-      <div className='auth-container center'>
-        <div clclassNameass='brand'>
-          <img src={shinhanlogo} alt="내 이미지" class="logoimage"/>
+      <div className='auth-container'>
+        <div className='brand'>
+          <img src={shinhanlogo} alt="신한로고" className="logoimage"/>
           <div className="brand-letter">
             청<span className="sm-letter">년</span>정<span className="sm-letter">책</span>지역
           </div>
-        </div>
+      </div>
         <div className='mg-top-sm'>이곳은 청년 정책 지역, 청정지역입니다.</div>
 
-        <div className="auth-toggle-container">
+        <div className="auth-toggle-container mg-top-bg">
             <label className="switch btn-color-mode-switch">
                 <input
                   value={tab}
