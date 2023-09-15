@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shbhack.ypz.dto.request.BankAccountAuthenticateAuthRequestDTO;
 import com.shbhack.ypz.dto.request.BankAccountAuthenticateRequestDTO;
 import com.shbhack.ypz.dto.request.SignInRequestDTO;
 import com.shbhack.ypz.dto.request.SignUpRequestDTO;
+import com.shbhack.ypz.dto.response.BankAccountAuthenticateResponseDTO;
 import com.shbhack.ypz.dto.response.SignInResponseDTO;
 import com.shbhack.ypz.service.AuthenticationService;
 import com.shbhack.ypz.service.BankAccountAuthenticationService;
@@ -77,9 +79,9 @@ public class AuthenticationController {
 	public ResponseEntity<?> authenticateBankAccount(@RequestBody BankAccountAuthenticateRequestDTO dto) {
 		log.info("--------------authenticateBankAccount called--------------");
 		try {
-			bankAccountAuthenticationService.createAuthentication(dto.getMemberId(), dto.getAccountNo());
+			String code = bankAccountAuthenticationService.createAuthentication(dto.getMemberId(), dto.getAccountNo());
 			
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<String>(code, HttpStatus.OK);
 			
 		} catch(Exception e) {
 			return new ResponseEntity<String>("계좌 인증 요청에 실패했습니다.", HttpStatus.BAD_REQUEST);
@@ -88,8 +90,20 @@ public class AuthenticationController {
 	}
 	
 	@PutMapping("/bank-account-authentication")
-	public ResponseEntity<?> authenticateBankAccount(@RequestBody String accountNo, @RequestBody String code) {
+	public ResponseEntity<?> authenticateBankAccount(@RequestBody BankAccountAuthenticateAuthRequestDTO dto) {
+		String memberId = dto.getMemberId();
+		String code = dto.getCode();
+		log.info("authenticateBankAccount: {}", dto);
+		if (memberId == null || code == null) return ResponseEntity.badRequest().build();
+		boolean result = false;
 		
-		return new ResponseEntity<>(HttpStatus.OK);
+		try {
+			result = bankAccountAuthenticationService.authenticate(dto.getMemberId(), dto.getCode());
+		} catch (Exception e) {
+			return ResponseEntity.ok(new BankAccountAuthenticateResponseDTO(false, e.getMessage()));
+		}
+		
+		if (result) return ResponseEntity.ok(new BankAccountAuthenticateResponseDTO(true, ""));
+		else return ResponseEntity.ok(new BankAccountAuthenticateResponseDTO(false, "인증번호가 일치하지 않습니다."));
 	}
 }

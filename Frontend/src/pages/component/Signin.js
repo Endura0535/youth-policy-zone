@@ -38,32 +38,32 @@ function Signin() {
   return (
     <div>
         {/* 이메일 입력 */}
-        <div class="input-container mg-top-bg">
+        <div className="input-container mg-top-bg">
           <div><label htmlFor="email">이메일 주소</label></div>
           <input placeholder="Enter email" type="email" onChange={onEmailChanged} value={email} id="email"/>
         </div>
 
         {/* 비밀번호 입력 */}
-        <div class="input-container mg-top-sm">
+        <div className="input-container mg-top-sm">
           <div><label htmlFor="pw">비밀번호</label></div>
           <input placeholder="Enter password" type={pwVisibility.type} onChange={onPwChanged} value={pw} id="pw" />
 
-          <span onClick={handlePwVisibility} class='hidepassword'>
+          <span onClick={handlePwVisibility} className='hidepassword'>
             {pwVisibility.visible ? "비밀번호 숨기기" : "비밀번호 보기"}
           </span>
         </div>
 
-        <div class='signin-options'>
+        <div className='signin-options'>
           <label htmlFor='rememberId' className='rememberId'>
             <input type="checkbox" onChange={handleRememberId} value={rememberId} id="rememberId"/>
             아이디 기억하기
           </label>
           <br />
-          <span onClick={onClickForgotPw} class='forgotPw'>비밀번호를 잊어버렸나요?</span>
+          <span onClick={onClickForgotPw} className='forgotPw'>비밀번호를 잊어버렸나요?</span>
         </div>
 
         {/* 로그인 버튼 */}
-        <button onClick={onClickSignin} class='primary-btn mg-top-bg'>로그인</button>
+        <button onClick={onClickSignin} className='primary-btn mg-top-bg'>로그인</button>
     </div>
   )
 }
