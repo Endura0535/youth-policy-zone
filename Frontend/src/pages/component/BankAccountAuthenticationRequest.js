@@ -6,6 +6,7 @@ function BankAccountAuthenticationRequest({ setIsRequested }) {
   const { email, bankAccount } = useMember();
 
   const onClickAuthRequestButton = () => {
+    console.log(`${process.env.REACT_APP_API_URL}`, email, bankAccount);
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/auth/bank-account-authentication`,

@@ -24,16 +24,16 @@ function AuthPage() {
   return (
     <CSSTransition in={true} appear={true} timeout={300} classNames="fade">
       <div className='center'>
-        <div class='brand'>
-          <img src={shinhanlogo} alt="내 이미지" class="welcomelogo"/>
-          <div class="brand-letter">
-            청<span class="sm-letter">년</span>정<span class="sm-letter">책</span>지역
+        <div className='brand'>
+          <img src={shinhanlogo} alt="내 이미지" className="welcomelogo"/>
+          <div className="brand-letter">
+            청<span className="sm-letter">년</span>정<span className="sm-letter">책</span>지역
           </div>
         </div>
         <div>이곳은 청년 정책 지역, 청정지역입니다.</div>
 
-        <div class="auth-toggle-container">
-            <label class="switch btn-color-mode-switch">
+        <div className="auth-toggle-container">
+            <label className="switch btn-color-mode-switch">
                 <input
                   value={tab}
                   id="color_mode"
@@ -41,7 +41,7 @@ function AuthPage() {
                   type="checkbox"
                   onChange={handleToggle}
                 />
-                <label class="btn-color-mode-switch-inner" data-off="로그인" data-on="회원가입" for="color_mode"></label>
+                <label className="btn-color-mode-switch-inner" data-off="로그인" data-on="회원가입" htmlFor="color_mode"></label>
             </label>
         </div>
         {tab === 1 && <Signin />}
