@@ -18,14 +18,14 @@ public class StartAlarm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long alarmBoxNo;
+    private Long startAlarmNo;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "memberNo", referencedColumnName = "memberId")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "policyId", referencedColumnName = "policyId")
+    @JoinColumn(name = "policyNo", referencedColumnName = "id")
     private Policy policy;
 
 }
