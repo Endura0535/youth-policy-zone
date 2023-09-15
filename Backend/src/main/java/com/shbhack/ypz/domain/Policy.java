@@ -23,14 +23,17 @@ public class Policy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;  // 정책 번호
 
+    @NotBlank
     private String name;   // 정책 이름
 
     @NotBlank
     @Column(unique = true)
     private String policyId;    // 정책 아이디
 
+    @NotBlank
     private String policyDetail;    // 정책 소개
 
+    @NotBlank
     private String supportContent;  // 지원 내용
 
     private String supportScale;    // 지원 규모
@@ -53,7 +56,7 @@ public class Policy {
 
     private String academicAbility; // 학력 요건
 
-    private String ResiIncomeCondition; // 거주지 및 소득 조건
+    private String resiIncomeCondition; // 거주지 및 소득 조건
 
     private String additional; // 추가 단서 사항
 
@@ -72,11 +75,5 @@ public class Policy {
     private String referenceURL2; // 참고 사이트 2
 
     private String department; // 주관 부처명
-
-    @NotBlank
-    private char alarmType; // 알람 타입
-
-    @NotBlank
-    private Date expireDt;  // 마감일
 
 }

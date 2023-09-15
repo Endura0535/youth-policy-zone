@@ -38,13 +38,13 @@ function Signin() {
   return (
     <div>
         {/* 이메일 입력 */}
-        <div className="input-container">
+        <div className="input-container mg-top-bg">
           <div><label htmlFor="email">이메일 주소</label></div>
           <input placeholder="Enter email" type="email" onChange={onEmailChanged} value={email} id="email"/>
         </div>
 
         {/* 비밀번호 입력 */}
-        <div className="input-container">
+        <div className="input-container mg-top-sm">
           <div><label htmlFor="pw">비밀번호</label></div>
           <input placeholder="Enter password" type={pwVisibility.type} onChange={onPwChanged} value={pw} id="pw" />
 
@@ -63,7 +63,7 @@ function Signin() {
         </div>
 
         {/* 로그인 버튼 */}
-        <button onClick={onClickSignin} className='primary-btn'>로그인</button>
+        <button onClick={onClickSignin} className='primary-btn mg-top-bg'>로그인</button>
     </div>
   )
 }

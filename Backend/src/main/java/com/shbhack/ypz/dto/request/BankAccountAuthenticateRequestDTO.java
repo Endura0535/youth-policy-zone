@@ -10,4 +10,10 @@ import lombok.NoArgsConstructor;
 public class BankAccountAuthenticateRequestDTO {
 	private String memberId;
 	private String accountNo;
+
+	@JsonCreator
+	public BankAccountAuthenticateRequestDTO(@JsonProperty("memberId") String memberId, @JsonProperty("accountNo") String accountNo) {
+		this.memberId = memberId;
+		this.accountNo = accountNo;
+	}
 }
