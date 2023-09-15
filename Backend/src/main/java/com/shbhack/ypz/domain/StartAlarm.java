@@ -21,7 +21,7 @@ public class StartAlarm {
     private Long startAlarmNo;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "memberNo", referencedColumnName = "memberId")
+    @JoinColumn(name = "memberNo", referencedColumnName = "memberNo")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
