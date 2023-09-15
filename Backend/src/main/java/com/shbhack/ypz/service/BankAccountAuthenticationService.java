@@ -2,9 +2,13 @@ package com.shbhack.ypz.service;
 
 import java.util.*;
 
+import com.shbhack.ypz.client.ShbFeignClient;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class BankAccountAuthenticationService {
 	
 	private final Map<String, String> authenticationMap = new HashMap<>(10);
@@ -25,7 +29,10 @@ public class BankAccountAuthenticationService {
 		String code = String.valueOf(result);
 		
 		// TODO 신한 OpenAI 1원 이체 요청
-		
+
+
+
+
 		// 인증코드 맵에 추가
 		authenticationMap.put(memberId, code);
 		

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useContext, useRef } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const MemberContext = createContext("member");
@@ -10,6 +10,41 @@ export function MemberProvider({ children }) {
   const memberInfo = useRef({});
   const navigate = useNavigate();
   const apiClient = useRef(null);
+
+  // AuthPage
+  const [tab, setTab] = useState(1);
+  const [email, setEmail] = useState('');
+  const [pw, setPw] = useState('');
+  const [pwVisibility, setPwVisibility] = useState({
+    type: 'password',
+    visible: false,
+  });
+  const [bankAccount, setBankAccount] = useState('');
+
+  const onEmailChanged = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const onPwChanged = (e) => {
+    setPw(e.target.value);
+  }
+
+  const handlePwVisibility = (e) => {
+    setPwVisibility(() => {
+      if (!pwVisibility.visible) {
+        return {type: "text", visible: true};
+      }
+      else {
+        return {type: "password", visible: false};
+      }
+    })
+  }
+
+  const onBankAccountChanged = (e) => {
+    setBankAccount(e.target.value);
+  }
+
+  // AuthPage //
 
   const setAccessToken = (token) => {
     // 엑세스토큰 설정
@@ -38,27 +73,28 @@ export function MemberProvider({ children }) {
   }
 
   const setMemberInfo = () => {
-    if (apiClient.current === null) {
-      alert('로그인 정보가 유효하지 않습니다.');
-      navigate("/");
-      return;
-    }
+    if (accessToken.current === null || apiClient.current === null) return false;
 
     // 회원 정보 설정
     apiClient.current.get(`/member/${memberInfo.current.memberId}`)
       .then((response) => {
       memberInfo.current = response.data;
     });
+    return true;
   }
 
   const doSignout = () => {
     setAccessToken(null);
+    memberInfo.current = null;
     navigate('/');
   }
 
   return (
     <MemberContext.Provider value={{ 
-      accessToken, memberInfo, succeededSignin, setMemberId, doSignout
+      accessToken, memberInfo, succeededSignin, setMemberId, doSignout, setMemberInfo,
+      email, setEmail, pw, pwVisibility, setPwVisibility, bankAccount, setBankAccount,
+      onEmailChanged, onPwChanged, handlePwVisibility, onBankAccountChanged,
+      tab, setTab
     }}>
       {children}
     </MemberContext.Provider>

@@ -4,35 +4,11 @@ import { useMember } from '../../MemberContext';
 import { useNavigate } from 'react-router-dom';
 
 function Signin() {
-  const { succeededSignin, setMemberId } = useMember();
-  const [email, setEmail] = useState('');
-  const [pw, setPw] = useState('');
-  const [pwVisibility, setPwVisibility] = useState({
-    type: 'password',
-    visible: false,
-  });
+  const { succeededSignin, setMemberId, email, pw, pwVisibility,
+    onEmailChanged, onPwChanged, handlePwVisibility
+  } = useMember();
   const [rememberId, setRememberId] = useState(false);
   const navigate = useNavigate();
-
-
-  const onEmailChanged = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const onPwChanged = (e) => {
-    setPw(e.target.value);
-  }
-
-  const handlePwVisibility = (e) => {
-    setPwVisibility(() => {
-      if (!pwVisibility.visible) {
-        return {type: "text", visible: true};
-      }
-      else {
-        return {type: "password", visible: false};
-      }
-    })
-  }
 
   // 아이디 기억하기
   const handleRememberId = () => {
