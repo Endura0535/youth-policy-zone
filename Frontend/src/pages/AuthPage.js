@@ -23,16 +23,16 @@ function AuthPage() {
 
   return (
     <CSSTransition in={true} appear={true} timeout={300} classNames="fade">
-      <div className='center'>
+      <div className='auth-container center'>
         <div class='brand'>
-          <img src={shinhanlogo} alt="내 이미지" class="welcomelogo"/>
+          <img src={shinhanlogo} alt="내 이미지" class="logoimage"/>
           <div class="brand-letter">
             청<span class="sm-letter">년</span>정<span class="sm-letter">책</span>지역
           </div>
         </div>
-        <div>이곳은 청년 정책 지역, 청정지역입니다.</div>
+        <div class='mg-top-sm'>이곳은 청년 정책 지역, 청정지역입니다.</div>
 
-        <div class="auth-toggle-container">
+        <div class="auth-toggle-container mg-top-bg">
             <label class="switch btn-color-mode-switch">
                 <input
                   value={tab}

@@ -4,7 +4,7 @@ body {
 
 
 /* ---------- WELCOMEPAGE.js ---------- */
-.welcome-container {
+.welcome-container, .auth-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,7 +18,7 @@ body {
 
 .brand .brand-letter {
   font-size: 50px;
-  color: #0B68E9;
+  color: #0046FF;
 }
 
 .brand .brand-letter .sm-letter {
@@ -31,10 +31,9 @@ body {
   margin: 30px 0 20px 0;
 }
 
-.cover-btn {
-  margin: 30px;
+.welcome-btn {
+  margin-left: -15px;
 }
-
 
 /* ------------- AUTHPAGE.js ------------ */
 .auth-toggle-container {
@@ -51,7 +50,7 @@ body {
 
 .btn-color-mode-switch > label.btn-color-mode-switch-inner {
   margin: 0px;
-  width: 140px;
+  width: 350px;
   height: 40px;
   background-color: #E5F0FC;
   border-radius: 26px;
@@ -60,26 +59,27 @@ body {
   transition: all 0.3s ease;
     /*box-shadow: 0px 0px 8px 0px rgba(17, 17, 17, 0.34) inset;*/
   display: block;
+  cursor: pointer;
 }
 
 .btn-color-mode-switch > label.btn-color-mode-switch-inner:before {
   content: attr(data-on);
   position: absolute;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 600;
   top: 7px;
-  right: 20px;
-  color: #222;
+  right: 70px;
+  color: #0B68E9;
 }
 
 .btn-color-mode-switch > label.btn-color-mode-switch-inner:after {
   content: attr(data-off);
-  width: 70px;
+  width: 175px;
   height: 25px;
-  background: #fff;
+  background: #0B68E9;
   border-radius: 26px;
   position: absolute;
-  font-size: 20px;
+  font-size: 15px;
   display: flex;
   justify-content: center;
   left: 2px;
@@ -88,7 +88,7 @@ body {
   transition: all 0.3s ease;
   box-shadow: 0px 0px 6px -2px #111;
   padding: 5px 0px;
-  color: #222;
+  color: #fff;
   font-weight: 600;
 }
 
@@ -104,21 +104,21 @@ body {
 }
 
 .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner {
-  background-color: #fcce8a;
+  background-color: #E5F0FC;
 }
 
 .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:after {
   content: attr(data-on);
-  left: 68px;
+  left: 175px;
 }
 
 .btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:before {
   content: attr(data-off);
   right: auto;
-  left: 20px;
+  left: 70px;
 }
 
-
+/* SIGNIN.js & SIGNUP.js*/
 .input-container {
   position: relative;
 }
