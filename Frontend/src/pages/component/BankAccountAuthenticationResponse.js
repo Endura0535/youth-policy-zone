@@ -4,7 +4,7 @@ import { useMember } from "../../MemberContext";
 import { useNavigate } from "react-router-dom";
 
 function BankAccountAuthenticationResponse({ setIsRequested }) {
-  const { bankAccount } = useMember();
+  const { email } = useMember();
   const [num1, setNum1] = useState("");
   const [num2, setNum2] = useState("");
   const [num3, setNum3] = useState("");
@@ -15,14 +15,44 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
     onClickAuthResponseButton();
   }, [num4]);
 
-  const onKeyUp = (e, next) => {
-    if (!/^[0-9]+$/.test(e.key)) return;
-
-    e.target.value = e.key;
+  const setNum = (val, id) => {
+    console.log(val);
+    if (!/^[0-9]$/.test(val)) {
+      switch (id) {
+        case "num1":
+          setNum1('');
+          break;
+        case "num2":
+          setNum2('');
+          break;
+        case "num3":
+          setNum3('');
+          break;
+        case "num4":
+          setNum4('');
+          break;
+      }
+      document.getElementById(id).focus();
+      return;
+    }
     // e.preventDefault();
-    if (next === "") return;
-
-    document.getElementById(next).focus();
+    switch(id) {
+    case 'num1': 
+      setNum1(val);
+      document.getElementById('num2').focus();
+      break;
+    case 'num2': 
+      setNum2(val);
+      document.getElementById("num3").focus();
+      break;
+    case 'num3': 
+      setNum3(val);
+      document.getElementById("num4").focus();
+      break;
+    case 'num4': 
+      setNum4(val);
+      break;
+    }
   };
 
   const onClickAuthResponseButton = () => {
@@ -52,11 +82,22 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
       .put(
         `${process.env.REACT_APP_API_URL}/auth/bank-account-authentication`,
         {
-          accountNo: bankAccount,
+          memberId: email,
           code: num1 + num2 + num3 + num4,
         }
       )
       .then((response) => {
+        if (!response.data.result) {
+          // 인증실패
+          console.log("인증실패");
+          setNum1("");
+          setNum2("");
+          setNum3("");
+          setNum4("");
+          document.getElementById("num1").focus();
+          return;
+        }
+
         console.log("인증완료");
         navigate("/signup-result", {
           state: {
@@ -80,29 +121,25 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
           {/* 인증번호 입력 */}
           <input
             type="text"
-            onChange={(e) => setNum1(e.target.value)}
-            onKeyUp={(e) => onKeyUp(e, "num2")}
+            onChange={(e) => setNum(e.target.value, "num1")}
             value={num1}
             id="num1"
           ></input>
           <input
             type="text"
-            onChange={(e) => setNum2(e.target.value)}
-            onKeyUp={(e) => onKeyUp(e, "num3")}
+            onChange={(e) => setNum(e.target.value, "num2")}
             value={num2}
             id="num2"
           ></input>
           <input
             type="text"
-            onChange={(e) => setNum3(e.target.value)}
-            onKeyUp={(e) => onKeyUp(e, "num4")}
+            onChange={(e) => setNum(e.target.value, "num3")}
             value={num3}
             id="num3"
           ></input>
           <input
             type="text"
-            onChange={(e) => setNum4(e.target.value)}
-            onKeyUp={(e) => onKeyUp(e, "authResponse")}
+            onChange={(e) => setNum(e.target.value, "num4")}
             value={num4}
             id="num4"
           ></input>
