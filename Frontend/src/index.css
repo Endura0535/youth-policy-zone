@@ -50,7 +50,7 @@ body {
 }
 
 .header-container {
-  margin-top: 50px;
+  margin-top: 20px;
   display: flex;
 }
 
@@ -167,3 +167,9 @@ body {
  .info-card:hover {
   border: #006fff 0.1em solid;
  }
+
+ /* --------- 스크롤바 무효화 ---------- */
+ *::-webkit-scrollbar {
+  width: 0 !important;  
+  height: 0 !important; 
+}

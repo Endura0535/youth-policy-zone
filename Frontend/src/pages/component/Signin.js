@@ -21,19 +21,16 @@ function Signin() {
   }
 
   // 로그인 버튼 클릭
-  const onClickSignin = () => {
+  const onClickSignin = async () => {
     setMemberId(email);
-    axios.post(`${process.env.REACT_APP_API_URL}/auth/signin`, {
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/signin`, {
       "memberId": email,
       "password": pw,
-    }).then(async (response) => {
-      await succeededSignin(response.data.token);
-      
-      navigate('/home');
-    }).catch((err)=> {
-      console.log(err);
-      alert(err.response.data);
     });
+    
+    await succeededSignin(response.data.token);
+      
+    navigate('/home');
   }
 
   return (

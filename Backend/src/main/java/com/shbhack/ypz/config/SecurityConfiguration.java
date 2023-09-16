@@ -87,7 +87,7 @@ public class SecurityConfiguration {
     }
 
     static class CsrfRequireMatcher implements RequestMatcher {
-        private static final Pattern ALLOWED_METHODS = Pattern.compile("^(GET|HEAD|TRACE|OPTIONS)$");
+        private static final Pattern ALLOWED_METHODS = Pattern.compile("^(GET|POST|PUT|DELETE|HEAD|TRACE|OPTIONS)$");
 
         @Override
         public boolean matches(HttpServletRequest request) {

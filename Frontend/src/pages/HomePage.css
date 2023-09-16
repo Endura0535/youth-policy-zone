@@ -1,104 +1,198 @@
-/* -------- HEADER ------- */
-.home-header-left-side {
-  font-size: 1.3em;
+.home-header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -175px;
 }
 
-.alarm-button {
-  width: 140px;
+.home-header-logo {
+  width: 40px;
+}
+
+.home-header-ypclogo {
+  width: 100px;
+}
+
+/* ---------- COMMON --------- */
+.section-header {
+  font-size: 1.3em;
+  font-family: 'OneShinhanBold', sans-serif;
+}
+
+.policy-container {
+  max-height: 430px;
+  overflow-y: auto;
+}
+
+/* ------- RecommendationPolicyComponent -------- */
+
+
+/* -------- ProfileComponent --------- */
+.tag__card {
+  width: 320px;
+  height: 150px;
+  background: #ecf39e;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  color: #31572c;
+  border-radius: 15px;
+  box-shadow: -20px 20px 0px -5px #31572c;
+}
+
+.tag__name {
+  display: inline-block;
+  color: #fff;
+  font-size: 0.7em;
+  background-color: #31572c;
+  padding: 6px 23px 9px;
+  border-radius: 70em;
+  margin: 8px 6px 8px 0;
+  margin-left: 0px;
+  position: relative;
+  text-transform: lowercase;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.tag__name::before,.tag__name::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 40%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #90a955;
+}
+
+.tag__name::before {
+  left: 7px;
+}
+
+.tag__name::after {
+  right: 7px;
+}
+
+.tag__name:hover {
+  transform: scale(1.1);
+  background-color: #51572c;
+}
+
+
+/* ------- Header --------- */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 40px;
   height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(5, 65, 65);
+}
+
+/* plus logout-sign */
+.logout-sign {
+  width: 100%;
+  transition-duration: .3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  background: linear-gradient(to left,rgb(173, 154, 255),rgb(149, 110, 255));
-  border-radius: 30px;
-  color: rgb(255, 255, 255);
-  font-weight: 600;
-  border: none;
-  position: relative;
-  cursor: pointer;
-  transition-duration: .2s;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.116);
 }
 
-.bell {
+.logout-sign svg {
   width: 13px;
 }
 
-.bell path {
-  fill: rgb(255, 255, 255);
+.logout-sign svg path {
+  fill: white;
+}
+/* logout-text */
+.logout-text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+/* hover effect on button width */
+.logout-btn:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
 }
 
-.alarm-button:hover {
-  background: linear-gradient(to left,rgb(154, 131, 255),rgb(135, 91, 255));
+.logout-btn:hover .logout-sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
 }
-
-.alarm-button:active {
-  transform: scale(0.97);
-  transition-duration: .2s;
+/* hover effect button's logout-text */
+.logout-btn:hover .logout-text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
 }
+/* button click effect*/
+.logout-btn:active {
+  transform: translate(2px ,2px);
+} 
 
-.alarm-button:hover .bell {
-  animation: bellRing 0.9s both;
-}
-
-/* bell ringing animation keyframes*/
-@keyframes bellRing {
-  0%,
-  100% {
-    transform-origin: top;
-  }
-
-  15% {
-    transform: rotateZ(10deg);
-  }
-
-  30% {
-    transform: rotateZ(-10deg);
-  }
-
-  45% {
-    transform: rotateZ(5deg);
-  }
-
-  60% {
-    transform: rotateZ(-5deg);
-  }
-
-  75% {
-    transform: rotateZ(2deg);
-  }
-}
 
 
 /* ----------- NAVBAR -------- */
 .home-navbar-container {
+  gap: 30px;
   display: flex;
-  background-color: #E5F0FC;
-  width: 450px;
-  height: 50px;
-  align-items: center;
-  justify-content: space-around;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px,
-              #0B68E9 5px 10px 15px;
+}
+
+.home-navbar-description-container {
+  display: flex;
+  padding: 5px;
+  gap: 45px;
+  font-size: 0.8em;
+  font-family: 'OneShinhanLight', sans-serif;
 }
 
 .navbar-button {
-  outline: 0 !important;
-  border: 0 !important;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  transition: all ease-in-out 0.3s;
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  background: #e3edf7;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
+	      -6px -6px 10px -1px rgba(255,255,255,0.7);
+  border: 1px solid rgba(0,0,0,0);
   cursor: pointer;
+  transition: transform 0.5s;
 }
 
 .navbar-button:hover {
-  transform: translateY(-3px);
+  box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),
+	      inset -4px -4px 6px -1px rgba(255,255,255,0.7),
+	      -0.5px -0.5px 0px rgba(255,255,255,1),
+	      0.5px 0.5px 0px rgba(0,0,0,0.15),
+	      0px 12px 10px -10px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.1);
+  transform: translateY(0.1em);
+}
+
+.navbar-button img {
+  width: 45px;
+}
+
+.navbar-button:hover svg {
+  transform: scale(0.9);
+  fill: #333333;
 }
