@@ -2,17 +2,31 @@ import requests
 import bs4
 import json
 import re
-from datetime import datetime, timedelta
-import calendar
+
+import os
+from dotenv import load_dotenv
+
+from database.crud import policyCrud
+from database import database
+
+
+load_dotenv()
+
+engine = database.engineconn()
+session = engine.sessionmaker()
+
+
+def getPolicy():
+    policyCrud.getPolicyByPolicyId(session, '1')
 
 
 async def getPolicyInfo():
     policyList = []
 
     # 청년정책 정보 api metadata
-    URL = "https://www.youthcenter.go.kr/opi/youthPlcyList.do"
+    URL = os.getenv('POLICY_URL')
     params = {
-        'openApiVlak': 'fcbb6f9bfa03c6cee91bf7dd',
+        'openApiVlak': os.getenv('POLICY_KEY'),
         'pageIndex': '1',
         'display': '1'
     }
@@ -34,7 +48,7 @@ async def getPolicyInfo():
         rows = xml_obj.findAll('youthPolicy')
 
         # 더 이상 정책이 없는 경우 종료
-        if idx == 30:
+        if idx == 2:
             # if len(rows) == 0:
             break
 
@@ -102,7 +116,8 @@ async def getPolicyInfo():
         policyList.append(policyInfo)
         idx += 1
 
-        # TODO: DB에 저장
+        # metadata db에 저장
+        policyCrud.createPolicy(session, metadata)
 
         # json 형태로 반환
         data = {
