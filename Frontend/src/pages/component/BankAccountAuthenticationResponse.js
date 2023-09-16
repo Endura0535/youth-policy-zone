@@ -89,7 +89,7 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
       .then((response) => {
         if (!response.data.result) {
           // 인증실패
-          console.log("인증실패");
+          console.log(`인증실패: ${response.data.message}`);
           setNum1("");
           setNum2("");
           setNum3("");
@@ -99,13 +99,13 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
         }
 
         console.log("인증완료", response.data);
+
         navigate("/signup-result", {
           state: {
             name: response.data.message,
           },
         });
       });
-    console.log("인증번호 전송");
   };
 
   return (
