@@ -5,7 +5,9 @@ import requests
 from dotenv import load_dotenv
 
 import pandas as pd
-import numpy as np
+
+from konlpy.tag import Okt
+from collections import Counter
 
 from database import database
 from database.crud import memberCrud, accountDetailCrud
@@ -40,7 +42,7 @@ def analyzeMember(
 
     # DB에서 더미 데이터 가져오기
     allDetails = accountDetailCrud.getAllDetails(session, memberSeq)
-    dictDetails = toDict(allDetails)
+    dictDetails, contents = toDict(allDetails)
 
     df = pd.DataFrame.from_dict(dictDetails)
     df = pd.DataFrame.from_records(df)
@@ -50,7 +52,9 @@ def analyzeMember(
     salary = getSalary(df)
     # print(salary)
 
-    # TODO: 거주지 분석
+    # 거주지 분석
+    residence = getResidence(contents)
+    # print(residence)
 
     # TODO: db에 정보 넣기
 
@@ -98,6 +102,7 @@ def insertDetail(detail, memberSeq):
 # model to dictionary
 def toDict(datails):
     li = []
+    contents=[]
     for detail in datails:
         dict = {}
         dict["date"] = detail.date
@@ -110,7 +115,9 @@ def toDict(datails):
         dict["ctype"] = detail.ctype
         dict["dname"] = detail.dname
         li.append(dict)
-    return li
+
+        contents.append(detail.content)
+    return li, contents
 
 
 # 거래내역에서 소득 정보 분석
@@ -122,3 +129,33 @@ def getSalary(df):
     countIncome = dfIncome.pivot_table(index=['deposit', 'content'], aggfunc='size', sort=True).to_frame()
     lastRow = countIncome.iloc[-1]
     return lastRow[:0].name[0] * 12
+
+
+# 거주지 분석
+# 거래 내역의 토큰(역삼, 강남 등)으로 거주지 분석
+def getResidence(contents):
+    korea = getKoreaData()
+
+    okt = Okt()
+    li = []
+    for content in contents:
+        li.extend(okt.nouns(content))
+    count = Counter(li)
+    df = pd.DataFrame(count, index=[0]).transpose()
+    df = df.sort_values(by=[0], ascending=False)
+
+    return getMostFrequent(korea, df.index.values)
+
+
+# 한국 행정 구역 가져오기
+def getKoreaData():
+    data = pd.read_csv('csv/data_korea.csv')
+    return data[['shortName', '광역시도']].values.tolist()
+
+
+# 주로 거래하는 구역 가져오기
+def getMostFrequent(korea, values):
+    for value in values:
+        for datum in korea:
+            if value in datum[0]:
+                return datum[1]
