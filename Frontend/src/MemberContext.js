@@ -96,7 +96,7 @@ export function MemberProvider({ children }) {
     <MemberContext.Provider value={{ 
       accessToken, memberInfo, succeededSignin, setMemberId, doSignout, setMemberInfo,
       email, setEmail, pw, pwVisibility, setPwVisibility, bankAccount, setBankAccount,
-      onEmailChanged, onPwChanged, handlePwVisibility, onBankAccountChanged,
+      onEmailChanged, onPwChanged, handlePwVisibility, onBankAccountChanged, apiClient,
       tab, setTab
     }}>
       {children}

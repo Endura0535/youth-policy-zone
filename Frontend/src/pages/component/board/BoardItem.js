@@ -1,16 +1,21 @@
 import React from 'react'
 
-function BoardItem() {
+function BoardItem(props) {
+
+  const policy = props.policy;
+
+  console.log(policy);
+
   return (
     <div>
       <div>
-        <div>title</div>
-        <div>tags</div>
+        <div>{policy.name}</div>
+        {/* <div>tags</div> */}
       </div>
       <div>
         <div>
           <div>마감임박</div>
-          <div>D-day</div>
+          <div>{policy.applicationEnd.slice(0, 10)}</div>
         </div>
         <div>
           <div>alarm</div>

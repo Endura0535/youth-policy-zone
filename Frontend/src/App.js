@@ -15,20 +15,18 @@ class App extends React.Component {
     return(
       <BrowserRouter>
         <MemberProvider>
-          <div className="main-container">
-            <Routes>
-              <Route path="/" element={<WelcomePage />} />
-              <Route path="/auth" element={<AuthPage />} />
-              <Route path="/account-auth" element={<BankAccountAuthenticationPage />} />
-              <Route path="/signup-result" element={<BankAccountAuthenticationResultPage />} />
-            </Routes>
-            <HomeProvider>
+          <HomeProvider>
+            <div className="main-container">
               <Routes>
+                <Route path="/" element={<WelcomePage />} />
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/account-auth" element={<BankAccountAuthenticationPage />} />
+                <Route path="/signup-result" element={<BankAccountAuthenticationResultPage />} />
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/profile" element={<ProfilePage />} />
               </Routes>
-            </HomeProvider>
-          </div>
+            </div>
+          </HomeProvider>
         </MemberProvider>
     </BrowserRouter>
     )

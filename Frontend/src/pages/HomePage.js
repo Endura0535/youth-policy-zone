@@ -26,26 +26,28 @@ function HomePage() {
   }, [memberInfo, navigate]);
 
   return (
-    <CSSTransition in={true} appear={true} timeout={300} classNames="fade">
-      {memberInfo.current !== null && (
-        <div className='center'>
+    <div>
+      <CSSTransition in={true} appear={true} timeout={300} classNames="fade">
+        {memberInfo.current !== null ? (
+          <div className='center'>
 
-          <div className='default-container'>
-            <Header />
+            <div className='default-container'>
+              <Header />
+            </div>
+
+            {/* 컨텐츠 컴포넌트 */}
+            {navIdx === 0 && <RecommendationPolicyComponent />}
+            {navIdx === 1 && <PolicyAllComponent />}
+            {navIdx === 2 && <LikesPolicyComponent />}
+            {navIdx === 3 && <ProfileComponent />}
+
+            <div className='default-container-reverse'>
+              <Navbar />
+            </div>
           </div>
-
-          {/* 컨텐츠 컴포넌트 */}
-          {navIdx === 0 && <RecommendationPolicyComponent />}
-          {navIdx === 1 && <PolicyAllComponent />}
-          {navIdx === 2 && <LikesPolicyComponent />}
-          {navIdx === 3 && <ProfileComponent />}
-
-          <div className='default-container-reverse'>
-            <Navbar />
-          </div>
-        </div>
-      )}
-    </CSSTransition>
+        ) : <></>}
+      </CSSTransition>
+    </div>
   );
 }
 
