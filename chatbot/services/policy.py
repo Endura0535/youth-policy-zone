@@ -31,8 +31,13 @@ async def getPolicyInfo():
         'display': '1'
     }
 
-    # TODO: DB에서 마지막 값 조회
-    idx = 6
+    # DB에서 마지막 값 조회
+    lastPolicy = policyCrud.getLastPolicyId(session)
+    if lastPolicy is None:
+        idx = 1
+    else:
+        idx = lastPolicy[0] + 1
+    print(idx)
 
     # 청년정책 정보 수집 및 저장
     while True:
@@ -48,8 +53,8 @@ async def getPolicyInfo():
         rows = xml_obj.findAll('youthPolicy')
 
         # 더 이상 정책이 없는 경우 종료
-        if idx == 10:
-            # if len(rows) == 0:
+        # if idx == 20:
+        if len(rows) == 0:
             break
 
         # 컬럼 값 조회
@@ -116,8 +121,8 @@ async def getPolicyInfo():
         policyList.append(policyInfo)
         idx += 1
 
-        print("===================================")
-        print(metadata)
+        # print("===================================")
+        # print(metadata)
 
         # metadata db에 저장
         policyCrud.createPolicy(session, metadata)

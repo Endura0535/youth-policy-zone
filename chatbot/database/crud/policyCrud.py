@@ -21,3 +21,8 @@ def createPolicy(db: Session, policy: policySchema.PolicyBase):
     db.commit()
     db.refresh(db_policy)
     return db_policy
+
+
+# 마지막 정책의 id 가져오기
+def getLastPolicyId(db: Session):
+    return db.query(policyModel.Policy.id).order_by(policyModel.Policy.id.desc()).first()
