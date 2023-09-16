@@ -1,8 +1,11 @@
 import React from 'react'
+import BoardItem from './BoardItem'
 
 function Board() {
   return (
-    <div>Board</div>
+    <div>
+      <BoardItem />
+    </div>
   )
 }
 
