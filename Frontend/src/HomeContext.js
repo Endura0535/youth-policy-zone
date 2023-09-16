@@ -6,13 +6,13 @@ const HomeContext = createContext("home");
 
 export function HomeProvider({ children }) {
 
-  const [ tabIdx, setTabIdx ] = useState(0);
+  const [ navIdx, setNavIdx ] = useState(0);
   
   return (
     <HomeContext.Provider
       value={{
-        tabIdx,
-        setTabIdx,
+        navIdx,
+        setNavIdx,
       }}
     >
       {children}

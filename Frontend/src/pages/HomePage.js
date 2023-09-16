@@ -10,7 +10,7 @@ import ProfileComponent from './component/ProfileComponent';
 import { HomeProvider, useHome } from '../HomeContext';
 
 function HomePage() {
-  const { tabIdx } = useHome();
+  const { navIdx } = useHome();
   const { memberInfo } = useMember();
   const navigate = useNavigate();
 
@@ -30,10 +30,10 @@ function HomePage() {
           <Header />
           
           {/* 컨텐츠 컴포넌트 */}
-          {tabIdx === 0 && <RecommendationPolicyComponent />}
-          {tabIdx === 1 && <PolicyAllComponent />}
-          {tabIdx === 2 && <LikesPolicyComponent />}
-          {tabIdx === 3 && <ProfileComponent />}
+          {navIdx === 0 && <RecommendationPolicyComponent />}
+          {navIdx === 1 && <PolicyAllComponent />}
+          {navIdx === 2 && <LikesPolicyComponent />}
+          {navIdx === 3 && <ProfileComponent />}
           
           <Navbar />
         </div>
