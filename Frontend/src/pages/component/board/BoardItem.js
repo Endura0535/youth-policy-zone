@@ -4,8 +4,6 @@ function BoardItem(props) {
 
   const policy = props.policy;
 
-  console.log(policy);
-
   return (
     <div>
       <div>

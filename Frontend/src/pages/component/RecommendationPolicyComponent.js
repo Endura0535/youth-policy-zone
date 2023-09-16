@@ -18,12 +18,10 @@ function RecommendationPolicyComponent() {
 
   return (
     <div>
-      <div>
-        추천 정책
-      </div>
-      <div>
-        {memberInfo.current.name.substring(1)}님께 맞는 정책을 추천드릴께요.
-      </div>
+      {/* 추천 정책의 헤더 역할 */}
+      <div className='section-header shinhan-color'>추천 정책</div>
+      <div className='mg-top-sm'>{memberInfo.current.name.substring(1)}님께 맞는 정책을 추천드릴께요.</div>
+
       <Board policies={policies}/>
     </div>
   );
