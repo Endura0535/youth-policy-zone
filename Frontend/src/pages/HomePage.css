@@ -31,20 +31,21 @@
 .tag__card {
   width: 320px;
   height: 150px;
-  background: #ecf39e;
+  background: #C9D4E4;
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
   color: #31572c;
+  border: 1px dashed black;
   border-radius: 15px;
-  box-shadow: -20px 20px 0px -5px #31572c;
+  box-shadow: -20px 20px 0px -5px #C1DBF8;
 }
 
 .tag__name {
   display: inline-block;
   color: #fff;
   font-size: 0.7em;
-  background-color: #31572c;
+  background-color: #0B68E9;
   padding: 6px 23px 9px;
   border-radius: 70em;
   margin: 8px 6px 8px 0;
@@ -63,7 +64,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #90a955;
+  background: #C1DBF8;
 }
 
 .tag__name::before {
@@ -88,12 +89,8 @@
   background-color: #3b82f6;
 }
 
-.policy-apply {
-  background-color: #22c55e;
-}
-
 .scroll-snap-card {
-  height: 550px;
+  height: 500px;
   width: 350px;
   scroll-snap-type: y mandatory;
   overflow: auto;
@@ -116,19 +113,23 @@
   color: white;
   font-weight: 700;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 20px;
+}
+
+.policydetail-btn {
+  margin: 10px 0 20px;
 }
 
 #checklist {
-  --background: #303952;
+  --background: #C1DBF8;
   --text: #5d6474;
   --check: #cc29f0;
   --disabled: #d3c8de;
   --width: 400px;
-  --height: 180px;
   --border-radius: 10px;
   background: var(--background);
   width: var(--width);
-  height: var(--height);
+  gap: 20px;
   border-radius: var(--border-radius);
   position: relative;
   box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
