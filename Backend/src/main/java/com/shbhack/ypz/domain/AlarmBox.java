@@ -29,10 +29,10 @@ public class AlarmBox {
     @JoinColumn(name = "policyNo", referencedColumnName = "id", nullable = false)
     private Policy policy;
 
-    @NotBlank
-    private char alarmType;
+    @Column(nullable = false)
+    private Character alarmType;
 
-    @NotBlank
+    @Column(nullable = false)
     private Date expireDt;
 
 }

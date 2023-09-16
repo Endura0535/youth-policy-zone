@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StartAlarmServiceImpl implements StartAlarmService {
 
-    ShbService shbService = new ShbService();
+    private final ShbService shbService;
     private final StartAlarmRepository startAlarmRepository;
     private final AlarmBoxRepository alarmBoxRepository;
 
@@ -38,7 +39,6 @@ public class StartAlarmServiceImpl implements StartAlarmService {
 
     }
 
-    //  TODO: startAlarm을 AlarmBox에 저장하는 함수 구현
     @Override
     public void saveToAlarmbox(StartAlarm startAlarm) {
         Member member = startAlarm.getMember();
@@ -59,10 +59,13 @@ public class StartAlarmServiceImpl implements StartAlarmService {
     @Override
     public void moveToAlarmbox(StartAlarm startAlarm) {
         saveToAlarmbox(startAlarm);
-        startAlarmRepository.deleteByStartAlarmNo(startAlarm.getStartAlarmNo());
+        log.info("startAlarmNo:{}", startAlarm.getStartAlarmNo());
+        startAlarmRepository.deleteById(startAlarm.getStartAlarmNo());
     }
 
-    @Scheduled(cron = "0 42 9 ? * *")
+    @Scheduled(cron = "00 00 12 ? * *")
+//    @Scheduled(cron = "0/5 * * * * *)
+    @Transactional
     @Override
     public void sendAllNewAlert() {
 
