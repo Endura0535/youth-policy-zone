@@ -16,7 +16,6 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
   }, [num4]);
 
   const setNum = (val, id) => {
-    console.log(val);
     if (!/^[0-9]$/.test(val)) {
       switch (id) {
         case "num1":
@@ -110,11 +109,18 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
             name: response.data.message,
           })
           .then((response) => {
-            navigate("/signup-result", {
-              state: {
-                name: response.data,
-              },
-            });
+            if (response.status === 409) {
+              alert("이미 가입된 계정입니다. 로그인해주세요.");
+              navigate("/signin");
+              return;
+            }
+            else {
+              navigate("/signup-result", {
+                state: {
+                  name: response.data,
+                },
+              });
+            }
           });
       })
   };
