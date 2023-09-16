@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import BoardItem from './BoardItem'
 
 function Board(props) {
@@ -8,7 +8,7 @@ function Board(props) {
   console.log(policies);
 
   return (
-    <div>
+    <div className='board'>
       {policies.map((policy) => <BoardItem policy={policy}/>)}
     </div>
   )

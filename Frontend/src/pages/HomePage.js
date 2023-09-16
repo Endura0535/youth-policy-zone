@@ -31,9 +31,8 @@ function HomePage() {
     <div>
       <CSSTransition in={true} appear={true} timeout={300} classNames="fade">
         {memberInfo.current !== null ? (
-          <div className='center'>
-
-            <div className='default-container'>
+          <div class="center">    
+            <div class="header-container">
               <Header />
             </div>
 
@@ -46,6 +45,7 @@ function HomePage() {
           <div className='default-container-reverse'>
             <Navbar />
           </div>
+
         </div>
         ) : <></>}
       </CSSTransition>
