@@ -5,7 +5,7 @@ import youthimage from '../assets/images/youth.png';
 
 function WelcomePage() {
   return (
-    <div className="welcome-container">
+    <div className="default-container">
       <div className='brand'>
           <img src={shinhanlogo} alt="신한로고" className="logoimage"/>
           <div className="brand-letter">

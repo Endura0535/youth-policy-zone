@@ -20,7 +20,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ----- CENTER ALIGN ------ */
+/* ----- ALL SORTS OF CONTAINERS ------ */
 .main-container {
   margin: 0 auto;
   max-width: 800px;
@@ -28,7 +28,6 @@ body {
   background-color: #F3F6FB;
 }
 
-.welcome-container, 
 .auth-container,
 .default-container {
   display: flex;
@@ -38,6 +37,11 @@ body {
   margin-top: 50px;
 }
 
+.default-container-reverse {
+  position: absolute;
+  bottom: 40px;
+}
+
 .center {
   display: flex;
   flex-direction: column;
@@ -45,6 +49,10 @@ body {
   align-items: center;
 }
 
+.header-container {
+  margin-top: 50px;
+  display: flex;
+}
 
 /* --------- primary-btn ---------- */ 
 .primary-btn {
