@@ -20,18 +20,18 @@ from services.file import get_document_from_file
 
 from models.models import DocumentMetadata, Source
 
-bearer_scheme = HTTPBearer()
-BEARER_TOKEN = os.environ.get("BEARER_TOKEN")
-assert BEARER_TOKEN is not None
+# bearer_scheme = HTTPBearer()
+# BEARER_TOKEN = os.environ.get("BEARER_TOKEN")
+# assert BEARER_TOKEN is not None
+#
+#
+# def validate_token(credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
+#     if credentials.scheme != "Bearer" or credentials.credentials != BEARER_TOKEN:
+#         raise HTTPException(status_code=401, detail="Invalid or missing token")
+#     return credentials
 
 
-def validate_token(credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
-    if credentials.scheme != "Bearer" or credentials.credentials != BEARER_TOKEN:
-        raise HTTPException(status_code=401, detail="Invalid or missing token")
-    return credentials
-
-
-app = FastAPI(dependencies=[Depends(validate_token)])
+app = FastAPI()
 app.mount("/.well-known", StaticFiles(directory=".well-known"), name="static")
 
 # 정책 api 추가
@@ -44,7 +44,7 @@ sub_app = FastAPI(
     description="A retrieval API for querying and filtering documents based on natural language queries and metadata",
     version="1.0.0",
     servers=[{"url": "https://your-app-url.com"}],
-    dependencies=[Depends(validate_token)],
+    # dependencies=[Depends(validate_token)],
 )
 app.mount("/sub", sub_app)
 
