@@ -81,7 +81,6 @@ export function MemberProvider({ children }) {
     memberInfo.current = {
       ...response.data
     };
-    console.log(memberInfo.current);
 
     return true;
   }

@@ -1,9 +1,13 @@
 package com.shbhack.ypz.dto.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RecommendPolicyRequestDTO {
-    private int page;
-    private int count;
+    private Integer page;
+    private Integer count;
 }

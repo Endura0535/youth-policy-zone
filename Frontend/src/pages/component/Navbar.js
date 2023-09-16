@@ -26,6 +26,9 @@ function Navbar() {
           <button className="navbar-button" onClick={() => {setNavIdx(3)}}>
             <img src={profile} alt="추천 이미지" />
           </button>
+          <button className="navbar-button" onClick={() => {setNavIdx(4)}}>
+            챗봇
+          </button>
         </div>
 
         <div className="home-navbar-description-container mg-top-sm">

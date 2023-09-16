@@ -11,7 +11,6 @@ import java.sql.Date;
 
 @Data
 @Entity
-@Builder
 @Table(name = "policy")
 @NoArgsConstructor
 @AllArgsConstructor
