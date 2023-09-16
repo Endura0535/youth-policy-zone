@@ -43,4 +43,11 @@ public class SwaggerConfig {
                 .description("YPZ API")
                 .version("v1.0.0"));
     }
+
+    @Bean
+    public GroupedOpenApi recommend() {
+        String[] paths = {"/recommend/**"};
+        return GroupedOpenApi.builder().group("recommend").pathsToMatch(paths)
+                .build();
+    }
 }

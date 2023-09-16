@@ -1,23 +1,22 @@
 package com.shbhack.ypz.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "remind_alarm")
+@Table(name = "recommend_policy")
 @NoArgsConstructor
 @AllArgsConstructor
-public class RemindAlarm {
+public class RecommendPolicy {
 
-    private static final long serailVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long remindAlarmNo;
+    private Long recommendPolicyNo;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "memberNo", referencedColumnName = "memberNo", nullable = false)
@@ -27,10 +26,5 @@ public class RemindAlarm {
     @JoinColumn(name = "policyNo", referencedColumnName = "id", nullable = false)
     private Policy policy;
 
-    @NotBlank
-    private String startDt;
-
-    @NotBlank
-    private String finishDt;
-
+    private String endDay;
 }
