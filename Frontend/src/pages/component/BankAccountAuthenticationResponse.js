@@ -98,10 +98,10 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
           return;
         }
 
-        console.log("인증완료");
+        console.log("인증완료", response.data);
         navigate("/signup-result", {
           state: {
-            name: response.data,
+            name: response.data.message,
           },
         });
       });
@@ -115,8 +115,9 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
         계좌의 입금내역에 표시된 숫자 4자리를 입력해주세요. <br />
         입금내역이 없다면 등록하신 계좌 정보를 다시 확인해주세요.
       </div>
-      <div>
-        <div>Image</div>
+
+
+      <div>  
         <div>
           {/* 인증번호 입력 */}
           <input
@@ -145,11 +146,14 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
           ></input>
         </div>
       </div>
+
+
       {/* 요청 전송 버튼 */}
       <button
         type="button"
         onClick={onClickAuthResponseButton}
         id="authResponse"
+        className="primary-btn"
       >
         인증하기
       </button>
