@@ -40,9 +40,7 @@ function PolicyDetail() {
                       <input id="02" type="checkbox" name="r" value="2" />
                       <label for="02">마감기한: {policy.applicationEnd}</label>
                       <input id="03" type="checkbox" name="r" value="3" />
-                      <label for="03">Coffee</label>
-                      <input id="04" type="checkbox" name="r" value="4" />
-                      <label for="04">전공제한: {policy.major}</label>
+                      <label for="03">전공제한: {policy.major}</label>
                     </div>
                 </div>
 
