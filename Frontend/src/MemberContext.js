@@ -7,7 +7,7 @@ const MemberContext = createContext("member");
 export function MemberProvider({ children }) {
 
   const accessToken = useRef("");
-  const memberInfo = useRef({});
+  const memberInfo = useRef(null);
   const navigate = useNavigate();
   const apiClient = useRef(null);
 
@@ -59,10 +59,10 @@ export function MemberProvider({ children }) {
     });
   }
 
-  const succeededSignin = (token) => {
+  const succeededSignin = async (token) => {
     setAccessToken(token);
     // 멤버정보 설정
-    setMemberInfo();
+    await setMemberInfo();
   }
 
   const setMemberId = (memberId) => {
@@ -72,15 +72,17 @@ export function MemberProvider({ children }) {
     }
   }
 
-  const setMemberInfo = () => {
+  const setMemberInfo = async () => {
     if (accessToken.current === null || apiClient.current === null) return false;
 
     // 회원 정보 설정
-    apiClient.current.get(`/member`)
-      .then((response) => {
-      memberInfo.current = response.data;
-      console.log(memberInfo.current);
-    });
+    const response = await apiClient.current.get(`/member`);
+    
+    memberInfo.current = {
+      ...response.data
+    };
+    console.log(memberInfo.current);
+
     return true;
   }
 

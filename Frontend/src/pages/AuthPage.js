@@ -10,16 +10,17 @@ import { CSSTransition } from 'react-transition-group';
 
 
 function AuthPage() {
-  const { setMemberInfo, tab, setTab} = useMember();
+  const { memberInfo, tab, setTab} = useMember();
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (memberInfo.current !== null) {
+      console.log(`authpage:`, memberInfo.current);
+      navigate("/home");
+      return;
+    }
     setTab(0);
   }, []);
-
-  useEffect(() => {
-    if(setMemberInfo()) navigate('/home');
-  }, [navigate, setMemberInfo]);
 
   const handleToggle = () => {
     setTab(prevTab => (prevTab === 0 ? 1 : 0));
