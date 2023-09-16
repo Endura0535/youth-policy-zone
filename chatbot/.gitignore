@@ -235,3 +235,4 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # credentials
+.env
