@@ -1,6 +1,7 @@
 package com.shbhack.ypz.controller;
 
 import com.shbhack.ypz.service.ShbService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import com.shbhack.ypz.service.BankAccountAuthenticationService;
 
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "auth", description = "인증")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
@@ -43,9 +45,7 @@ public class AuthenticationController {
 
 		try {
 			authenticationService.signup(dto);
-
 			return new ResponseEntity<String>(dto.getName(), HttpStatus.OK);
-
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}

@@ -22,16 +22,17 @@ public class AlarmBox {
     private Long alarmBoxNo;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "memberNo", referencedColumnName = "memberNo")
+    @JoinColumn(name = "memberNo", referencedColumnName = "memberNo", nullable = false)
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "policyNo", referencedColumnName = "id")
+    @JoinColumn(name = "policyNo", referencedColumnName = "id", nullable = false)
     private Policy policy;
 
     @NotBlank
     private char alarmType;
 
+    @NotBlank
     private Date expireDt;
 
 }
