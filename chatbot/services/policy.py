@@ -16,8 +16,8 @@ engine = database.engineconn()
 session = engine.sessionmaker()
 
 
-def getPolicy():
-    policyCrud.getPolicyByPolicyId(session, '1')
+# def getPolicy(id):
+#     policyCrud.getPolicyByPolicyId(session, id)
 
 
 async def getPolicyInfo():
@@ -32,7 +32,7 @@ async def getPolicyInfo():
     }
 
     # TODO: DB에서 마지막 값 조회
-    idx = 1
+    idx = 6
 
     # 청년정책 정보 수집 및 저장
     while True:
@@ -48,7 +48,7 @@ async def getPolicyInfo():
         rows = xml_obj.findAll('youthPolicy')
 
         # 더 이상 정책이 없는 경우 종료
-        if idx == 2:
+        if idx == 10:
             # if len(rows) == 0:
             break
 
@@ -115,6 +115,9 @@ async def getPolicyInfo():
         policyInfo['metadata'] = metadata
         policyList.append(policyInfo)
         idx += 1
+
+        print("===================================")
+        print(metadata)
 
         # metadata db에 저장
         policyCrud.createPolicy(session, metadata)

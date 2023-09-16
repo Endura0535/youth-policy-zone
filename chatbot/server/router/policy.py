@@ -7,7 +7,7 @@ router = APIRouter(
 )
 
 
-@router.post("/init")
+@router.post("/collect")
 async def getNewPolicyDate():
     # 정책 정보 가져 오기
     policyInfo = await getPolicyInfo()
