@@ -34,3 +34,4 @@ class Policy(Base):
     referenceURL1 = Column(VARCHAR(255), nullable=True)
     referenceURL2 = Column(VARCHAR(255), nullable=True)
     department = Column(VARCHAR(50), nullable=True)
+    location = Column(VARCHAR(10), nullable=True)

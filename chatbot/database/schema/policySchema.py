@@ -28,6 +28,8 @@ class PolicyBase(BaseModel):
     referenceURL1: Optional[int] = None
     referenceURL2: Optional[int] = None
     department: Optional[int] = None
+    location: Optional[str] = None
+
 
 class Policy(PolicyBase):
     class Config():

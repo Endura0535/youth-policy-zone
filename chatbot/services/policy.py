@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 from database.crud import policyCrud
 from database import database
+from services import korea
 
 
 load_dotenv()
@@ -116,13 +117,14 @@ async def getPolicyInfo():
                 metadata['referenceURL2'] = val
             elif infoType == 'mngtMson':  # 주관 부처명
                 metadata['department'] = val
+                metadata['location'] = korea.getResidence(list(val))
 
         policyInfo['metadata'] = metadata
         policyList.append(policyInfo)
         idx += 1
 
-        # print("===================================")
-        # print(metadata)
+        print("===================================")
+        print(metadata)
 
         # metadata db에 저장
         policyCrud.createPolicy(session, metadata)
