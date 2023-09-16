@@ -1,6 +1,7 @@
 package com.shbhack.ypz.controller;
 
 import com.shbhack.ypz.service.ShbService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import com.shbhack.ypz.service.BankAccountAuthenticationService;
 
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "auth", description = "인증")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
@@ -40,14 +42,13 @@ public class AuthenticationController {
 		}
 
 		// TODO 예금주 실명 조회 : 은행 코드, 계좌번호 받아서 넣기(signUpRequestDTO에 계좌 번호 추가 필요)
+		String accountNo = dto.getAccountNo();
 
-		String bankCode = "088";
-		String accountNo = "110184999999";
-
-		String name = shbService.searchName(bankCode, accountNo);
-		log.info("--------------name: " + name + "--------------");
+		String name = shbService.searchName("088", dto.getAccountNo());
+//		log.info("--------------name: " + name + "--------------");
 
 		dto.setName(name);
+
 
 //		try {
 //			authenticationService.signup(dto);

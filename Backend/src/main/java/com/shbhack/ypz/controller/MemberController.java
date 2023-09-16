@@ -1,5 +1,6 @@
 package com.shbhack.ypz.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import com.shbhack.ypz.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "member", description = "회원")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")

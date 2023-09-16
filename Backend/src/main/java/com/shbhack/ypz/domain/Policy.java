@@ -44,9 +44,9 @@ public class Policy {
 
     private String applicationEnd;  // 사업 신청 종료일
 
-    private int startAge;   // 지원 연령(시작)
+    private Integer startAge;   // 지원 연령(시작)
 
-    private int endAge;     // 지원 연령(끝)
+    private Integer endAge;     // 지원 연령(끝)
 
     private String major;  // 전공 요건
 
