@@ -16,3 +16,9 @@ def updateMemberInfo(db: Session, seq: int, residence:str, income: int):
     member.income = income
     db.add(member)
     db.commit()
+
+
+# 전체 회원 조회
+def getAllMembers(db: Session):
+    return db.query(memberModel.Member).all()
+

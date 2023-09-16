@@ -5,16 +5,29 @@ import re
 
 import os
 from dotenv import load_dotenv
+from celery import Celery
+from celery.schedules import crontab
 
 from database.crud import policyCrud
 from database import database
-from services import korea
+from services import korea, alarm
 
 
 load_dotenv()
 
 engine = database.engineconn()
 session = engine.sessionmaker()
+
+app = Celery()
+
+
+@app.on_after_configure.connect()
+def setup_daily_tasks(sender, **kwargs):
+    # 매일 자정에 실행
+    sender.add_periodic_task(
+        crontab(hour=4, minute=54),
+        getPolicyInfo(),
+    )
 
 
 # def getPolicy(id):
@@ -123,11 +136,14 @@ async def getPolicyInfo():
         policyList.append(policyInfo)
         idx += 1
 
-        print("===================================")
-        print(metadata)
+        # print("===================================")
 
         # metadata db에 저장
         policyCrud.createPolicy(session, metadata)
+        # print(metadata)
+
+        # 정책에 적합한 회원 탐색
+        alarm.findMatchMember(metadata)
 
         # json 형태로 반환
         data = {
