@@ -14,8 +14,6 @@ function RecommendationPolicyComponent() {
 
   const retrieveAllPolicies = async () => {
     const response = await apiClient.current.get('/policy/all');
-    console.log(response.data.policy);
-    // setPolicies(response.data.policy);
   }
 
   const retrieveRecommendedPolicies = async () => {
@@ -23,12 +21,11 @@ function RecommendationPolicyComponent() {
       page: 0,
       count: 100
     });
-    console.log(response.data);
     setRecommendedPolicies(response.data.recommendPolicy);
   }
 
   return (
-    <div class="mg-top-sm">
+    <div className="mg-top-sm">
       {/* 추천 정책의 헤더 역할 */}
       <div className='section-header shinhan-color'>추천 정책</div>
       <div className='mg-top-sm'>{memberInfo.current.name.substring(1)}님께 맞는 정책을 추천드릴께요.</div>

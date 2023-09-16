@@ -8,7 +8,6 @@ function RecommendationPolicyComponent() {
 
   useEffect(() => {
     apiClient.current.get(`/alarmbox`).then((res) => {
-      console.log(res.data);
       setAlarmList(res.data.alarms);
     });
   }, []);

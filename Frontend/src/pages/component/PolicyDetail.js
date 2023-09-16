@@ -30,7 +30,6 @@ function PolicyDetail() {
         role: 'user', content: '위 내용에 대해 항목별로 정리해줘'
       }]);
 
-      console.log(response);
       setOutline(response[response.length - 1].content);
     };
     query();
@@ -58,13 +57,13 @@ function PolicyDetail() {
                     <p className="tip">체크리스트</p>
                     <div id="checklist">
                       <input id="01" type="checkbox" name="r" value="1" />
-                      <label for="01">학력: {policy.academicAbility}</label>
+                      <label htmlFor="01">학력: {policy.academicAbility}</label>
                       <input id="02" type="checkbox" name="r" value="2" />
-                      <label for="02">마감기한: {policy.applicationEnd}</label>
+                      <label htmlFor="02">마감기한: {policy.applicationEnd}</label>
                       <input id="03" type="checkbox" name="r" value="3" />
-                      <label for="03">Coffee</label>
+                      <label htmlFor="03">Coffee</label>
                       <input id="04" type="checkbox" name="r" value="4" />
-                      <label for="04">전공제한: {policy.major}</label>
+                      <label htmlFor="04">전공제한: {policy.major}</label>
                     </div>
                 </div>
 

@@ -12,14 +12,14 @@ function RecommendationPolicyComponent() {
       <div className='mg-top-sm'>{memberInfo.current.name.substring(1)}님의 소중한 개인정보입니다.</div>
 
 
-      <div class="tag__card mg-top-bg">
-        <div class="card__tags">
-          <ul class="tag">
-            <li class="tag__name">구직자</li>
-            <li class="tag__name">대졸</li>
-            <li class="tag__name">남성</li>
-            <li class="tag__name">#교통정책</li>
-            <li class="tag__name">#복지정책</li>
+      <div className="tag__card mg-top-bg">
+        <div className="card__tags">
+          <ul className="tag">
+            <li className="tag__name">구직자</li>
+            <li className="tag__name">대졸</li>
+            <li className="tag__name">남성</li>
+            <li className="tag__name">#교통정책</li>
+            <li className="tag__name">#복지정책</li>
           </ul>
         </div>
       </div>

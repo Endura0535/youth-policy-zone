@@ -30,8 +30,8 @@ function HomePage() {
     <div>
       <CSSTransition in={true} appear={true} timeout={300} classNames="fade">
         {memberInfo.current !== null ? (
-          <div class="center">    
-            <div class="header-container">
+          <div className="center">    
+            <div className="header-container">
               <Header />
             </div>
 
