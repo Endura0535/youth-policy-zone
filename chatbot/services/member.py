@@ -24,12 +24,16 @@ def analyzeMember(
     accountDetail = getAccountDetails(accountNo)
 
     # 신한 은행 거래 내역 DB에 저장하기
-    # TODO: 가장 최근 거래 내역 가져와서 비교
+    lastTrans = accountDetailCrud.getLastDetail(session, memberSeq)
+
     for detail in accountDetail:
+        # 가장 최근 거래일자와 비교
+        if (lastTrans.date > detail["거래일자"]) or (lastTrans.date == detail["거래일자"] and lastTrans.time >= detail["거래시간"]):
+            continue
         insertDetail(detail, memberSeq)
 
     # TODO: DB에서 더미 데이터 가져오기
-
+    lastTrans.date, lastTrans.time
     # TODO: 거주지 분석
 
     # TODO: 소득 분석
