@@ -29,7 +29,7 @@ public class RecommendController {
 
     private final RecommendService recommendService;
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<?> retrieveRecommendPolicy(@AuthenticationPrincipal UserDetails userDetails, @RequestBody RecommendPolicyRequestDTO dto) {
 
         log.info("--------------------recommendAllPolicy called--------------------");
@@ -40,6 +40,7 @@ public class RecommendController {
             Map<String, Object> res = new HashMap<>();
 
             List<RecommendPolicy> recommendList = recommendService.retrievePolicy(member.getMemberId(), dto.getPage(), dto.getCount());
+            log.debug("retrieveRecommendPolicy {}", recommendList);
             res.put("recommendPolicy", recommendList);
 
             return new ResponseEntity<Map>(res, HttpStatus.OK);

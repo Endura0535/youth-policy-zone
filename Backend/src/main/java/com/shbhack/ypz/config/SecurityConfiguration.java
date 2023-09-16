@@ -40,7 +40,7 @@ public class SecurityConfiguration {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
                         .authorizeHttpRequests(request -> request.requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/policy/**", "/member/**", "/chat/**", "/alert/**")
+                                .requestMatchers("/policy/**", "/member/**", "/chat/**", "/alert/**", "/recommend/**")
                         .permitAll()
                         .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/api-docs/**")
                         .permitAll()

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import './Board.css';
+import './AlarmBoard.css';
 import filledheart from '../../../assets/images/filledheart.png'
 import emptyheart from '../../../assets/images/emptyheart.png'
 import { useNavigate } from 'react-router-dom';
 
-function BoardItem(props) {
-  const policy = props.policy;
+function AlarmBoardItem(props) {
+  const alarm = props.alarm;
   const [isLike, setIsLike] = useState(true);
   const navigate = useNavigate();
 
@@ -18,18 +18,22 @@ function BoardItem(props) {
     return daysDiff;
   }
 
-  const dDay = getDday(policy.endDay);
-
-  const moveDetail = () => {
-    navigate(`/policy/${policy.recommendPolicyNo}`, { state: { policy: policy }});
-  }
-
-  const handleLikeClick = () => {
-    setIsLike(!isLike);
+  const handleAlarmType = () => {
+    switch (alarm.type) {
+      case 'S':
+        // 시작 정책
+        return ('alert-prompt-wrap');
+      case 'N':
+        // 새로운 정책
+        return ('alert-prompt-wrap');
+      case 'E':
+        // 마감 정책
+        return ('alert-prompt-wrap');
+    }
   }
 
   return (
-    <div className="notifications-container" onClick={moveDetail}>
+    <div className="notifications-container">
       <div class="alert">
         <div class="flex">
 
@@ -40,21 +44,11 @@ function BoardItem(props) {
             </svg>
           </div>
 
-          {/* 정책 이름  +  마감 기한  */}
+          {/* 알람 */}
           <div className="alert-prompt-wrap">
-            <p className="text-sm text-yellow-700">{policy.name}</p>
-            <p className="text-sm text-yellow-700">{policy.endDay}</p>
-            <p className="text-sm text-yellow-700">{`D-${dDay}`}</p>
+            <p className="text-sm text-yellow-700">{alarm.name}</p>
+            <p className="text-sm text-yellow-700">{alarm.endDay}</p>
           </div>
-
-          {/* 좋아요 */}
-          {isLike ? 
-          <div class="like-btn-applied" onClick={handleLikeClick}>
-             <img src={filledheart} alt="하트" className="filledheart"/>
-          </div> : 
-          <div class="like-btn" onClick={handleLikeClick}>
-              <img src={emptyheart} alt="하트" className="emptyheart"/>
-          </div>}
       </div>
       </div>
     </div>
@@ -62,4 +56,4 @@ function BoardItem(props) {
   )
 }
 
-export default BoardItem
+export default AlarmBoardItem

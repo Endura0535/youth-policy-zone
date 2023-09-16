@@ -12,6 +12,7 @@ import ProfileComponent from './component/ProfileComponent';
 import { HomeProvider, useHome } from '../HomeContext';
 
 import { CSSTransition } from 'react-transition-group';
+import ChatgptApi from './component/chatgpt/ChatgptApi';
 
 function HomePage() {
   const { navIdx } = useHome();
@@ -20,11 +21,9 @@ function HomePage() {
 
   useEffect(() => {
     if (memberInfo.current === null) {
-      console.log('home: memberInfo.current is null');
       navigate("/");
       return;
     }
-    console.log('home: memberInfo.current is not null');
   }, [memberInfo, navigate]);
 
   return (
@@ -41,6 +40,7 @@ function HomePage() {
           {navIdx === 1 && <AlarmComponent />}
           {navIdx === 2 && <LikesPolicyComponent />}
           {navIdx === 3 && <ProfileComponent />}
+          {navIdx === 4 && <ChatgptApi />}
 
           <div className='default-container-reverse'>
             <Navbar />

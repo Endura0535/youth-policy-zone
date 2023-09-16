@@ -15,7 +15,6 @@ function AuthPage() {
 
   useEffect(() => {
     if (memberInfo.current !== null) {
-      console.log(`authpage:`, memberInfo.current);
       navigate("/home");
       return;
     }

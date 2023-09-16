@@ -4,16 +4,27 @@ import Board from './board/Board';
 
 function RecommendationPolicyComponent() {
   const { memberInfo, apiClient } = useMember();
-  const [policies, setPolicies] = useState([]);
+  // const [policies, setPolicies] = useState([]);
+  const [recommendedPolicies, setRecommendedPolicies] = useState();
 
   useEffect(() => {
-    retrieveAllPolicies();
+    // retrieveAllPolicies();
+    retrieveRecommendedPolicies();
   }, []);
 
   const retrieveAllPolicies = async () => {
     const response = await apiClient.current.get('/policy/all');
     console.log(response.data.policy);
-    setPolicies(response.data.policy);
+    // setPolicies(response.data.policy);
+  }
+
+  const retrieveRecommendedPolicies = async () => {
+    const response = await apiClient.current.post('/recommend', {
+      page: 0,
+      count: 100
+    });
+    console.log(response.data);
+    setRecommendedPolicies(response.data.recommendPolicy);
   }
 
   return (
@@ -23,7 +34,8 @@ function RecommendationPolicyComponent() {
       <div className='mg-top-sm'>{memberInfo.current.name.substring(1)}님께 맞는 정책을 추천드릴께요.</div>
 
       <div className="policy-container">
-        <Board policies={policies}/>
+        {/* <Board policies={policies}/> */}
+        {recommendedPolicies !== undefined && <Board policies={recommendedPolicies}/>}
       </div>
       
     </div>

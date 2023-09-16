@@ -25,7 +25,7 @@ public class AlarmBoxController {
 
     private final AlarmBoxService alarmBoxService;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<?> retrieveAlarmBox(@AuthenticationPrincipal UserDetails userDetails){
 
         try {
