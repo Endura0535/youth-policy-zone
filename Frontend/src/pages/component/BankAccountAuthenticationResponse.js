@@ -4,7 +4,7 @@ import { useMember } from "../../MemberContext";
 import { useNavigate } from "react-router-dom";
 
 function BankAccountAuthenticationResponse({ setIsRequested }) {
-  const { email } = useMember();
+  const { email, pw, bankAccount } = useMember();
   const [num1, setNum1] = useState("");
   const [num2, setNum2] = useState("");
   const [num3, setNum3] = useState("");
@@ -83,6 +83,7 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
         `${process.env.REACT_APP_API_URL}/auth/bank-account-authentication`,
         {
           memberId: email,
+          accountNo: bankAccount,
           code: num1 + num2 + num3 + num4,
         }
       )
@@ -98,14 +99,23 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
           return;
         }
 
-        console.log("인증완료", response.data);
-
-        navigate("/signup-result", {
-          state: {
+        console.log(`${process.env.REACT_APP_API_URL}/auth/signup`, email, pw, bankAccount, response.data.message);
+        axios
+          .post(`${process.env.REACT_APP_API_URL}/auth/signup`, {
+            memberId: email,
+            password: pw,
+            accountNo: bankAccount,
             name: response.data.message,
-          },
-        });
-      });
+          })
+          .then((response) => {
+            console.log("회원가입 완료:", response.data);
+            navigate("/signup-result", {
+              state: {
+                name: response.data,
+              },
+            });
+          });
+      })
   };
 
   return (
