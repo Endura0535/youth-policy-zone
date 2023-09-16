@@ -1,9 +1,9 @@
-import requests, bs4, json, re
+import requests, json
 
 import os
 from dotenv import load_dotenv
 
-from database.crud import memberCrud
+from database.crud import memberCrud, accountDetailCrud
 from database import database
 
 load_dotenv()
@@ -20,8 +20,13 @@ def analyzeMember(
     accountNo = member.accountNo
     memberSeq = member.memberNo
 
-    # TODO: 신한은행에서 거래 내역 가져오기 + 저장하기
-    getAccountDetails(accountNo)
+    # 신한은행에서 거래 내역 가져오기
+    accountDetail = getAccountDetails(accountNo)
+
+    # 신한 은행 거래 내역 DB에 저장하기
+    # TODO: 가장 최근 거래 내역 가져와서 비교
+    for detail in accountDetail:
+        insertDetail(detail, memberSeq)
 
     # TODO: DB에서 더미 데이터 가져오기
 
@@ -50,9 +55,26 @@ def getAccountDetails(
     }
 
     response = requests.post(URL, data=json.dumps(data))
-    print(response.json()['dataBody']['거래내역'])
+    # print(response.json()['dataBody']['거래내역'])
 
-    return "inProgress"
+    return response.json()['dataBody']['거래내역']
+
+
+# 각각의 거래 내역 db에 넣기
+def insertDetail(detail, memberSeq):
+    data = {
+        "memberNo": memberSeq,
+        "date": detail["거래일자"],
+        "time": detail["거래시간"],
+        "state": detail["적요"],
+        "withdraw": detail["출금금액"],
+        "deposit": detail["입금금액"],
+        "content": detail["내용"],
+        "balance": detail["잔액"],
+        "ctype": detail["입지구분"],
+        "dname": detail["거래점명"]
+    }
+    accountDetailCrud.createAccountDetail(session, data)
 
 
 # 사용자의 거래내역 더미 데이터 가져오기
