@@ -1,0 +1,104 @@
+/* -------- HEADER ------- */
+.home-header-left-side {
+  font-size: 1.3em;
+}
+
+.alarm-button {
+  width: 140px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(to left,rgb(173, 154, 255),rgb(149, 110, 255));
+  border-radius: 30px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  transition-duration: .2s;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.116);
+}
+
+.bell {
+  width: 13px;
+}
+
+.bell path {
+  fill: rgb(255, 255, 255);
+}
+
+.alarm-button:hover {
+  background: linear-gradient(to left,rgb(154, 131, 255),rgb(135, 91, 255));
+}
+
+.alarm-button:active {
+  transform: scale(0.97);
+  transition-duration: .2s;
+}
+
+.alarm-button:hover .bell {
+  animation: bellRing 0.9s both;
+}
+
+/* bell ringing animation keyframes*/
+@keyframes bellRing {
+  0%,
+  100% {
+    transform-origin: top;
+  }
+
+  15% {
+    transform: rotateZ(10deg);
+  }
+
+  30% {
+    transform: rotateZ(-10deg);
+  }
+
+  45% {
+    transform: rotateZ(5deg);
+  }
+
+  60% {
+    transform: rotateZ(-5deg);
+  }
+
+  75% {
+    transform: rotateZ(2deg);
+  }
+}
+
+
+/* ----------- NAVBAR -------- */
+.home-navbar-container {
+  display: flex;
+  background-color: #E5F0FC;
+  width: 450px;
+  height: 50px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px,
+              #0B68E9 5px 10px 15px;
+}
+
+.navbar-button {
+  outline: 0 !important;
+  border: 0 !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.navbar-button:hover {
+  transform: translateY(-3px);
+}

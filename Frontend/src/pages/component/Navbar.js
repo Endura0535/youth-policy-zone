@@ -1,17 +1,28 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { useMember } from '../../MemberContext'
 import { useHome } from '../../HomeContext';
 
+
 function Navbar() {
-  const { setNavIdx } = useHome();
+  const { setTabIdx } = useHome();
 
   return (
-    <div>
-      <button onClick={() => {setNavIdx(0)}}>추천 정책</button>
-      <button onClick={() => {setNavIdx(1)}}>전체 정책</button>
-      <button onClick={() => {setNavIdx(2)}}>찜한 정책</button>
-      <button onClick={() => {setNavIdx(3)}}>내 정보</button>
+    <div className="home-navbar-container">
+      <div className='navbar-button'>
+        <button onClick={() => {setTabIdx(0)}}>추천정책</button>
+      </div>
+
+      <div className='navbar-button'>
+        <button onClick={() => {setTabIdx(1)}}>전체정책</button>
+      </div>
+
+      <div className='navbar-button'>
+        <button onClick={() => {setTabIdx(3)}}>찜한정책</button>
+      </div>
+
+      <div className='navbar-button'>
+        <button onClick={() => {setTabIdx(4)}}>내 정보</button>
+      </div>
+
     </div>
   )
 }

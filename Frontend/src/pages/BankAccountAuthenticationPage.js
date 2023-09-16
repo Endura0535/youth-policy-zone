@@ -29,7 +29,7 @@ function BankAccountAuthenticationPage() {
 
         {/* HEADER */}
         <div className='header'>
-          <div onClick={onClickBackButton} class='header-back-btn'>
+          <div onClick={onClickBackButton} className='header-back-btn'>
             <IoIosArrowBack />
           </div>
           계좌인증
