@@ -3,7 +3,7 @@ import axios from "axios";
 export default async function createMessage(conversation) {
   const requestBody = {
     messages: conversation,
-    max_tokens: 150,
+    max_tokens: 500,
     temperature: 0,
     model: "gpt-3.5-turbo-0613",
   };
