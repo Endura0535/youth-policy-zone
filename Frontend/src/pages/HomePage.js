@@ -4,6 +4,9 @@ import Navbar from './component/Navbar'
 import { useMember } from '../MemberContext';
 import { useNavigate } from 'react-router-dom';
 import RecommendationPolicyComponent from './component/RecommendationPolicyComponent';
+import LikesPolicyComponent from './component/LikesPolicyComponent';
+import PolicyAllComponent from './component/PolicyAllComponent';
+import ProfileComponent from './component/ProfileComponent';
 import { HomeProvider, useHome } from '../HomeContext';
 
 function HomePage() {
@@ -28,6 +31,9 @@ function HomePage() {
           
           {/* 컨텐츠 컴포넌트 */}
           {tabIdx === 0 && <RecommendationPolicyComponent />}
+          {tabIdx === 1 && <PolicyAllComponent />}
+          {tabIdx === 2 && <LikesPolicyComponent />}
+          {tabIdx === 3 && <ProfileComponent />}
           
           <Navbar />
         </div>

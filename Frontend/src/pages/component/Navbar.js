@@ -1,16 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useMember } from '../../MemberContext'
+import { useHome } from '../../HomeContext';
 
 function Navbar() {
-  const { doSignout } = useMember();
+  const { setTabIdx } = useHome();
 
   return (
     <div>
-      <div><Link to={`/`}>Welcome</Link></div>
-      <div><Link to={`/home`}>홈</Link></div>
-      <div><Link to={`/profile`}>profile</Link></div>
-      <div><button onClick={doSignout}>로그아웃</button></div>
+      <button onClick={() => {setTabIdx(0)}}>추천 정책</button>
+      <button onClick={() => {setTabIdx(1)}}>전체 정책</button>
+      <button onClick={() => {setTabIdx(2)}}>찜한 정책</button>
+      <button onClick={() => {setTabIdx(3)}}>내 정보</button>
     </div>
   )
 }
