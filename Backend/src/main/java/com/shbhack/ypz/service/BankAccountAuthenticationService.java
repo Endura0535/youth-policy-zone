@@ -14,7 +14,7 @@ public class BankAccountAuthenticationService {
 	private final Map<String, String> authenticationMap = new HashMap<>(10);
 	
 	// 계좌 인증 정보 생성
-	public void createAuthentication(String memberId, String accountNo) throws Exception {
+	public String createAuthentication(String memberId, String accountNo) throws Exception {
 		
 		// 임의 4자리 코드 생성
 		Random random = new Random(System.currentTimeMillis());
@@ -43,6 +43,17 @@ public class BankAccountAuthenticationService {
 		    public void run() {
 		    	authenticationMap.remove(memberId);
 		    }
-		}, 3000);  // 3초 후에 실행
+		}, 30000);  // 30초 후에 실행
+		
+		return code;
+	}
+	
+	public boolean authenticate(String memberId, String code) throws Exception {
+		String authCode = authenticationMap.get(memberId);
+		if (authCode == null) throw new Exception("인증시간이 만료되었습니다.");
+		log.info("{}, {}", authCode, code);
+		if (authCode.equals(code)) return true;
+		return false;
+		
 	}
 }

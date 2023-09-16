@@ -34,6 +34,8 @@ public class MemberService {
 			.education(updatedMember.getEducation())
 			.memberPwd(updatedMember.getPassword())
 			.residence(updatedMember.getResidence())
+			.gender(updatedMember.getGender())
+			.jobStatus(updatedMember.getJobStatus())
 			.build();
 		
 		memberRepository.saveAndFlush(member);

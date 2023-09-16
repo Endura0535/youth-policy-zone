@@ -21,8 +21,6 @@ public class PolicyServiceImpl implements PolicyService {
         var policyList = policyRepository.findAllPolicy().stream()
                 .map(p -> Policy.builder()
                         .id(p.getId())
-                        .alarmType(p.getAlarmType())
-                        .expireDt(p.getExpireDt())
                         .build())
                 .collect(Collectors.toList());
 
