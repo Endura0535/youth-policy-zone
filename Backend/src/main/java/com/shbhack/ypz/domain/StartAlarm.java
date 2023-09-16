@@ -20,11 +20,11 @@ public class StartAlarm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long startAlarmNo;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberNo", referencedColumnName = "memberNo", nullable = false)
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "policyNo", referencedColumnName = "id", nullable = false)
     private Policy policy;
 

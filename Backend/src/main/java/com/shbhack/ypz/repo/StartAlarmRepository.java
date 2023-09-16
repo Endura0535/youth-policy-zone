@@ -10,9 +10,8 @@ public interface StartAlarmRepository extends JpaRepository<StartAlarm, Long>{
 
     StartAlarm findFirst1ByOrderByStartAlarmNo();
 
-    @Query("SELECT s FROM StartAlarm s WHERE s.member = ?1")
-    List<StartAlarm> findAllByMemberNo(long memberNo);
+    @Query("SELECT s FROM StartAlarm s WHERE s.member.memberNo = ?1")
+    List<StartAlarm> findAllByMemberNo(Long memberNo);
 
-    void deleteByStartAlarmNo(long startAlarmNo);
 
 }

@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
-
 @Data
 @Entity
 @Table(name = "remind_alarm")
@@ -30,9 +28,9 @@ public class RemindAlarm {
     private Policy policy;
 
     @NotBlank
-    private Date startDt;
+    private String startDt;
 
     @NotBlank
-    private Date finishDt;
+    private String finishDt;
 
 }
