@@ -1,10 +1,8 @@
 package com.shbhack.ypz.controller;
 
 import com.shbhack.ypz.domain.Member;
-import com.shbhack.ypz.domain.Policy;
 import com.shbhack.ypz.domain.RecommendPolicy;
 import com.shbhack.ypz.dto.request.RecommendPolicyRequestDTO;
-import com.shbhack.ypz.service.PolicyService;
 import com.shbhack.ypz.service.RecommendService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +28,6 @@ import java.util.Map;
 public class RecommendController {
 
     private final RecommendService recommendService;
-    private final PolicyService policyService;
 
     @PostMapping("/")
     public ResponseEntity<?> retrieveRecommendPolicy(@AuthenticationPrincipal UserDetails userDetails, @RequestBody RecommendPolicyRequestDTO dto) {
