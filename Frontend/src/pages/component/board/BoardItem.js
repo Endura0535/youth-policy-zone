@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import './Board.css';
 import filledheart from '../../../assets/images/filledheart.png'
 import emptyheart from '../../../assets/images/emptyheart.png'
+import { useNavigate } from 'react-router-dom';
 
 function BoardItem(props) {
   const policy = props.policy;
   const [isLike, setIsLike] = useState(true);
+  const navigate = useNavigate();
 
   function getDday(endDate) {
     const today = new Date();
@@ -18,12 +20,16 @@ function BoardItem(props) {
 
   const dDay = getDday(policy.endDay);
 
+  const moveDetail = () => {
+    navigate(`/policy/${policy.id}`);
+  }
+
   const handleLikeClick = () => {
     setIsLike(!isLike);
   }
 
   return (
-    <div className="notifications-container">
+    <div className="notifications-container" onClick={moveDetail}>
       <div class="alert">
         <div class="flex">
 
