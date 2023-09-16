@@ -7,6 +7,7 @@ import AuthPage from './pages/AuthPage'
 import { MemberProvider } from './MemberContext'
 import BankAccountAuthenticationPage from './pages/BankAccountAuthenticationPage'
 import BankAccountAuthenticationResultPage from './pages/BankAccountAuthenticationResultPage'
+import { HomeProvider } from './HomeContext'
 // React Icons
 
 class App extends React.Component {
@@ -20,9 +21,13 @@ class App extends React.Component {
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/account-auth" element={<BankAccountAuthenticationPage />} />
               <Route path="/signup-result" element={<BankAccountAuthenticationResultPage />} />
-              <Route path="/home" element={<HomePage />} />
-              <Route path="/profile" element={<ProfilePage />} />
             </Routes>
+            <HomeProvider>
+              <Routes>
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+              </Routes>
+            </HomeProvider>
           </div>
         </MemberProvider>
     </BrowserRouter>

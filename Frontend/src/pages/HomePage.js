@@ -3,8 +3,11 @@ import Header from './component/Header'
 import Navbar from './component/Navbar'
 import { useMember } from '../MemberContext';
 import { useNavigate } from 'react-router-dom';
+import RecommendationPolicyComponent from './component/RecommendationPolicyComponent';
+import { HomeProvider, useHome } from '../HomeContext';
 
 function HomePage() {
+  const { tabIdx } = useHome();
   const { memberInfo } = useMember();
   const navigate = useNavigate();
 
@@ -22,12 +25,10 @@ function HomePage() {
       {memberInfo.current !== null && (
         <div>
           <Header />
-          <div>HomePage</div>
-
-          <div>
-            {memberInfo.current.name.substring(1)}님께 맞는 정책을 추천드릴께요.
-          </div>
-
+          
+          {/* 컨텐츠 컴포넌트 */}
+          {tabIdx === 0 && <RecommendationPolicyComponent />}
+          
           <Navbar />
         </div>
       )}
