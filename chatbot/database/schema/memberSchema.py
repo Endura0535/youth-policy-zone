@@ -1,6 +1,7 @@
 from typing import Optional
 from pydantic import BaseModel
 
+
 class MemberBase(BaseModel):
     age: int
     education: Optional[str] = None
@@ -11,5 +12,11 @@ class MemberBase(BaseModel):
     memberPwd: Optional[str] = None
     name: Optional[str] = None
     residence: Optional[str] = None
-    income: Optional[str] = None
+    income: Optional[int] = None
     role: Optional[str] = None
+
+
+class MemberInfo(BaseModel):
+    memberSeq: int
+    residence: Optional[str] = None
+    income: Optional[int] = None

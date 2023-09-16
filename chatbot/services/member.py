@@ -56,9 +56,10 @@ def analyzeMember(
     residence = getResidence(contents)
     # print(residence)
 
-    # TODO: db에 정보 넣기
+    # db에 정보 넣기
+    memberCrud.updateMemberInfo(session, memberSeq, residence, salary)
 
-    return "inProgress"
+    return "success"
 
 
 # 계좌 번호를 통해 계좌 내역 조회
