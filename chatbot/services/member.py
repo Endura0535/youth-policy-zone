@@ -5,6 +5,7 @@ import requests
 from dotenv import load_dotenv
 
 import pandas as pd
+import numpy as np
 
 from database import database
 from database.crud import memberCrud, accountDetailCrud
@@ -37,17 +38,19 @@ def analyzeMember(
     #             continue
     #     insertDetail(detail, memberSeq)
 
-    # TODO: DB에서 더미 데이터 가져오기
+    # DB에서 더미 데이터 가져오기
     allDetails = accountDetailCrud.getAllDetails(session, memberSeq)
     dictDetails = toDict(allDetails)
 
     df = pd.DataFrame.from_dict(dictDetails)
     df = pd.DataFrame.from_records(df)
-    print(df)
+    # print(df)
+
+    # 소득 분석
+    salary = getSalary(df)
+    # print(salary)
 
     # TODO: 거주지 분석
-
-    # TODO: 소득 분석
 
     # TODO: db에 정보 넣기
 
@@ -108,3 +111,14 @@ def toDict(datails):
         dict["dname"] = detail.dname
         li.append(dict)
     return li
+
+
+# 거래내역에서 소득 정보 분석
+# 입금금액과 거래내역의 쌍이 가장 많이 반복되는 것을 급여로 파악
+def getSalary(df):
+    # 입금 내역 추출
+    dfIncome = df.loc[(df.ctype == "1"),]
+    # 가장 많은 내용 추출
+    countIncome = dfIncome.pivot_table(index=['deposit', 'content'], aggfunc='size', sort=True).to_frame()
+    lastRow = countIncome.iloc[-1]
+    return lastRow[:0].name[0] * 12
