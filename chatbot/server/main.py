@@ -1,8 +1,7 @@
 import os
 from typing import Optional
 import uvicorn
-from fastapi import FastAPI, File, Form, HTTPException, Depends, Body, UploadFile
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi import FastAPI, File, Form, HTTPException, Body, UploadFile
 from fastapi.staticfiles import StaticFiles
 from loguru import logger
 import json
@@ -20,21 +19,15 @@ from services.file import get_document_from_file
 
 from models.models import DocumentMetadata, Source
 
-from services.policy import getPolicyInfo
 
-bearer_scheme = HTTPBearer()
-BEARER_TOKEN = os.environ.get("BEARER_TOKEN")
-assert BEARER_TOKEN is not None
-
-
-def validate_token(credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
-    if credentials.scheme != "Bearer" or credentials.credentials != BEARER_TOKEN:
-        raise HTTPException(status_code=401, detail="Invalid or missing token")
-    return credentials
-
-
-app = FastAPI(dependencies=[Depends(validate_token)])
+app = FastAPI()
 app.mount("/.well-known", StaticFiles(directory=".well-known"), name="static")
+
+# 정책 api 추가
+from server.router import policy, member
+app.include_router(policy.router)
+app.include_router(member.router)
+
 
 # Create a sub-application, in order to access just the query endpoint in an OpenAPI schema, found at http://0.0.0.0:8000/sub/openapi.json when the app is running locally
 sub_app = FastAPI(
@@ -42,7 +35,6 @@ sub_app = FastAPI(
     description="A retrieval API for querying and filtering documents based on natural language queries and metadata",
     version="1.0.0",
     servers=[{"url": "https://your-app-url.com"}],
-    dependencies=[Depends(validate_token)],
 )
 app.mount("/sub", sub_app)
 
@@ -82,7 +74,7 @@ async def upsert(
         request: UpsertRequest = Body(...),
 ):
     try:
-        # policyList 처리할 수 있도록 변경
+        # TODO: policyList 처리할 수 있도록 변경
         req = json.loads(request)
         # print(req["documents"])
         # ids = await datastore.upsert(request.documents)
@@ -161,10 +153,3 @@ async def startup():
 
 def start():
     uvicorn.run("server.main:app", host="0.0.0.0", port=8000, reload=True)
-
-
-@app.post("/policy/init")
-async def getNewPolicyDate():
-    policyInfo = await getPolicyInfo()
-    await upsert(policyInfo)
-    return policyInfo
