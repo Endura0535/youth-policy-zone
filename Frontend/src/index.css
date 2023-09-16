@@ -20,6 +20,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ----- CENTER ALIGN ------ */
 .main-container {
   margin: 0 auto;
   max-width: 800px;
@@ -27,7 +28,18 @@ body {
   background-color: #F3F6FB;
 }
 
-/* primary-btn */ 
+.welcome-container, 
+.auth-container,
+.default-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+
+/* --------- primary-btn ---------- */ 
 .primary-btn {
   padding: 15px;
   width: 100%;
@@ -69,20 +81,6 @@ body {
   width: 100%;
  }
 
- /* COMMON */
-.center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.yflex {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 /* REACT - TRANSITION - GROUP */
 .fade-appear {
   opacity: 0;
@@ -101,3 +99,45 @@ body {
 .mg-top-bg {
   margin-top: 30px;
 }
+
+.shinhan-color {
+  color: #0046FF;
+  font-family: 'OneShinhanMedium', sans-serif;
+}
+
+/* ------------- HEADER ------------ */
+.header {
+  color: #0046FF;
+  width: 100%;
+  text-align: center;
+  font-size: 1.3em;
+  font-family: 'OneShinhanBold', sans-serif;
+  position: relative;
+}
+
+.header-back-btn {
+  position: absolute;
+  left: 200px;
+  cursor: pointer;
+  transition: .10s ease;
+}
+.header-back-btn:hover {
+  transform: scale(1.03);
+}
+
+/* ----------- INFO CARD ----------- */
+.info-card {
+  width: 350px;
+  height: 80px;
+  padding: 20px;
+  background: rgb(255, 255, 255);
+  border-radius: 20px;
+  box-shadow: 0.3em 0.3em 0.7em #00000015;
+  transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: rgb(250, 250, 250) 0.2em solid;
+  line-height: 160%;
+ }
+ 
+ .info-card:hover {
+  border: #006fff 0.1em solid;
+ }

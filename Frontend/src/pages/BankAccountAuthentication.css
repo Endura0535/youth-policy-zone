@@ -1,0 +1,40 @@
+/* ------- 계좌번호 input 창 ------ */
+.account-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.account-input-logo, .account-input-change {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.globelogo {
+  width: 30px;
+}
+
+.input[type=account] {
+  width: 280px;
+  height: 20px;
+  background-color: #fff;
+  color: #242424;
+  padding: .15rem .5rem;
+  min-height: 40px;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  box-shadow: 0px 10px 20px -18px blue;
+  border-bottom: 3px solid #0d14e9;
+  transition: .10s ease;
+}
+
+.input[type=account]:hover {
+  outline: 2px solid #0d14e9;
+}
+
+.input[type=account]:focus {
+  border-bottom: 3px solid #0d14e9;
+  border-radius: 5px 5px 2px 2px;
+  transform: scale(1.03);
+}

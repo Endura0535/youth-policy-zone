@@ -14,8 +14,12 @@ function AuthPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(setMemberInfo()) navigate('/home');
+    setTab(0);
   }, []);
+
+  useEffect(() => {
+    if(setMemberInfo()) navigate('/home');
+  }, [navigate, setMemberInfo]);
 
   const handleToggle = () => {
     setTab(prevTab => (prevTab === 0 ? 1 : 0));
@@ -23,29 +27,30 @@ function AuthPage() {
 
   return (
     <CSSTransition in={true} appear={true} timeout={300} classNames="fade">
-      <div className='auth-container center'>
-        <div class='brand'>
-          <img src={shinhanlogo} alt="내 이미지" class="logoimage"/>
-          <div class="brand-letter">
-            청<span class="sm-letter">년</span>정<span class="sm-letter">책</span>지역
+      <div className='auth-container'>
+        <div className='brand'>
+          <img src={shinhanlogo} alt="신한로고" className="logoimage"/>
+          <div className="brand-letter">
+            청<span className="sm-letter">년</span>정<span className="sm-letter">책</span>지역
           </div>
-        </div>
-        <div class='mg-top-sm'>이곳은 청년 정책 지역, 청정지역입니다.</div>
+      </div>
+        <div className='mg-top-sm'>이곳은 청년 정책 지역, 청정지역입니다.</div>
 
-        <div class="auth-toggle-container mg-top-bg">
-            <label class="switch btn-color-mode-switch">
+        <div className="auth-toggle-container mg-top-bg">
+            <label className="switch btn-color-mode-switch">
                 <input
                   value={tab}
                   id="color_mode"
                   name="color_mode"
                   type="checkbox"
                   onChange={handleToggle}
+                  checked={tab}
                 />
-                <label class="btn-color-mode-switch-inner" data-off="로그인" data-on="회원가입" for="color_mode"></label>
+                <label className="btn-color-mode-switch-inner" data-off="로그인" data-on="회원가입" htmlFor="color_mode"></label>
             </label>
         </div>
-        {tab === 1 && <Signin />}
-        {tab === 0 && <Signup />}
+        {tab === 0 && <Signin />}
+        {tab === 1 && <Signup />}
       </div>
     </CSSTransition>
   )
