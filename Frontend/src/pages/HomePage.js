@@ -3,10 +3,12 @@ import Header from './component/Header'
 import Navbar from './component/Navbar'
 import { useMember } from '../MemberContext';
 import { useNavigate } from 'react-router-dom';
+
 import RecommendationPolicyComponent from './component/RecommendationPolicyComponent';
+import AlarmComponent from './component/AlarmComponent';
 import LikesPolicyComponent from './component/LikesPolicyComponent';
-import PolicyAllComponent from './component/PolicyAllComponent';
 import ProfileComponent from './component/ProfileComponent';
+
 import { HomeProvider, useHome } from '../HomeContext';
 
 import { CSSTransition } from 'react-transition-group';
@@ -36,7 +38,7 @@ function HomePage() {
 
           {/* 컨텐츠 컴포넌트 */}
           {navIdx === 0 && <RecommendationPolicyComponent />}
-          {navIdx === 1 && <PolicyAllComponent />}
+          {navIdx === 1 && <AlarmComponent />}
           {navIdx === 2 && <LikesPolicyComponent />}
           {navIdx === 3 && <ProfileComponent />}
 
