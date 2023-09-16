@@ -1,10 +1,13 @@
-import requests, json
-
 import os
+
+import json
+import requests
 from dotenv import load_dotenv
 
-from database.crud import memberCrud, accountDetailCrud
+import pandas as pd
+
 from database import database
+from database.crud import memberCrud, accountDetailCrud
 
 load_dotenv()
 
@@ -20,20 +23,28 @@ def analyzeMember(
     accountNo = member.accountNo
     memberSeq = member.memberNo
 
-    # 신한은행에서 거래 내역 가져오기
-    accountDetail = getAccountDetails(accountNo)
-
-    # 신한 은행 거래 내역 DB에 저장하기
+    # TODO: 주석 지우기
+    # # 신한은행에서 거래 내역 가져오기
+    # accountDetail = getAccountDetails(accountNo)
+    #
+    # # 신한 은행 거래 내역 DB에 저장하기
     lastTrans = accountDetailCrud.getLastDetail(session, memberSeq)
-
-    for detail in accountDetail:
-        # 가장 최근 거래일자와 비교
-        if (lastTrans.date > detail["거래일자"]) or (lastTrans.date == detail["거래일자"] and lastTrans.time >= detail["거래시간"]):
-            continue
-        insertDetail(detail, memberSeq)
+    #
+    # for detail in accountDetail:
+    #     # 가장 최근 거래일자와 비교
+    #     if lastTrans is not None:
+    #         if (lastTrans.date > detail["거래일자"]) or (lastTrans.date == detail["거래일자"] and lastTrans.time >= detail["거래시간"]):
+    #             continue
+    #     insertDetail(detail, memberSeq)
 
     # TODO: DB에서 더미 데이터 가져오기
-    lastTrans.date, lastTrans.time
+    allDetails = accountDetailCrud.getAllDetails(session, memberSeq)
+    dictDetails = toDict(allDetails)
+
+    df = pd.DataFrame.from_dict(dictDetails)
+    df = pd.DataFrame.from_records(df)
+    print(df)
+
     # TODO: 거주지 분석
 
     # TODO: 소득 분석
@@ -81,9 +92,19 @@ def insertDetail(detail, memberSeq):
     accountDetailCrud.createAccountDetail(session, data)
 
 
-# 사용자의 거래내역 더미 데이터 가져오기
-async def getDummyData(
-        accountNo: str
-):
-
-    return "inprogress"
+# model to dictionary
+def toDict(datails):
+    li = []
+    for detail in datails:
+        dict = {}
+        dict["date"] = detail.date
+        dict["time"] = detail.time
+        dict["state"] = detail.state
+        dict["withdraw"] = detail.withdraw
+        dict["deposit"] = detail.deposit
+        dict["content"] = detail.content
+        dict["balance"] = detail.balance
+        dict["ctype"] = detail.ctype
+        dict["dname"] = detail.dname
+        li.append(dict)
+    return li

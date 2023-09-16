@@ -18,3 +18,8 @@ def createAccountDetail(db: Session, accountDetail: accountDetailSchema.accountD
 def getLastDetail(db: Session, memberNo):
     detail = accountDetailModel.accountDetail
     return db.query(detail).order_by(detail.date.desc(), detail.time.desc()).filter(detail.memberNo == memberNo).first()
+
+
+# 전체 거래내역 조회
+def getAllDetails(db: Session, memberNo):
+    return db.query(accountDetailModel.accountDetail).filter(accountDetailModel.accountDetail.memberNo == memberNo).all()
