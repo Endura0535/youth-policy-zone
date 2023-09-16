@@ -1,8 +1,16 @@
+import enum
+
 from sqlalchemy import Column, BIGINT, INTEGER, CHAR, VARCHAR, Enum
 from sqlalchemy.dialects.mssql import TINYINT
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
+
+
+class roleEnum(enum.Enum):
+    ADMIN = 'ADMIN'
+    USER = 'USER'
+
 
 class Member(Base):
     __tablename__ = "member"
@@ -18,4 +26,4 @@ class Member(Base):
     name = Column(VARCHAR(5))
     residence = Column(VARCHAR(10))
     income = Column(INTEGER)
-    role = Column(Enum)
+    role = Column(Enum(roleEnum))
