@@ -45,7 +45,7 @@ function AlarmBoardItem(props) {
           </div>
 
           {/* 알람 */}
-          <div className={handleAlarmType}>
+          <div className="alert-prompt-wrap">
             <p className="text-sm text-yellow-700">{alarm.name}</p>
             <p className="text-sm text-yellow-700">{alarm.endDay}</p>
           </div>
