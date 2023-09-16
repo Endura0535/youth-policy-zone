@@ -38,6 +38,13 @@ body {
   margin-top: 50px;
 }
 
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 
 /* --------- primary-btn ---------- */ 
 .primary-btn {
@@ -56,6 +63,7 @@ body {
   box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
   transition: all 250ms;
   overflow: hidden;
+  cursor: pointer;
  }
  
  .primary-btn::before {
@@ -79,6 +87,16 @@ body {
  
  .primary-btn:hover::before {
   width: 100%;
+ }
+
+ .instant-extend {
+  width: 30%;
+  margin-left: -15px;
+ }
+
+ .instant-extend-two {
+  width: 40%;
+  margin-left: -20px;
  }
 
 /* REACT - TRANSITION - GROUP */

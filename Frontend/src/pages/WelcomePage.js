@@ -15,7 +15,8 @@ function WelcomePage() {
       <div className='cover-image'>
           <img src={youthimage} alt="청년" className="youthimage"/>
       </div>
-      <Link to={`/auth`} style={{ textDecoration: 'none' }} className='welcome-btn'>
+
+      <Link to={`/auth`} style={{ textDecoration: 'none' }} className='instant-extend'>
         <div className='primary-btn'>숨은 청년정책 찾으러 가기</div>
       </Link>
     </div>

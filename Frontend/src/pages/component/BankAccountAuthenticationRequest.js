@@ -26,17 +26,14 @@ function BankAccountAuthenticationRequest({ setIsRequested }) {
   };
 
   return (
-    <div>
+    
+    <div className="center">
       <div className="info-card mg-top-bg"> 
         본인 확인을 위해 회원님께서 입력하신 은행 계좌로 1원을 보내볼께요. 본인 명의의 신한은행 계좌번호가 맞는지 한번 더 확인해 주세요.
       </div>
 
-      {/* GIF */}
-      <div>
-        <img src={fakeimage} alt="페이크" className="fakeimage"/>
-      </div>
+      <img src={fakeimage} alt="fake" className="fakeimage mg-top-sm"/>
 
-      {/* 요청 전송 버튼 */}
       <button type="button" className='primary-btn mg-top-bg' onClick={onClickAuthRequestButton}>
         내 계좌로 1원 보내기
       </button>
