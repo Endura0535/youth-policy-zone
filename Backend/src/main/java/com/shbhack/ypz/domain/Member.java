@@ -25,12 +25,10 @@ public class Member implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
 
-    @NotBlank
     @Column(unique = true, nullable = false)
     private String memberId;
 
     @NotBlank
-    @Column
     private String memberPwd;
 
     @NotBlank
@@ -39,15 +37,17 @@ public class Member implements UserDetails {
     @NotBlank
     private String name;
 
-    private int age;
+    private Integer age;
 
-    private int education;
+    private String education;
 
     private String residence;
 
     private String gender;
 
     private String jobStatus;
+
+    private Integer income;
 
     @Enumerated(EnumType.STRING)
     private Role role;
