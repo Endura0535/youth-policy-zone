@@ -26,19 +26,18 @@ def analyzeMember(
     accountNo = member.accountNo
     memberSeq = member.memberNo
 
-    # TODO: 주석 지우기
-    # # 신한은행에서 거래 내역 가져오기
-    # accountDetail = getAccountDetails(accountNo)
-    #
-    # # 신한 은행 거래 내역 DB에 저장하기
+    # 신한은행에서 거래 내역 가져오기
+    accountDetail = getAccountDetails(accountNo)
+
+    # 신한 은행 거래 내역 DB에 저장하기
     lastTrans = accountDetailCrud.getLastDetail(session, memberSeq)
-    #
-    # for detail in accountDetail:
-    #     # 가장 최근 거래일자와 비교
-    #     if lastTrans is not None:
-    #         if (lastTrans.date > detail["거래일자"]) or (lastTrans.date == detail["거래일자"] and lastTrans.time >= detail["거래시간"]):
-    #             continue
-    #     insertDetail(detail, memberSeq)
+
+    for detail in accountDetail:
+        # 가장 최근 거래일자와 비교
+        if lastTrans is not None:
+            if (lastTrans.date > detail["거래일자"]) or (lastTrans.date == detail["거래일자"] and lastTrans.time >= detail["거래시간"]):
+                continue
+        insertDetail(detail, memberSeq)
 
     # DB에서 더미 데이터 가져오기
     allDetails = accountDetailCrud.getAllDetails(session, memberSeq)
