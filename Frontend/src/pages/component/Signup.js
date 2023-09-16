@@ -38,8 +38,8 @@ function Signup() {
           <div><label htmlFor="bankAccount">신한은행 계좌번호</label></div>
           <div><input type="text" onChange={onBankAccountChanged} value={bankAccount} id="bankAccount" placeholder='OOO OOO OOOOOO'/></div>
         </div>
-        <div className='signup-guide'>청정지역은 신한은행 고객만 이용 가능한 서비스입니다. <br />계좌번호를 입력하여 본인인증해주세요.</div>
-        <button className="primary-btn mg-top-bg" onClick={onClickNextButton}>다음</button>
+        <div className='signup-guide'>청정지역은 <span className='shinhan-color'>신한은행 고객만</span> 이용 가능한 서비스입니다. <br />계좌번호를 입력하여 본인인증해주세요.</div>
+        <button class="primary-btn mg-top-bg" onClick={onClickNextButton}>다음</button>
 
     </div>
   )

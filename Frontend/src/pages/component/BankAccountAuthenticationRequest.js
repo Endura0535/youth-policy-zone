@@ -27,9 +27,8 @@ function BankAccountAuthenticationRequest({ setIsRequested }) {
 
   return (
     <div>
-      <div>
-        입력하신 계좌가 회원님 계좌가 맞는지 확인하기 위해 청정지역이 1원을
-        보내볼게요.
+      <div className="info-card mg-top-bg"> 
+        본인 확인을 위해 회원님께서 입력하신 은행 계좌로 1원을 보내볼께요. 본인 명의의 신한은행 계좌번호가 맞는지 한번 더 확인해 주세요.
       </div>
 
       {/* GIF */}

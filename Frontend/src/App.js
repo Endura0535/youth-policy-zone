@@ -7,6 +7,7 @@ import AuthPage from './pages/AuthPage'
 import { MemberProvider } from './MemberContext'
 import BankAccountAuthenticationPage from './pages/BankAccountAuthenticationPage'
 import BankAccountAuthenticationResultPage from './pages/BankAccountAuthenticationResultPage'
+// React Icons
 
 class App extends React.Component {
   render(){
@@ -28,7 +29,5 @@ class App extends React.Component {
     )
   }
 }
-
-
 
 export default App
