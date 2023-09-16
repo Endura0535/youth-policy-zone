@@ -15,26 +15,26 @@ function Signup() {
   return (
     <div>
         {/* 이메일 입력  */}
-        <div class="input-container mg-top-bg">
+        <div className="input-container mg-top-bg">
           <div><label htmlFor="email">이메일 주소</label></div>
           <div><input type="email" onChange={onEmailChanged} value={email} id="email"/></div>
         </div>
 
         {/* 비밀번호 입력 */}
-        <div class="input-container">
+        <div className="input-container">
           <div><label htmlFor="pw">비밀번호</label></div>
           <div>
             <input type={pwVisibility.type} onChange={onPwChanged} value={pw} id="pw"
               autoComplete='false'
             />
-            <span onClick={handlePwVisibility} class='hidepassword'>
+            <span onClick={handlePwVisibility} className='hidepassword'>
               {pwVisibility.visible ? "비밀번호 숨기기" : "비밀번호 보기"}
             </span>
           </div>
         </div>
 
         {/* 계좌번호 입력 */}
-        <div class='input-container'>
+        <div className='input-container'>
           <div><label htmlFor="bankAccount">신한은행 계좌번호</label></div>
           <div><input type="text" onChange={onBankAccountChanged} value={bankAccount} id="bankAccount" placeholder='OOO OOO OOOOOO'/></div>
         </div>

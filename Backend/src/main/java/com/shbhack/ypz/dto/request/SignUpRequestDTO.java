@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class SignUpRequestDTO {

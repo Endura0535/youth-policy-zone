@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMember } from "../MemberContext";
 import BankAccountAuthenticationRequest from "./component/BankAccountAuthenticationRequest";
 import BankAccountAuthenticationResponse from "./component/BankAccountAuthenticationResponse";
 
 function BankAccountAuthenticationPage() {
-  const name = { ...location.state };
   const location = useLocation();
+  const name = location.state.name;
   const navigate = useNavigate();
 
   return (

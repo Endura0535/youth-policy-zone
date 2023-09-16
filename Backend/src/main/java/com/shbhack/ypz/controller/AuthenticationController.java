@@ -35,31 +35,20 @@ public class AuthenticationController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@RequestBody SignUpRequestDTO dto) {
-		log.info("--------------signup called--------------");
+		log.info("--------------signup called-------------- {}", dto);
 		// id 중복검사
 		if(authenticationService.isExistMember(dto.getMemberId())) {
 			return new ResponseEntity<String>("이미 존재하는 아이디입니다.", HttpStatus.CONFLICT);
 		}
 
-		// TODO 예금주 실명 조회 : 은행 코드, 계좌번호 받아서 넣기(signUpRequestDTO에 계좌 번호 추가 필요)
+		try {
+			authenticationService.signup(dto);
 
-		String bankCode = "088";
-		String accountNo = "110184999999";
+			return new ResponseEntity<String>(dto.getName(), HttpStatus.OK);
 
-		String name = shbService.searchName(bankCode, accountNo);
-		log.info("--------------name: " + name + "--------------");
-
-		dto.setName(name);
-
-//		try {
-//			authenticationService.signup(dto);
-//
-//			return new ResponseEntity<String>(name, HttpStatus.OK);
-//
-//		} catch (Exception e) {
-//			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-//		}
-		return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@PostMapping("/signin")
@@ -103,7 +92,16 @@ public class AuthenticationController {
 			return ResponseEntity.ok(new BankAccountAuthenticateResponseDTO(false, e.getMessage()));
 		}
 		
-		if (result) return ResponseEntity.ok(new BankAccountAuthenticateResponseDTO(true, ""));
+		if (result) {
+			// 예금주 실명 조회 : 은행 코드, 계좌번호 받아서 넣기(signUpRequestDTO에 계좌 번호 추가 필요)
+			String bankCode = "088";
+			String accountNo = dto.getAccountNo();
+
+			String name = shbService.searchName(bankCode, accountNo);
+			log.info("--------------name: " + name + "--------------");
+			
+			return ResponseEntity.ok(new BankAccountAuthenticateResponseDTO(true, name));
+		}
 		else return ResponseEntity.ok(new BankAccountAuthenticateResponseDTO(false, "인증번호가 일치하지 않습니다."));
 	}
 }

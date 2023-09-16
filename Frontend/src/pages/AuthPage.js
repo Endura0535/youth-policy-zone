@@ -14,6 +14,10 @@ function AuthPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setTab(0);
+  }, []);
+
+  useEffect(() => {
     if(setMemberInfo()) navigate('/home');
   }, [navigate, setMemberInfo]);
 
@@ -40,12 +44,13 @@ function AuthPage() {
                   name="color_mode"
                   type="checkbox"
                   onChange={handleToggle}
+                  checked={tab}
                 />
                 <label className="btn-color-mode-switch-inner" data-off="로그인" data-on="회원가입" htmlFor="color_mode"></label>
             </label>
         </div>
-        {tab === 1 && <Signin />}
-        {tab === 0 && <Signup />}
+        {tab === 0 && <Signin />}
+        {tab === 1 && <Signup />}
       </div>
     </CSSTransition>
   )

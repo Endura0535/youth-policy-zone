@@ -4,15 +4,12 @@ import java.util.Collection;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
@@ -28,7 +25,8 @@ public class Member implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
 
-    @Column(unique = true)
+    @NotBlank
+    @Column(unique = true, nullable = false)
     private String memberId;
 
     @NotBlank
@@ -43,13 +41,13 @@ public class Member implements UserDetails {
 
     private int age;
 
-    private boolean single;
-
-    private int kidsCount;
-
     private int education;
 
     private String residence;
+
+    private String gender;
+
+    private String jobStatus;
 
     @Enumerated(EnumType.STRING)
     private Role role;

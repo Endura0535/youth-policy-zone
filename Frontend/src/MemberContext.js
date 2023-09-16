@@ -12,7 +12,7 @@ export function MemberProvider({ children }) {
   const apiClient = useRef(null);
 
   // AuthPage
-  const [tab, setTab] = useState(1);
+  const [tab, setTab] = useState(0);
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [pwVisibility, setPwVisibility] = useState({
@@ -76,9 +76,10 @@ export function MemberProvider({ children }) {
     if (accessToken.current === null || apiClient.current === null) return false;
 
     // 회원 정보 설정
-    apiClient.current.get(`/member/${memberInfo.current.memberId}`)
+    apiClient.current.get(`/member`)
       .then((response) => {
       memberInfo.current = response.data;
+      console.log(memberInfo.current);
     });
     return true;
   }
