@@ -49,7 +49,6 @@ export function MemberProvider({ children }) {
   const setAccessToken = (token) => {
     // 엑세스토큰 설정
     accessToken.current = token;
-    console.log(accessToken.current);
     if (token === null) return;
 
     apiClient.current = apiClient.current = axios.create({
@@ -82,7 +81,6 @@ export function MemberProvider({ children }) {
     memberInfo.current = {
       ...response.data
     };
-    console.log(memberInfo.current);
 
     return true;
   }

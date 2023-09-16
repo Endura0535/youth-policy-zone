@@ -8,8 +8,6 @@ export default async function createMessage(conversation) {
     model: "gpt-3.5-turbo-0613",
   };
 
-  console.log(conversation);
-
   const response = await axios.post("https://api.openai.com/v1/chat/completions", requestBody, {
     headers: {
       Authorization: "Bearer " + process.env.REACT_APP_OPENAI_API_KEY,
@@ -19,6 +17,7 @@ export default async function createMessage(conversation) {
 
   if (response.status !== 200) {
     console.log("Error: ", response.data.error);
+    alert("Error: " + response.data.error);
     return conversation;
   }
   conversation.push({ role: "assistant", content: response.data.choices[0].message.content });

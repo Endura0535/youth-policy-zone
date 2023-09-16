@@ -93,6 +93,7 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
         if (!response.data.result) {
           // 인증실패
           console.log(`인증실패: ${response.data.message}`);
+          alert(response.data.message);
           setNum1("");
           setNum2("");
           setNum3("");
@@ -101,7 +102,6 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
           return;
         }
 
-        console.log(`${process.env.REACT_APP_API_URL}/auth/signup`, email, pw, bankAccount, response.data.message);
         axios
           .post(`${process.env.REACT_APP_API_URL}/auth/signup`, {
             memberId: email,
@@ -110,7 +110,6 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
             name: response.data.message,
           })
           .then((response) => {
-            console.log("회원가입 완료:", response.data);
             navigate("/signup-result", {
               state: {
                 name: response.data,

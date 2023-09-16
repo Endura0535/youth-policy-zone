@@ -21,7 +21,7 @@ function BoardItem(props) {
   const dDay = getDday(policy.endDay);
 
   const moveDetail = () => {
-    navigate(`/policy/${policy.id}`, { state: { policy: policy }});
+    navigate(`/policy/${policy.recommendPolicyNo}`, { state: { policy: policy }});
   }
 
   const handleLikeClick = () => {

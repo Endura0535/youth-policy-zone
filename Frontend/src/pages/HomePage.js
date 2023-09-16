@@ -21,11 +21,9 @@ function HomePage() {
 
   useEffect(() => {
     if (memberInfo.current === null) {
-      console.log('home: memberInfo.current is null');
       navigate("/");
       return;
     }
-    console.log('home: memberInfo.current is not null');
   }, [memberInfo, navigate]);
 
   return (

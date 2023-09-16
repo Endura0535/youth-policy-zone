@@ -21,7 +21,7 @@ function RecommendationPolicyComponent() {
   const retrieveRecommendedPolicies = async () => {
     const response = await apiClient.current.post('/recommend', {
       page: 0,
-      count: 10
+      count: 100
     });
     console.log(response.data);
     setRecommendedPolicies(response.data.recommendPolicy);
