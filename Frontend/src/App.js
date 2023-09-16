@@ -9,6 +9,7 @@ import BankAccountAuthenticationPage from './pages/BankAccountAuthenticationPage
 import BankAccountAuthenticationResultPage from './pages/BankAccountAuthenticationResultPage'
 import { HomeProvider } from './HomeContext'
 import PolicyDetail from './pages/component/PolicyDetail'
+import ChatgptApi from './pages/component/chatgpt/ChatgptApi'
 // React Icons
 
 class App extends React.Component {

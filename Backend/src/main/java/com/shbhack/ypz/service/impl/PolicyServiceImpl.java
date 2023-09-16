@@ -19,34 +19,36 @@ public class PolicyServiceImpl implements PolicyService {
     public List<Policy> retrieveAllPolicy() {
 
         var policyList = policyRepository.findAllPolicy().stream()
-                .map(p -> Policy.builder()
-                        .id(p.getId())
-                        .name(p.getName())
-                        .policyId(p.getPolicyId())
-                        .policyDetail(p.getPolicyDetail())
-                        .supportContent(p.getSupportContent())
-                        .supportScale(p.getSupportScale())
-                        .policyOperationPeriod(p.getPolicyOperationPeriod())
-                        .applicationStart(p.getApplicationStart())
-                        .applicationEnd(p.getApplicationEnd())
-                        .startAge(p.getStartAge())
-                        .endAge(p.getEndAge())
-                        .major(p.getMajor())
-                        .employeedStatus(p.getEmployeedStatus())
-                        .specialized(p.getSpecialized())
-                        .academicAbility(p.getAcademicAbility())
-                        .resiIncomeCondition(p.getResiIncomeCondition())
-                        .additional(p.getAdditional())
-                        .restriction(p.getRestriction())
-                        .applicationProcedure(p.getApplicationProcedure())
-                        .submissionDocuments(p.getSubmissionDocuments())
-                        .judge(p.getJudge())
-                        .applicationURL(p.getApplicationURL())
-                        .referenceURL1(p.getReferenceURL1())
-                        .referenceURL2(p.getReferenceURL2())
-                        .department(p.getDepartment())
-                        .build())
-                .collect(Collectors.toList());
+        	    .map(p -> {
+        	        Policy policy = new Policy();
+        	        policy.setId(p.getId());
+        	        policy.setName(p.getName());
+        	        policy.setPolicyId(p.getPolicyId());
+        	        policy.setPolicyDetail(p.getPolicyDetail());
+        	        policy.setSupportContent(p.getSupportContent());
+        	        policy.setSupportScale(p.getSupportScale());
+        	        policy.setPolicyOperationPeriod(p.getPolicyOperationPeriod());
+        	        policy.setApplicationStart(p.getApplicationStart());
+        	        policy.setApplicationEnd(p.getApplicationEnd());
+        	        policy.setStartAge(p.getStartAge());
+        	        policy.setEndAge(p.getEndAge());
+        	        policy.setMajor(p.getMajor());
+        	        policy.setEmployeedStatus(p.getEmployeedStatus());
+        	        policy.setSpecialized(p.getSpecialized());
+        	        policy.setAcademicAbility(p.getAcademicAbility());
+        	        policy.setResiIncomeCondition(p.getResiIncomeCondition());
+        	        policy.setAdditional(p.getAdditional());
+        	        policy.setRestriction(p.getRestriction());
+        	        policy.setApplicationProcedure(p.getApplicationProcedure());
+        	        policy.setSubmissionDocuments(p.getSubmissionDocuments());
+        	        policy.setJudge(p.getJudge());
+        	        policy.setApplicationURL(p.getApplicationURL());
+        	        policy.setReferenceURL1(p.getReferenceURL1());
+        	        policy.setReferenceURL2(p.getReferenceURL2());
+        	        policy.setDepartment(p.getDepartment());
+        	        return policy;
+        	    })
+        	    .collect(Collectors.toList());
         
         return policyList;
     }
