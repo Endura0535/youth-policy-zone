@@ -21,7 +21,7 @@ function BoardItem(props) {
   const dDay = getDday(policy.endDay);
 
   const moveDetail = () => {
-    navigate(`/policy/${policy.id}`);
+    navigate(`/policy/${policy.id}`, { state: { policy: policy }});
   }
 
   const handleLikeClick = () => {
@@ -41,9 +41,9 @@ function BoardItem(props) {
           </div>
 
           {/* 정책 이름  +  마감 기한  */}
-          <div class="alert-prompt-wrap">
-            <p class="text-sm text-yellow-700">{policy.name}</p>
-            <p class="text-sm text-yellow-700">{policy.endDay}</p>
+          <div className="alert-prompt-wrap">
+            <p className="text-sm text-yellow-700">{policy.name}</p>
+            <p className="text-sm text-yellow-700">{policy.endDay}</p>
             <p className="text-sm text-yellow-700">{`D-${dDay}`}</p>
           </div>
 
