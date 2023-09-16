@@ -63,8 +63,8 @@ public class StartAlarmServiceImpl implements StartAlarmService {
         startAlarmRepository.deleteById(startAlarm.getStartAlarmNo());
     }
 
-//    @Scheduled(cron = "30 47 17 ? * *")
-    @Scheduled(cron = "0/5 * * * * *")
+    @Scheduled(cron = "00 00 12 ? * *")
+//    @Scheduled(cron = "0/5 * * * * *)
     @Transactional
     @Override
     public void sendAllNewAlert() {
