@@ -31,6 +31,7 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
         case "num4":
           setNum4('');
           break;
+        default:
       }
       document.getElementById(id).focus();
       return;
@@ -52,6 +53,7 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
     case 'num4': 
       setNum4(val);
       break;
+      default:
     }
   };
 
@@ -119,40 +121,43 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
   };
 
   return (
-    <div>
-      <div>
-        입력하신 계좌로 1원을 보내드렸습니다. <br />
-        계좌의 입금내역에 표시된 숫자 4자리를 입력해주세요. <br />
-        입금내역이 없다면 등록하신 계좌 정보를 다시 확인해주세요.
+    <div className="center">
+      <div className="info-card mg-top-bg">
+        입력하신 계좌로 1원을 보내드렸어요. 계좌의 입금내역에 표시된 <span className="shinhan-color">숫자 4자리</span>를 입력해주세요. 내역이 없다면 등록하신 계좌 정보를 다시 확인해주세요.
       </div>
 
+      <div className="bear-loader mg-top-sm"></div>
 
       <div>  
-        <div>
+        <div className="mg-top-sm">
           {/* 인증번호 입력 */}
           <input
             type="text"
             onChange={(e) => setNum(e.target.value, "num1")}
             value={num1}
             id="num1"
+            className="code-input-box"
           ></input>
           <input
             type="text"
             onChange={(e) => setNum(e.target.value, "num2")}
             value={num2}
             id="num2"
+            className="code-input-box"
           ></input>
           <input
             type="text"
             onChange={(e) => setNum(e.target.value, "num3")}
             value={num3}
             id="num3"
+            className="code-input-box"
           ></input>
           <input
             type="text"
             onChange={(e) => setNum(e.target.value, "num4")}
             value={num4}
             id="num4"
+            className="code-input-box"
           ></input>
         </div>
       </div>
@@ -163,7 +168,7 @@ function BankAccountAuthenticationResponse({ setIsRequested }) {
         type="button"
         onClick={onClickAuthResponseButton}
         id="authResponse"
-        className="primary-btn"
+        className="primary-btn mg-top-bg"
       >
         인증하기
       </button>

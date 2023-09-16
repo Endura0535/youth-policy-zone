@@ -8,10 +8,22 @@
 .account-input-logo, .account-input-change {
   margin: 10px;
   cursor: pointer;
+  color: #0d14e9;
 }
 
 .globelogo {
   width: 30px;
+}
+
+.fakeimage {
+  width: 390px;
+  border-radius: 22px;
+  box-shadow: 0.3em 0.3em 0.7em #00000015;
+  transition: .10s ease;
+}
+
+.fakeimage:hover {
+  transform: scale(1.03);
 }
 
 .input[type=account] {
@@ -37,4 +49,112 @@
   border-bottom: 3px solid #0d14e9;
   border-radius: 5px 5px 2px 2px;
   transform: scale(1.03);
+}
+
+
+/* -------------- 1원 이체 인증코드 입력 FORM --------------- */
+.code-input-box {
+  max-width: 190px;
+  width: 40px;
+  height: 40px;
+  outline: none;
+  margin: 5px;
+  transition: .5s;
+  border: 1px inset grey;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-size: 1.5em;
+  color:grey;
+}
+
+.code-input-box:focus {
+  width: 150px;
+  transform: rotate(0);
+}
+
+
+/* ----------------- BEAR bear-loader -------------- */
+.bear-loader {
+  width: 150px;
+  height: 170px;
+  position: relative;
+  background: #fff;
+  border-radius: 100px 100px 0 0;
+}
+
+.bear-loader:after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 110px;
+  left: 50%;
+  top: 25px;
+  transform: translateX(-50%);
+  background-image: radial-gradient(circle, #000 48%, transparent 55%),
+    radial-gradient(circle, #000 48%, transparent 55%),
+    radial-gradient(circle, #fff 30%, transparent 45%),
+    radial-gradient(circle, #000 48%, transparent 51%),
+    linear-gradient(#000 20px, transparent 0),
+    linear-gradient(#cfecf9 60px, transparent 0),
+    radial-gradient(circle, #cfecf9 50%, transparent 51%),
+    radial-gradient(circle, #cfecf9 50%, transparent 51%);
+  background-repeat: no-repeat;
+  background-size: 16px 16px, 16px 16px, 10px 10px, 42px 42px, 12px 3px,
+    50px 25px, 70px 70px, 70px 70px;
+  background-position: 25px 10px, 55px 10px, 36px 44px, 50% 30px, 50% 85px,
+    50% 50px, 50% 22px, 50% 45px;
+  animation: faceLift 3s linear infinite alternate;
+}
+
+.bear-loader:before {
+  content: "";
+  position: absolute;
+  width: 140%;
+  height: 125px;
+  left: -20%;
+  top: 0;
+  background-image: radial-gradient(circle, #fff 48%, transparent 50%),
+    radial-gradient(circle, #fff 48%, transparent 50%);
+  background-repeat: no-repeat;
+  background-size: 65px 65px;
+  background-position: 0px 12px, 145px 12px;
+  animation: earLift 3s linear infinite alternate;
+}
+
+@keyframes faceLift {
+  0% {
+    transform: translateX(-60%);
+  }
+
+  100% {
+    transform: translateX(-30%);
+  }
+}
+
+@keyframes earLift {
+  0% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+
+/* ---------- 계좌인증 완료 성공창 ------------ */
+.auth-result-header {
+  text-align: center;
+  font-size: 25px;
+  line-height: 160%; ;
+}
+
+.complete {
+  width: 100px;
+  margin: 15px 0 40px;
 }

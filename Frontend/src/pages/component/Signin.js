@@ -26,8 +26,9 @@ function Signin() {
     axios.post(`${process.env.REACT_APP_API_URL}/auth/signin`, {
       "memberId": email,
       "password": pw,
-    }).then((response) => {
-      succeededSignin(response.data.token);
+    }).then(async (response) => {
+      await succeededSignin(response.data.token);
+      
       navigate('/home');
     }).catch((err)=> {
       console.log(err);

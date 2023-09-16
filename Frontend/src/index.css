@@ -20,7 +20,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ----- CENTER ALIGN ------ */
+/* ----- ALL SORTS OF CONTAINERS ------ */
 .main-container {
   margin: 0 auto;
   max-width: 800px;
@@ -28,7 +28,6 @@ body {
   background-color: #F3F6FB;
 }
 
-.welcome-container, 
 .auth-container,
 .default-container {
   display: flex;
@@ -38,6 +37,22 @@ body {
   margin-top: 50px;
 }
 
+.default-container-reverse {
+  position: absolute;
+  bottom: 40px;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-container {
+  margin-top: 50px;
+  display: flex;
+}
 
 /* --------- primary-btn ---------- */ 
 .primary-btn {
@@ -56,6 +71,7 @@ body {
   box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
   transition: all 250ms;
   overflow: hidden;
+  cursor: pointer;
  }
  
  .primary-btn::before {
@@ -79,6 +95,16 @@ body {
  
  .primary-btn:hover::before {
   width: 100%;
+ }
+
+ .instant-extend {
+  width: 30%;
+  margin-left: -15px;
+ }
+
+ .instant-extend-two {
+  width: 40%;
+  margin-left: -20px;
  }
 
 /* REACT - TRANSITION - GROUP */
