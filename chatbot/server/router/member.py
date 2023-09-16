@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from services.member import analyzeMember
+from pydantic import BaseModel
 
 router = APIRouter(
     prefix="/member",
@@ -7,9 +8,13 @@ router = APIRouter(
 )
 
 
+class Member(BaseModel):
+    memberId: str
+
+
 @router.post("/analyze")
 def getMemberInfo(
-        memberId: str
+        member: Member
 ):
-    memberInfo = analyzeMember(memberId)
+    memberInfo = analyzeMember(member.memberId)
     return memberInfo
